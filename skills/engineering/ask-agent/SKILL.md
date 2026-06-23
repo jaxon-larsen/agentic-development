@@ -1,6 +1,6 @@
 ---
 name: ask-agent
-description: Find the right agent skill or workflow for the current engineering, product, debugging, design, or setup situation.
+description: Find the right agent skill or workflow for the current engineering, product, debugging, or design situation.
 disable-model-invocation: true
 ---
 
@@ -12,17 +12,12 @@ This is a router, not a place to do the work. Listen to the user's situation, as
 
 ## Routing Guide
 
-- **New repo or missing per-repo config**: `/setup-skills`
 - **Fuzzy product, design, or implementation idea**: `/grill-with-docs`
 - **Non-code idea that needs sharper thinking**: `/grill-me`
-- **Turn an agreed plan into a PRD**: `/to-prd`
-- **Break a PRD, plan, or issue into vertical slices**: `/to-issues`
-- **Triage incoming issues or external PRs**: `/triage`
 - **Implement planned work**: `/implement`
 - **Build or fix with tests first**: `/tdd`
 - **Diagnose a hard bug or regression**: `/diagnosing-bugs`
-- **Explore architecture or module boundaries**: `/improve-codebase-architecture`
-- **Prototype state, logic, or UI alternatives**: `/prototype`
+- **Explore architecture or module boundaries**: `/codebase-design`
 - **Resolve merge or rebase conflicts**: `/resolving-merge-conflicts`
 - **Hand work to another agent or future session**: `/handoff`
 
