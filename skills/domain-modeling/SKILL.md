@@ -13,7 +13,7 @@ Three modes. Say which mode you're in.
 
 | Mode | When | Auto-run? |
 |---|---|---|
-| **Sync** | After code changes — check what likely became stale | Yes ([INSTRUCTIONS.md](../../INSTRUCTIONS.md) §5) |
+| **Sync** | After code changes — check what likely became stale | Yes (project `INSTRUCTIONS.md` §5) |
 | **Audit** | Full doc/code cross-check — drift, gaps, stale facts | No |
 | **Restructure** | Docs are messy — reorganize, extract glossary, dedupe | No — only when user explicitly asks |
 

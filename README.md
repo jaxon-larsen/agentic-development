@@ -2,16 +2,39 @@
 
 A compact library of AI agent skills focused on keeping **code and documentation in sync**.
 
-Works across agent environments (Cursor, Antigravity) that load `SKILL.md` files or slash-command workflows.
+Works across Cursor and Antigravity (`SKILL.md` + slash commands).
 
-General coding behavior lives in [INSTRUCTIONS.md](./INSTRUCTIONS.md) — including post-implementation doc sync.
+## Drop into a project
 
-## Quickstart
+From this repo, run the installer against any codebase:
 
-1. Copy `skills/` into your agent's skills directory.
-2. Copy [INSTRUCTIONS.md](./INSTRUCTIONS.md) into each project (or reference it from your agent config).
-3. **`/grilling`** — probe and clarify docs, code, or both (questions only).
-4. **`/domain-modeling`** — sync, audit, or restructure docs vs code.
+```bash
+# macOS / Linux
+./drop-in/install.sh /path/to/your-project
+
+# Windows
+.\drop-in\install.ps1 -Target C:\path\to\your-project
+```
+
+**What it installs:**
+
+| Destination | Contents |
+|---|---|
+| `.cursor/skills/` | All skills (Cursor) |
+| `.agents/skills/` | All skills (Antigravity) |
+| `AGENTS.md` | Agent entry point (skipped if exists) |
+| `INSTRUCTIONS.md` | Coding + doc-sync behavior (skipped if exists) |
+| `CONTEXT.md` | Glossary seed (skipped if exists) |
+| `docs/adr/` | ADR folder |
+| `.scratch/` | Grill session notes (gitignored) |
+
+**Manual copy** (same result): copy `skills/*` into `.cursor/skills/` and `.agents/skills/`, then copy files from `drop-in/` and `INSTRUCTIONS.md` from the repo root.
+
+### After install
+
+1. Edit `CONTEXT.md` — add your domain terms or run `/domain-modeling` restructure on existing docs.
+2. Open the project in Cursor or Antigravity — skills load from `.cursor/skills/` or `.agents/skills/`.
+3. Try `/grilling` on something fuzzy, then `/domain-modeling` restructure or audit.
 
 ## Workflow
 
@@ -23,11 +46,11 @@ General coding behavior lives in [INSTRUCTIONS.md](./INSTRUCTIONS.md) — includ
 /domain-modeling audit or sync  →  verify vs code
 ```
 
+`INSTRUCTIONS.md` runs **sync** automatically after implementation work.
+
 ## Skills
 
-Skills live in flat folders under `skills/`. Each skill has a `SKILL.md`. Every skill below links to its definition.
-
-Each skill is either **user-invoked** (`disable-model-invocation: true` — only you, typing its name) or **model-invoked** (agent can reach when the task fits). See [docs/invocation.md](./docs/invocation.md).
+Skills live in `skills/`. Each skill is **user-invoked** (`disable-model-invocation: true`) or **model-invoked** (agent can reach when the task fits).
 
 ### User-invoked
 
@@ -53,22 +76,21 @@ Each skill is either **user-invoked** (`disable-model-invocation: true` — only
 
 ## Terms
 
-Vocabulary for **this skill library** (not to be confused with a project's own `CONTEXT.md`):
-
 | Term | Meaning |
 |---|---|
-| **Skill** | A folder with `SKILL.md` — instructions the agent follows when invoked |
-| **Grilling** | Questions only; probes docs and code; writes `.scratch/grill-session.md` |
-| **Domain modeling** | Sync, audit, or restructure mode; edits docs with approval |
-| **Project CONTEXT.md** | Per-project glossary and index into `docs/`; not a spec |
-| **ADR** | Short decision record in `docs/adr/` |
+| **Skill** | Folder with `SKILL.md` — agent instructions when invoked |
+| **Grilling** | Questions only; writes `.scratch/grill-session.md` |
+| **Domain modeling** | Sync, audit, or restructure; edits docs with approval |
+| **CONTEXT.md** | Project glossary and index into `docs/` |
+| **ADR** | Decision record in `docs/adr/` |
 
-**Doc skill pipeline:** `/grilling` → session notes → `/domain-modeling` restructure → audit/sync. Project CONTEXT indexes into `docs/` without duplicating them. README stays human-facing; agents fix factual drift only (except link fixes after restructure).
-
-## Maintaining this repo
+## Maintaining this skill library
 
 When adding or editing skills:
 
 - Every skill in `skills/` must appear in this README with a link to its `SKILL.md`.
-- Group entries under **User-invoked** and **Model-invoked**.
-- Skill behavior conventions: [docs/invocation.md](./docs/invocation.md).
+- Group under **User-invoked** and **Model-invoked**.
+- **User-invoked:** set `disable-model-invocation: true`; human-facing `description`.
+- **Model-invoked:** omit that flag; model-facing `description` with trigger phrasing.
+- User-invoked skills may invoke model-invoked skills, not other user-invoked skills.
+- Reach other skills via `/skill` prose, not cross-folder behavior links.
