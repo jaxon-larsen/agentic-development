@@ -55,3 +55,14 @@ Never consider code finished without a verification step. Transform tasks into v
 - **Idempotency Awareness:** If a tool call, test, or edit fails, do not repeat it unchanged. Analyze the error, alter the approach, or stop and ask for clarification.
 - **Not Lazy About:** Input validation at trust boundaries (API responses, user inputs, disk I/O), error handling that prevents data loss, security, accessibility, and real hardware/platform calibration (clock drift, sensor offsets). Do not add defensive error handling for impossible, deterministic scenarios deep inside internal functions.
 - **The Test Criteria:** Before declaring a task complete, run the target file or a syntax check to verify no broken syntax or malformed diffs were introduced. Non-trivial logic must leave exactly **one** runnable check behind—the smallest thing that fails if the logic breaks (e.g., an assert-based self-check or one minimal test file; no complex frameworks or fixtures). Trivial one-liners require no test.
+
+---
+
+## 5. Finishing Implementation Work
+
+When implementing a planned change (not a question-only or review-only task):
+
+1. Run typechecking and relevant tests before declaring done.
+2. Review the diff against the original plan or request.
+3. Do not commit unless the user asks.
+4. Run the `/domain-modeling` skill in **sync** mode: check whether `CONTEXT.md`, ADRs, README, or documentation files are stale relative to your changes. Propose minimal patches for each drift. When code and docs disagree, ask which side is authoritative before editing either. Wait for approval per patch.

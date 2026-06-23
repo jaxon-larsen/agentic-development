@@ -1,59 +1,74 @@
 # Agent Skills for Engineering Workspaces
 
-A compact library of AI agent skills for real software work: alignment, implementation, test-driven development, debugging, and handoffs.
+A compact library of AI agent skills focused on keeping **code and documentation in sync**.
 
-These skills are intentionally small and composable. They work across agent environments, including Cursor and Antigravity, that can load `SKILL.md` files or slash-command-style workflows.
+Works across agent environments (Cursor, Antigravity) that load `SKILL.md` files or slash-command workflows.
 
-General coding behavior for agents lives in [INSTRUCTIONS.md](./INSTRUCTIONS.md).
+General coding behavior lives in [INSTRUCTIONS.md](./INSTRUCTIONS.md) — including post-implementation doc sync.
 
 ## Quickstart
 
-1. Install or copy the skills you want into your agent's skills directory.
-2. Use `/ask-agent` when you are not sure which workflow fits the moment.
+1. Copy `skills/` into your agent's skills directory.
+2. Copy [INSTRUCTIONS.md](./INSTRUCTIONS.md) into each project (or reference it from your agent config).
+3. **`/grilling`** — probe and clarify docs, code, or both (questions only).
+4. **`/domain-modeling`** — sync, audit, or restructure docs vs code.
 
-## Why These Skills Exist
+## Workflow
 
-AI agents are most useful when they have the same engineering rails a strong teammate would expect: crisp context, small slices, fast feedback, durable decisions, and clear handoffs.
+```
+/grilling  →  .scratch/grill-session.md
+     ↓
+/domain-modeling restructure  →  organize docs, build CONTEXT.md
+     ↓
+/domain-modeling audit or sync  →  verify vs code
+```
 
-This repo packages those rails as reusable skills:
+## Skills
 
-- **Alignment before action**: `/grill-me` and `/grill-with-docs` help turn fuzzy intent into concrete decisions.
-- **Shared project language**: domain-modeling workflows keep `CONTEXT.md` and ADRs useful, so agents can speak in the project's terms instead of generic prose.
-- **Feedback loops**: `/tdd` and `/diagnosing-bugs` push agents toward small verified steps instead of large untested edits.
-- **Design pressure**: `/codebase-design` helps agents notice module boundaries, seams, and complexity before the code hardens around them.
+Skills live in flat folders under `skills/`. Each skill has a `SKILL.md`. Every skill below links to its definition.
 
-## Reference
+Each skill is either **user-invoked** (`disable-model-invocation: true` — only you, typing its name) or **model-invoked** (agent can reach when the task fits). See [docs/invocation.md](./docs/invocation.md).
 
-These split on one axis: who can invoke them. **User-invoked** skills are reachable only when you type them, usually to orchestrate a workflow. **Model-invoked** skills can be invoked by you or reached for automatically by an agent when the task fits.
+### User-invoked
 
-### Engineering
+| Skill | Purpose |
+|---|---|
+| [grilling](./skills/grilling/SKILL.md) | Ask questions; probe docs and code; capture session notes |
+| [handoff](./skills/handoff/SKILL.md) | Compact conversation for another session |
 
-Daily code-work skills.
+### Model-invoked
 
-**User-invoked**
+| Skill | Purpose |
+|---|---|
+| [domain-modeling](./skills/domain-modeling/SKILL.md) | Sync, audit, or restructure docs; keep them aligned with code |
+| [diagnosing-bugs](./skills/diagnosing-bugs/SKILL.md) | Diagnosis loop for hard bugs and regressions |
 
-- **[ask-agent](./skills/engineering/ask-agent/SKILL.md)** - Find the right skill or flow for the current engineering/design situation.
-- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** - Grilling session that also builds your project's domain model, sharpening terminology and updating `CONTEXT.md` and ADRs inline.
-- **[implement](./skills/engineering/implement/SKILL.md)** - Implement a planned change from a spec or agreed design, using tests where possible.
+### domain-modeling modes
 
-**Model-invoked**
+| Mode | Use when |
+|---|---|
+| **Sync** | After implementation (automatic via INSTRUCTIONS.md) |
+| **Audit** | Full doc/code drift check |
+| **Restructure** | Messy docs — extract CONTEXT.md, dedupe, reorganize |
 
-- **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)** - Disciplined diagnosis loop for hard bugs and performance regressions: reproduce, minimize, hypothesize, instrument, fix, regression-test.
-- **[tdd](./skills/engineering/tdd/SKILL.md)** - Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
-- **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)** - Actively build and sharpen a project's domain model, stress-test terms, and update `CONTEXT.md` and ADRs inline.
-- **[codebase-design](./skills/engineering/codebase-design/SKILL.md)** - Shared discipline and vocabulary for designing deep modules with small interfaces and useful seams.
-- **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)** - Resolve merge conflicts while preserving both sides' intent.
+## Terms
 
-### Productivity
+Vocabulary for **this skill library** (not to be confused with a project's own `CONTEXT.md`):
 
-General workflow tools, not code-specific.
+| Term | Meaning |
+|---|---|
+| **Skill** | A folder with `SKILL.md` — instructions the agent follows when invoked |
+| **Grilling** | Questions only; probes docs and code; writes `.scratch/grill-session.md` |
+| **Domain modeling** | Sync, audit, or restructure mode; edits docs with approval |
+| **Project CONTEXT.md** | Per-project glossary and index into `docs/`; not a spec |
+| **ADR** | Short decision record in `docs/adr/` |
 
-**User-invoked**
+**Doc skill pipeline:** `/grilling` → session notes → `/domain-modeling` restructure → audit/sync. Project CONTEXT indexes into `docs/` without duplicating them. README stays human-facing; agents fix factual drift only (except link fixes after restructure).
 
-- **[grill-me](./skills/productivity/grill-me/SKILL.md)** - Get interviewed about a plan or design until every branch of the decision tree is resolved.
-- **[handoff](./skills/productivity/handoff/SKILL.md)** - Compact the current conversation into a handoff document so another agent can continue the work.
-- **[writing-great-skills](./skills/productivity/writing-great-skills/SKILL.md)** - Reference for writing and editing skills well: the vocabulary and principles that make a skill predictable.
+## Maintaining this repo
 
-**Model-invoked**
+When adding or editing skills:
 
-- **[grilling](./skills/productivity/grilling/SKILL.md)** - Interview the user about a plan or design until every branch of the decision tree is resolved.
+- Every skill in `skills/` must appear in this README with a link to its `SKILL.md`.
+- Group entries under **User-invoked** and **Model-invoked**.
+- Skill behavior conventions: [docs/invocation.md](./docs/invocation.md).

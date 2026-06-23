@@ -22,6 +22,19 @@ A person or organization that places orders.
 _Avoid_: Client, buyer, account
 ```
 
+## Indexing scattered docs
+
+When the project already has markdown under `docs/`, `CONTEXT.md` should **index** rather than duplicate:
+
+```md
+## Docs
+
+- [Authentication flow](./docs/auth.md) — how login and sessions work
+- [Deployment](./docs/deploy.md) — environments and release process
+```
+
+Keep definitions of domain terms in CONTEXT; keep long-form narrative in `docs/` and link to it.
+
 ## Rules
 
 - **Be opinionated.** When multiple words exist for the same concept, pick the best one and list the others under `_Avoid_`.
