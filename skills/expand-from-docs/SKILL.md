@@ -17,6 +17,8 @@ Read existing documentation (`CONTEXT.md`, files in `docs/`, etc.) and scan the 
 - **Stepping Off Points:** Promising entry points or foundations in the current code and docs to expand the project into a more robust, complete system.
 - **Architectural Readiness:** What scaffolding or preparation is needed to support the next logical phase of implementation.
 
+*If significant drift, conflicts, or other problems are detected between the code and docs, explain the issue clearly and ask the user how they would like to proceed before writing a plan.*
+
 ### 2. Interview
 
 Ask the user targeted questions **one at a time** to align on what the next step of the project should be. 
@@ -38,6 +40,7 @@ Draft a structured plan to execute the agreed-upon phase. The plan must:
 
 Once the plan is approved:
 - Write and refine the code to implement the next stage.
-- Update the documentation (e.g. task lists or checklists in `CONTEXT.md`) to:
+- Run all verification steps (type checks, compilation, tests) and ensure they pass successfully.
+- Update the documentation (e.g. task lists or checklists in `CONTEXT.md`) *only after verification passes* to:
   - Mark completed tasks as finished.
   - Add newly discovered ideas, roadmap items, or next steps to the backlog.

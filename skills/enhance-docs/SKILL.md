@@ -23,6 +23,8 @@ Write a structured report (do not edit files yet) detailing the following:
 - **Ambiguities & Gaps:** Underspecified requirements, missing edge cases, or unclear logic in the specifications.
 - **Simplification Plan:** Concrete, actionable steps to reorganize, deduplicate, or restructure the docs (e.g., merging scattered notes into `CONTEXT.md`, archiving old plans).
 
+*If no drift, bloat, or ambiguities are found, present a "Clean Alignment Report" and suggest proactive documentation improvements (e.g., adding guides for undocumented patterns, expanding glossary terms).*
+
 ### 3. Interview
 
 Present the report to the user. Then, ask targeted clarifying questions **one at a time** to resolve the open concerns. 
