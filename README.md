@@ -18,32 +18,32 @@ From this repo, run the installer against any codebase:
 
 **What it installs:**
 
-| Destination | Contents |
-|---|---|
-| `.cursor/skills/` | All skills (Cursor) |
-| `.agents/skills/` | All skills (Antigravity) |
-| `AGENTS.md` | Agent entry point (skipped if exists) |
+| Destination       | Contents                                       |
+| ----------------- | ---------------------------------------------- |
+| `.cursor/skills/` | All skills (Cursor)                            |
+| `.agents/skills/` | All skills (Antigravity)                       |
+| `AGENTS.md`       | Agent entry point (skipped if exists)          |
 | `INSTRUCTIONS.md` | Coding + doc-sync behavior (skipped if exists) |
-| `CONTEXT.md` | Glossary seed (skipped if exists) |
-| `docs/adr/` | ADR folder |
-| `.scratch/` | Grill session notes (gitignored) |
+| `CONTEXT.md`      | Glossary seed (skipped if exists)              |
+| `docs/adr/`       | ADR folder                                     |
+| `docs/scratch/`   | Grill session notes (gitignored)               |
 
 **Manual copy** (same result): copy `skills/*` into `.cursor/skills/` and `.agents/skills/`, then copy files from `drop-in/` and `INSTRUCTIONS.md` from the repo root.
 
 ### After install
 
-1. Edit `CONTEXT.md` — add your domain terms or run `/domain-modeling` restructure on existing docs.
+1. Edit `CONTEXT.md` — add your domain terms or run `/enhance-docs` to audit existing docs against the code.
 2. Open the project in Cursor or Antigravity — skills load from `.cursor/skills/` or `.agents/skills/`.
-3. Try `/grilling` on something fuzzy, then `/domain-modeling` restructure or audit.
+3. Try `/grilling` on something fuzzy, then `/enhance-docs` to sync, or `/expand-from-docs` to build out new features.
 
 ## Workflow
 
 ```
-/grilling  →  .scratch/grill-session.md
+/grilling  →  docs/scratch/grill-session.md
      ↓
-/domain-modeling restructure  →  organize docs, build CONTEXT.md
+/enhance-docs  →  audit doc-code drift, resolve ambiguities
      ↓
-/domain-modeling audit or sync  →  verify vs code
+/expand-from-docs  →  interview, plan, and execute feature expansion
 ```
 
 `INSTRUCTIONS.md` runs **sync** automatically after implementation work.
@@ -54,35 +54,29 @@ Skills live in `skills/`. Each skill is **user-invoked** (`disable-model-invocat
 
 ### User-invoked
 
-| Skill | Purpose |
-|---|---|
-| [grilling](./skills/grilling/SKILL.md) | Ask questions; probe docs and code; capture session notes |
-| [handoff](./skills/handoff/SKILL.md) | Compact conversation for another session |
+| Skill                                                                            | Purpose                                                     |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| [enhance-docs](./skills/enhance-docs/SKILL.md)                                   | Audit doc-code drift, identify ambiguities, and grill to clarify vision |
+| [expand-from-docs](./skills/expand-from-docs/SKILL.md)                           | Identify gaps, interview user on next phase, and create execution plans |
+| [grilling](./skills/grilling/SKILL.md)                                           | Ask questions; probe docs and code; capture session notes   |
+| [handoff](./skills/handoff/SKILL.md)                                             | Compact conversation for another session                    |
+| [improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring opportunities |
+| [prototype](./skills/prototype/SKILL.md)                                         | Build throwaway prototype code                              |
 
 ### Model-invoked
 
-| Skill | Purpose |
-|---|---|
-| [domain-modeling](./skills/domain-modeling/SKILL.md) | Sync, audit, or restructure docs; keep them aligned with code |
-| [diagnosing-bugs](./skills/diagnosing-bugs/SKILL.md) | Diagnosis loop for hard bugs and regressions |
-
-### domain-modeling modes
-
-| Mode | Use when |
-|---|---|
-| **Sync** | After implementation (automatic via INSTRUCTIONS.md) |
-| **Audit** | Full doc/code drift check |
-| **Restructure** | Messy docs — extract CONTEXT.md, dedupe, reorganize |
+| Skill                              | Purpose                                             |
+| ---------------------------------- | --------------------------------------------------- |
+| [review](./skills/review/SKILL.md) | Two-axis review (Standards vs Spec) of commit diffs |
 
 ## Terms
 
-| Term | Meaning |
-|---|---|
-| **Skill** | Folder with `SKILL.md` — agent instructions when invoked |
-| **Grilling** | Questions only; writes `.scratch/grill-session.md` |
-| **Domain modeling** | Sync, audit, or restructure; edits docs with approval |
-| **CONTEXT.md** | Project glossary and index into `docs/` |
-| **ADR** | Decision record in `docs/adr/` |
+| Term                | Meaning                                                  |
+| ------------------- | -------------------------------------------------------- |
+| **Skill**           | Folder with `SKILL.md` — agent instructions when invoked |
+| **Grilling**        | Questions only; writes `docs/scratch/grill-session.md`   |
+| **CONTEXT.md**      | Project glossary and index into `docs/`                  |
+| **ADR**             | Decision record in `docs/adr/`                           |
 
 ## Maintaining this skill library
 

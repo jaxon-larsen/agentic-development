@@ -44,20 +44,19 @@ Copy-IfMissing (Join-Path $RepoRoot "INSTRUCTIONS.md") (Join-Path $Target "INSTR
 Copy-IfMissing (Join-Path $ScriptDir "AGENTS.md") (Join-Path $Target "AGENTS.md")
 Copy-IfMissing (Join-Path $ScriptDir "CONTEXT.md") (Join-Path $Target "CONTEXT.md")
 
-New-Item -ItemType Directory -Force -Path (Join-Path $Target "docs\adr"), (Join-Path $Target ".scratch") | Out-Null
-New-Item -ItemType File -Force -Path (Join-Path $Target "docs\adr\.gitkeep"), (Join-Path $Target ".scratch\.gitkeep") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $Target "docs\adr"), (Join-Path $Target "docs\scratch") | Out-Null
+New-Item -ItemType File -Force -Path (Join-Path $Target "docs\adr\.gitkeep"), (Join-Path $Target "docs\scratch\.gitkeep") | Out-Null
 
 $gitignore = Join-Path $Target ".gitignore"
-$scratchRule = ".scratch/"
 if (Test-Path $gitignore) {
     $content = Get-Content $gitignore -Raw
-    if ($content -notmatch '(?m)^\.scratch/?\s*$') {
-        Add-Content $gitignore "`n# Agent grill session notes`n.scratch/`n"
-        Write-Host "  updated: .gitignore (.scratch/)"
+    if ($content -notmatch '(?m)^docs/scratch/?\s*$') {
+        Add-Content $gitignore "`n# Agent grill session notes`ndocs/scratch/`n"
+        Write-Host "  updated: .gitignore (docs/scratch/)"
     }
 } else {
-    Set-Content $gitignore "# Agent grill session notes`n.scratch/`n"
+    Set-Content $gitignore "# Agent grill session notes`ndocs/scratch/`n"
     Write-Host "  added: .gitignore"
 }
 
-Write-Host "Done. Open AGENTS.md in the target project and try /grilling or /domain-modeling."
+Write-Host "Done. Open AGENTS.md in the target project and try /grill."

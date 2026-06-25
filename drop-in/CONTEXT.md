@@ -1,25 +1,39 @@
-# Project Context
+# Project Context: [Project Name]
 
-{One or two sentences: what this project is and why it exists.}
+Provide a 1-2 sentence summary of what this project is, who it is for, and the core problem it solves.
 
-## Language
+---
 
-{Add domain terms as you nail them down — one or two sentences each, with _Avoid_ aliases.}
+## 💻 Technology Stack
 
-<!--
-Example:
+- **Frontend:** [e.g., React, Next.js, TypeScript, TailwindCSS]
+- **Backend:** [e.g., Node.js, Express, PostgreSQL, Prisma]
+- **Testing:** [e.g., Vitest, Playwright]
 
-**Widget**:
-The top-level unit of work the user creates in the app.
-_Avoid_: item, task
+---
 
-## Docs
+## 📚 Documentation Index
 
-Link longer material here instead of duplicating it:
+All detailed specifications and architecture maps live in the [docs/](./docs/) folder. Link to them here for easy discovery:
 
-- [Architecture](./docs/architecture.md) — system overview
--->
+- **[System Architecture](./docs/architecture.md):** Overall system relationships and data flow.
+- **[Technical Specifications](./docs/technical.md):** Coding conventions, standard UI patterns, etc.
+- **[Troubleshooting & Fixes](./fixes/):** Documented solutions for past complex issues.
 
-## Docs
+---
 
-{Index into docs/ as you add them.}
+## 🗣️ Core Domain Vocabulary
+
+Define project-specific terminology here to maintain name consistency and reduce verbosity:
+
+- **[Domain Term 1]:** [Definition / Naming rules]
+- **[Domain Term 2]:** [Definition / Naming rules]
+
+---
+
+## 🎯 Active Tasks & Roadmap
+
+Use this checklist to track your current sprint goals and implementation tasks:
+
+- [ ] Task 1: [Short description of what needs to be done]
+- [ ] Task 2: [Short description of what needs to be done]

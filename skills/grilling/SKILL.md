@@ -28,7 +28,7 @@ Works on fuzzy plans, existing documentation, code behavior, or gaps between the
 
 ## Session notes
 
-As decisions land, capture them in **`.scratch/grill-session.md`** (create `.scratch/` if needed). This file is input for `/domain-modeling` restructure mode — not a substitute for proper docs.
+As decisions land, capture them in **`docs/scratch/grill-session.md`** (create `docs/scratch/` if needed). This file records requirements and agreements — not a substitute for proper docs.
 
 Notes format:
 
@@ -55,4 +55,4 @@ Keep notes terse. Do not duplicate full doc content.
 
 ## When done
 
-Summarize what was resolved and what's still open. If terms were nailed down or docs need restructuring, suggest `/domain-modeling` in **restructure** mode.
+Summarize what was resolved and what's still open. If terms were nailed down, recommend updating `CONTEXT.md` to keep the domain glossary synchronized.
