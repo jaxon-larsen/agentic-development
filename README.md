@@ -26,7 +26,6 @@ From this repo, run the installer against any codebase:
 | `INSTRUCTIONS.md` | Coding + doc-sync behavior (skipped if exists) |
 | `CONTEXT.md`      | Glossary seed (skipped if exists)              |
 | `docs/`           | Documentation folder                           |
-| `docs/scratch/`   | Grill session notes (gitignored)               |
 
 **Manual copy** (same result): copy `skills/*` into `.cursor/skills/` and `.agents/skills/`, then copy files from `drop-in/` and `INSTRUCTIONS.md` from the repo root.
 
@@ -39,7 +38,7 @@ From this repo, run the installer against any codebase:
 ## Workflow
 
 ```
-/grilling  →  docs/scratch/grill-session.md
+/grilling  →  probe context, clarify design in chat
      ↓
 /enhance-docs  →  audit doc-code drift, resolve ambiguities
      ↓
@@ -74,7 +73,7 @@ Skills live in `skills/`. Each skill is **user-invoked** (`disable-model-invocat
 | Term                | Meaning                                                  |
 | ------------------- | -------------------------------------------------------- |
 | **Skill**           | Folder with `SKILL.md` — agent instructions when invoked |
-| **Grilling**        | Questions only; writes `docs/scratch/grill-session.md`   |
+| **Grilling**        | Questions only; clarifies goals and design in the chat   |
 | **CONTEXT.md**      | Project glossary and index into `docs/`                  |
 | **Decision Log**    | Inline records of key decisions in context/design files  |
 

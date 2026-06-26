@@ -28,7 +28,7 @@ Look for the originating spec, in this order:
 
 1. Active checklist/roadmap tasks in `CONTEXT.md` or `TODO.md`.
 2. A path the user passed as an argument.
-3. A PRD/spec file under `docs/`, `specs/`, or `docs/scratch/` matching the branch name or feature.
+3. A PRD/spec file under `docs/` or `specs/` matching the branch name or feature.
 4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
 
 ### 3. Identify the standards sources

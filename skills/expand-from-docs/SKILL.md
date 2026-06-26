@@ -21,11 +21,9 @@ Read existing documentation (`CONTEXT.md`, files in `docs/`, etc.) and scan the 
 
 ### 2. Interview
 
-Ask the user targeted questions **one at a time** to align on what the next step of the project should be. 
-
-For each question:
-- State the proposed feature/direction and why it is a natural next step.
-- Explain any trade-offs or design decisions.
+To decide on the next implementation stage, invoke the grilling protocol (the `/grill` command process) to ask targeted questions **one at a time**:
+- For each question, explain why it is a natural next step, detail trade-offs/design decisions, and offer a recommendation.
+- Summarize session notes in the chat as decisions crystallize.
 - Wait for the user's response before asking the next question or moving to the planning stage.
 
 ### 3. Create Implementation Plan

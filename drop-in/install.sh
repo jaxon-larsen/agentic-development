@@ -35,17 +35,7 @@ copy_if_missing "$REPO_ROOT/INSTRUCTIONS.md" "$TARGET/INSTRUCTIONS.md"
 copy_if_missing "$SCRIPT_DIR/AGENTS.md" "$TARGET/AGENTS.md"
 copy_if_missing "$SCRIPT_DIR/CONTEXT.md" "$TARGET/CONTEXT.md"
 
-mkdir -p "$TARGET/docs" "$TARGET/docs/scratch"
-touch "$TARGET/docs/.gitkeep" "$TARGET/docs/scratch/.gitkeep"
-
-if [[ -f "$TARGET/.gitignore" ]]; then
-  if ! grep -qE '^docs/scratch/?$' "$TARGET/.gitignore" 2>/dev/null; then
-    printf '\n# Agent grill session notes\ndocs/scratch/\n' >> "$TARGET/.gitignore"
-    echo "  updated: .gitignore (docs/scratch/)"
-  fi
-else
-  printf '# Agent grill session notes\ndocs/scratch/\n' > "$TARGET/.gitignore"
-  echo "  added: .gitignore"
-fi
+mkdir -p "$TARGET/docs"
+touch "$TARGET/docs/.gitkeep"
 
 echo "Done. Open AGENTS.md in the target project and try /grill."

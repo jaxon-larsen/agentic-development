@@ -27,15 +27,14 @@ Write a structured report (do not edit files yet) detailing the following:
 
 ### 3. Interview
 
-Present the report to the user. Then, ask targeted clarifying questions **one at a time** to resolve the open concerns. 
-
-For each question:
-- Explain why the ambiguity matters.
-- Provide your recommended resolution or design tradeoff.
-- Wait for the user's answer before asking the next question.
+Present the report to the user. To resolve the open concerns and clarify the project's vision, invoke the grilling protocol (the `/grill` command process):
+- Ask targeted clarifying questions **one at a time**.
+- For each question, explain why it matters, present design trade-offs, and suggest a recommended option.
+- Summarize session notes in the chat as decisions crystallize.
+- Wait for the user's response before asking the next question.
 
 ### 4. Sync
 
 Once the user confirms the decisions:
 - Update `CONTEXT.md` (specifically the Core Domain Vocabulary and Active Tasks checklist) or relevant local documentation files to reflect the agreed-upon vision.
-- Stage the updated documents for review.
+- Present the updated documents to the user for review.

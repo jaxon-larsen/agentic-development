@@ -28,7 +28,7 @@ Works on fuzzy plans, existing documentation, code behavior, or gaps between the
 
 ## Session notes
 
-As decisions land, capture them in **`docs/scratch/grill-session.md`** (create `docs/scratch/` if needed). This file records requirements and agreements — not a substitute for proper docs.
+As decisions land, summarize them clearly in the chat conversation. These session notes record requirements and agreements for immediate reference — they are not a substitute for proper documentation.
 
 Notes format:
 

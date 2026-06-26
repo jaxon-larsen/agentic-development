@@ -16,20 +16,16 @@ Assimilate these files before initiating work:
 
 Adhere to the project's documentation layouts:
 - All detailed guides, architecture maps, and technical specs live in the [docs/](./docs/) directory.
-- Documented complex bug investigations live in [fixes/](./fixes/).
 
 ---
 
 ## 🤖 Active Agent Commands & Skills
 
-If custom skills are loaded in `.agents/skills/`, you can trigger them via their respective slash commands:
-- `/grill` — Trigger a relentless interview session to stress-test a design before implementing.
-- `/review` — Perform a two-axis review of standards and specs for the current diff.
-- `/improve-codebase-architecture` — Scan the codebase for shallowness and refactoring opportunities.
-- `/prototype` — Build a throwaway prototype for state, business-logic, or UI design questions.
-- `/handoff` — Compact the current conversation for another session to bridge contexts.
-- `/enhance-docs` — Audit doc-code drift, identify ambiguities, and grill to clarify vision.
-- `/expand-from-docs` — Identify gaps, interview user on next phase, and create execution plans.
+Custom skills are loaded dynamically from the workspace's `.agents/skills/` (for Antigravity) or `.cursor/skills/` (for Cursor) directories. 
+
+To discover what slash commands are available in this workspace or suggest them to the user:
+1. Scan the subdirectories of `.agents/skills/` (each folder name corresponds to a command, e.g., `/grill` or `/enhance-docs`).
+2. Read the corresponding `SKILL.md` file in each folder to understand its parameters, description, and workflow.
 
 ---
 

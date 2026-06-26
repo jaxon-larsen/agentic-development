@@ -44,19 +44,7 @@ Copy-IfMissing (Join-Path $RepoRoot "INSTRUCTIONS.md") (Join-Path $Target "INSTR
 Copy-IfMissing (Join-Path $ScriptDir "AGENTS.md") (Join-Path $Target "AGENTS.md")
 Copy-IfMissing (Join-Path $ScriptDir "CONTEXT.md") (Join-Path $Target "CONTEXT.md")
 
-New-Item -ItemType Directory -Force -Path (Join-Path $Target "docs"), (Join-Path $Target "docs\scratch") | Out-Null
-New-Item -ItemType File -Force -Path (Join-Path $Target "docs\.gitkeep"), (Join-Path $Target "docs\scratch\.gitkeep") | Out-Null
-
-$gitignore = Join-Path $Target ".gitignore"
-if (Test-Path $gitignore) {
-    $content = Get-Content $gitignore -Raw
-    if ($content -notmatch '(?m)^docs/scratch/?\s*$') {
-        Add-Content $gitignore "`n# Agent grill session notes`ndocs/scratch/`n"
-        Write-Host "  updated: .gitignore (docs/scratch/)"
-    }
-} else {
-    Set-Content $gitignore "# Agent grill session notes`ndocs/scratch/`n"
-    Write-Host "  added: .gitignore"
-}
+New-Item -ItemType Directory -Force -Path (Join-Path $Target "docs") | Out-Null
+New-Item -ItemType File -Force -Path (Join-Path $Target "docs\.gitkeep") | Out-Null
 
 Write-Host "Done. Open AGENTS.md in the target project and try /grill."

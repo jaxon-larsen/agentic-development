@@ -18,7 +18,6 @@ All detailed specifications and architecture maps live in the [docs/](./docs/) f
 
 - **[System Architecture](./docs/architecture.md):** Overall system relationships and data flow.
 - **[Technical Specifications](./docs/technical.md):** Coding conventions, standard UI patterns, etc.
-- **[Troubleshooting & Fixes](./fixes/):** Documented solutions for past complex issues.
 
 ---
 
@@ -37,3 +36,11 @@ Use this checklist to track your current sprint goals and implementation tasks:
 
 - [ ] Task 1: [Short description of what needs to be done]
 - [ ] Task 2: [Short description of what needs to be done]
+
+---
+
+## 🛠️ Troubleshooting
+
+Record environment-specific gotchas, common error resolutions, and local developer setup tips here:
+
+- **[Common Issue / Gotcha]:** [How to resolve / work around it]
