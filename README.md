@@ -25,7 +25,7 @@ From this repo, run the installer against any codebase:
 | `AGENTS.md`       | Agent entry point (skipped if exists)          |
 | `INSTRUCTIONS.md` | Coding + doc-sync behavior (skipped if exists) |
 | `CONTEXT.md`      | Glossary seed (skipped if exists)              |
-| `docs/adr/`       | ADR folder                                     |
+| `docs/`           | Documentation folder                           |
 | `docs/scratch/`   | Grill session notes (gitignored)               |
 
 **Manual copy** (same result): copy `skills/*` into `.cursor/skills/` and `.agents/skills/`, then copy files from `drop-in/` and `INSTRUCTIONS.md` from the repo root.
@@ -76,7 +76,7 @@ Skills live in `skills/`. Each skill is **user-invoked** (`disable-model-invocat
 | **Skill**           | Folder with `SKILL.md` — agent instructions when invoked |
 | **Grilling**        | Questions only; writes `docs/scratch/grill-session.md`   |
 | **CONTEXT.md**      | Project glossary and index into `docs/`                  |
-| **ADR**             | Decision record in `docs/adr/`                           |
+| **Decision Log**    | Inline records of key decisions in context/design files  |
 
 ## Maintaining this skill library
 

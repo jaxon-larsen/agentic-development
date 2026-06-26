@@ -44,8 +44,8 @@ Copy-IfMissing (Join-Path $RepoRoot "INSTRUCTIONS.md") (Join-Path $Target "INSTR
 Copy-IfMissing (Join-Path $ScriptDir "AGENTS.md") (Join-Path $Target "AGENTS.md")
 Copy-IfMissing (Join-Path $ScriptDir "CONTEXT.md") (Join-Path $Target "CONTEXT.md")
 
-New-Item -ItemType Directory -Force -Path (Join-Path $Target "docs\adr"), (Join-Path $Target "docs\scratch") | Out-Null
-New-Item -ItemType File -Force -Path (Join-Path $Target "docs\adr\.gitkeep"), (Join-Path $Target "docs\scratch\.gitkeep") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $Target "docs"), (Join-Path $Target "docs\scratch") | Out-Null
+New-Item -ItemType File -Force -Path (Join-Path $Target "docs\.gitkeep"), (Join-Path $Target "docs\scratch\.gitkeep") | Out-Null
 
 $gitignore = Join-Path $Target ".gitignore"
 if (Test-Path $gitignore) {
