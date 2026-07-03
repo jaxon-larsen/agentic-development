@@ -23,12 +23,12 @@ Write a structured report (do not edit files yet) detailing the following:
 - **Ambiguities & Gaps:** Underspecified requirements, missing edge cases, or unclear logic in the specifications.
 - **Simplification Plan:** Concrete, actionable steps to reorganize, deduplicate, or restructure the docs (e.g., merging scattered notes into `CONTEXT.md`, archiving old plans).
 
-*If no drift, bloat, or ambiguities are found, present a "Clean Alignment Report" and suggest proactive documentation improvements (e.g., adding guides for undocumented patterns, expanding glossary terms).*
+_If no drift, bloat, or ambiguities are found, present a "Clean Alignment Report" and suggest proactive documentation improvements (e.g., adding guides for undocumented patterns, expanding glossary terms)._
 
 ### 3. Interview
 
 Present the report to the user. To resolve the open concerns and clarify the project's vision, invoke the grilling protocol (the `/grill` command process):
-- Ask targeted clarifying questions **one at a time**.
+
 - For each question, explain why it matters, present design trade-offs, and suggest a recommended option.
 - Summarize session notes in the chat as decisions crystallize.
 - Wait for the user's response before asking the next question.
@@ -36,5 +36,6 @@ Present the report to the user. To resolve the open concerns and clarify the pro
 ### 4. Sync
 
 Once the user confirms the decisions:
+
 - Update `CONTEXT.md` (specifically the Core Domain Vocabulary and Active Tasks checklist) or relevant local documentation files to reflect the agreed-upon vision.
 - Present the updated documents to the user for review.

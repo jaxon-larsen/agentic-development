@@ -40,11 +40,11 @@ function Copy-IfMissing($Src, $Dest) {
     }
 }
 
-Copy-IfMissing (Join-Path $RepoRoot "INSTRUCTIONS.md") (Join-Path $Target "INSTRUCTIONS.md")
-Copy-IfMissing (Join-Path $ScriptDir "AGENTS.md") (Join-Path $Target "AGENTS.md")
+Copy-IfMissing (Join-Path $RepoRoot "INSTRUCTIONS.mdc") (Join-Path $Target "INSTRUCTIONS.mdc")
+Copy-IfMissing (Join-Path $ScriptDir "AGENTS.mdc") (Join-Path $Target "AGENTS.mdc")
 Copy-IfMissing (Join-Path $ScriptDir "CONTEXT.md") (Join-Path $Target "CONTEXT.md")
 
 New-Item -ItemType Directory -Force -Path (Join-Path $Target "docs") | Out-Null
 New-Item -ItemType File -Force -Path (Join-Path $Target "docs\.gitkeep") | Out-Null
 
-Write-Host "Done. Open AGENTS.md in the target project and try /grill."
+Write-Host "Done. Open AGENTS.mdc in the target project and try /grill."

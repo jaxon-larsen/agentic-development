@@ -31,11 +31,11 @@ copy_if_missing() {
   fi
 }
 
-copy_if_missing "$REPO_ROOT/INSTRUCTIONS.md" "$TARGET/INSTRUCTIONS.md"
-copy_if_missing "$SCRIPT_DIR/AGENTS.md" "$TARGET/AGENTS.md"
+copy_if_missing "$REPO_ROOT/INSTRUCTIONS.mdc" "$TARGET/INSTRUCTIONS.mdc"
+copy_if_missing "$SCRIPT_DIR/AGENTS.mdc" "$TARGET/AGENTS.mdc"
 copy_if_missing "$SCRIPT_DIR/CONTEXT.md" "$TARGET/CONTEXT.md"
 
 mkdir -p "$TARGET/docs"
 touch "$TARGET/docs/.gitkeep"
 
-echo "Done. Open AGENTS.md in the target project and try /grill."
+echo "Done. Open AGENTS.mdc in the target project and try /grill."

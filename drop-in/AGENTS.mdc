@@ -3,29 +3,27 @@ alwaysApply: true
 ---
 # Agent Configuration & Workspace Rules
 
-This file guides AI coding assistants (including Cursor and Antigravity) in this workspace.
+This file bootstraps agent assistants (Cursor & Antigravity) in this workspace.
 
 ---
 
-## 📋 Core Setup Instructions
+## 📋 Core Setup & Context
 
-Assimilate these files before initiating work:
-1.  **[INSTRUCTIONS.md](./INSTRUCTIONS.md):** Overall behavioral guidelines, coding principles, testing, and collaboration protocols. (Never modify this file per-project).
-2.  **[CONTEXT.md](./CONTEXT.md):** High-level context of this project, technology stack, domain glossary, and active task tracker. CONTEXT.md might also just include references to other documents with this information.
-
----
-
-## 🛠️ Workspace Structure & Documentation
-
-Adhere to the project's documentation layouts:
-- All detailed guides, architecture maps, and technical specs live in the [docs/](./docs/) directory.
+1.  **Read Guidelines first:** Review [INSTRUCTIONS.mdc](./INSTRUCTIONS.mdc) for strict coding, testing, and Git rules.
+2.  **Read Living Memory:** Review [CONTEXT.md](./CONTEXT.md) for tech stack, glossary, active tasks, and past design decisions.
+3.  **Maintain Helpful Context:** You are free to edit [CONTEXT.md](./CONTEXT.md) and relevant docs as needed when something about the project changes or the user clarifies something you might need to remember.
 
 ---
 
-## 🤖 Active Agent Commands & Skills
+## 🛡️ Harness & Context Engineering
 
-Custom skills are loaded dynamically from the workspace's `.agents/skills/` (for Antigravity) or `.cursor/skills/` (for Cursor) directories. 
+You operate inside a local *Harness* (this config, CLI/IDE tools, sandboxing).
+*   **Static Context:** (`AGENTS.mdc`, `INSTRUCTIONS.mdc`) - Keep it lightweight.
+*   **Dynamic Context:** Do not read entire folders or dump large files. Dynamically run tools (grep, dynamic skills) only when needed to optimize tokens.
 
-To discover what slash commands are available in this workspace or suggest them to the user:
-1. Scan the subdirectories of `.agents/skills/` (each folder name corresponds to a command, e.g., `/grill` or `/enhance-docs`).
-2. Read the corresponding `SKILL.md` file in each folder to understand its parameters, description, and workflow.
+---
+
+## 🤖 Dynamic Slash Commands
+
+Skills load dynamically from `.agents/skills/` (Antigravity) and `.cursor/skills/` (Cursor).
+*   To discover active commands (e.g. `/grill`, `/enhance-docs`), scan the subdirectories of `.agents/skills/` and read their corresponding `SKILL.md` files.

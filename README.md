@@ -22,12 +22,12 @@ From this repo, run the installer against any codebase:
 | ----------------- | ---------------------------------------------- |
 | `.cursor/skills/` | All skills (Cursor)                            |
 | `.agents/skills/` | All skills (Antigravity)                       |
-| `AGENTS.md`       | Agent entry point (skipped if exists)          |
-| `INSTRUCTIONS.md` | Coding + doc-sync behavior (skipped if exists) |
+| `AGENTS.mdc`      | Agent entry point (skipped if exists)          |
+| `INSTRUCTIONS.mdc` | Coding + doc-sync behavior (skipped if exists) |
 | `CONTEXT.md`      | Glossary seed (skipped if exists)              |
 | `docs/`           | Documentation folder                           |
 
-**Manual copy** (same result): copy `skills/*` into `.cursor/skills/` and `.agents/skills/`, then copy files from `drop-in/` and `INSTRUCTIONS.md` from the repo root.
+**Manual copy** (same result): copy `skills/*` into `.cursor/skills/` and `.agents/skills/`, then copy files from `drop-in/` and `INSTRUCTIONS.mdc` from the repo root.
 
 ### After install
 
@@ -45,7 +45,7 @@ From this repo, run the installer against any codebase:
 /expand-from-docs  →  interview, plan, and execute feature expansion
 ```
 
-`INSTRUCTIONS.md` runs **sync** automatically after implementation work.
+`INSTRUCTIONS.mdc` runs **sync** automatically after implementation work.
 
 ## Skills
 
@@ -56,10 +56,12 @@ Skills live in `skills/`. Each skill is **user-invoked** (`disable-model-invocat
 | Skill                                                                            | Purpose                                                     |
 | -------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | [enhance-docs](./skills/enhance-docs/SKILL.md)                                   | Audit doc-code drift, identify ambiguities, and grill to clarify vision |
+| [eval-builder](./skills/eval-builder/SKILL.md)                                   | Scaffold or update an evaluation suite in docs/testing.md   |
 | [expand-from-docs](./skills/expand-from-docs/SKILL.md)                           | Identify gaps, interview user on next phase, and create execution plans |
 | [grilling](./skills/grilling/SKILL.md)                                           | Ask questions; probe docs and code; capture session notes   |
 | [handoff](./skills/handoff/SKILL.md)                                             | Compact conversation for another session                    |
 | [improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring opportunities |
+| [onboarding](./skills/onboarding/SKILL.md)                                       | Bootstrap a repository as an agentic workspace              |
 | [prototype](./skills/prototype/SKILL.md)                                         | Build throwaway prototype code                              |
 
 ### Model-invoked
