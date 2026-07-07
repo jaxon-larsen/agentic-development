@@ -1,0 +1,22 @@
+---
+description: Rules and guidelines for updating or modifying project documentation in docs/.
+globs: docs/**/*.md
+alwaysApply: false
+---
+
+# Documentation Rules
+
+> [!NOTE]
+> **Purpose:** Static rules governing how the agent maintains and modifies files in the `docs/` folder.
+
+## 1. Keep Documents Generic (For Templates)
+* **Living Documentation:** The files under `docs/` are living documents designed to be copied and customized for the target repository.
+* **No Hardcoding:** Do not insert target-specific credentials, private repository tokens, database secrets, or project-specific developer details.
+* **Placeholder Syntax:** Use clean, square-bracketed placeholders (e.g., `[Project Name]`, `[e.g., React, TypeScript]`) for any customizable segments.
+
+## 2. Structural & Link Integrity
+* **Link Resolution:** Any edits to document structures must verify that all cross-document markdown links (such as link references from `technical.md` to `architecture.md`) remain valid and resolve correctly.
+* **Consistency:** Maintain standard markdown section headers so that automation scripts (such as dynamic learning or setup skills) can parse them cleanly.
+
+## 3. Grounding Before Changing
+* **Dependency Check:** Before modifying a document placeholder or section heading, perform a targeted non-mutating codebase search (e.g., glob/grep search) to see if onboarding scripts, skills, or rules rely on those specific structures.

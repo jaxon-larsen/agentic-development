@@ -1,0 +1,27 @@
+---
+description: Layout, typography, spacing, and copywriting standards for HTML and UI styling files.
+globs: **/*.{html,css,js,jsx,ts,tsx}
+alwaysApply: false
+---
+
+# UI Design & Styling Rules
+
+> [!NOTE]
+> **Purpose:** Static rules governing layout, typography, neutral spacing, and copywriting standards for HTML/CSS/JS.
+
+## 1. Typography & Colors
+* **Line Width Limit:** Keep running text containers near **65 characters wide** to maintain typographic readability. Set a clear type scale.
+* **CSP-Safe Font Inlining:** Browser Content Security Policies (CSP) frequently block external font CDNs (like Google Fonts). Do not link external webfont URLs. Instead, inline custom webfonts as `@font-face` data URIs directly in CSS.
+* **Neutral Tone Bias:** Avoid pure grey backgrounds/components. Bias neutrals slightly toward the page's primary accent hue (e.g. using a warm-toned grey for a warm accent) to make the design look cohesive.
+* **Avoid AI-Generated Presets:** Do not default to generic visual presets (such as cream (#F4F1EA) with serif headings, or solid black with lone neon pop bars) unless explicitly requested by the user.
+
+## 2. Layout & Spacing
+* **Use Flexbox/Grid Gap:** Manage layout spacing between sibling components using flex/grid `gap` properties. Avoid using element-level margins, which are prone to collapsing or doubling.
+* **Sideways Overflow Prevention:** Wrap wide content (such as tables, code blocks, or wide diagrams) in a container with `overflow-x: auto` to prevent the main page from scrolling horizontally.
+* **Tabular Numbers:** Use `font-variant-numeric: tabular-nums` for numeric lists or data tables so digits align perfectly.
+
+## 3. Copywriting & Interaction
+* **User-First Perspective:** Name labels and controls based on what a person recognizes, not how the system is built (e.g. use "notifications" rather than "webhook config").
+* **Active Voice Controls:** Call-to-action buttons must state exactly what happens next (e.g. "Publish", followed by a toast alert "Published").
+* **Actionable Errors:** Error alerts must clearly explain what went wrong and provide exact instructions on how to resolve the issue (no apologies or vagueness).
+* **Information Hierarchy:** Surface summary states and cards before detailed listings. State should be encoded in shape (e.g. pills, chips, colored stripes) so what needs attention is visible at a glance.

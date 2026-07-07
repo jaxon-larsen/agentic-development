@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+---
+# Agent Configuration & Workspace Rules
+
+> [!NOTE]
+> **Purpose:** Agent entry point. Indexes the workspace's rules, memory, and docs directories.
+
+## 📋 Core Setup & Context
+
+1.  **Read Guidelines first:** Review the modular rules in [.agents/rules/](./rules/) for collaboration, git safety, and TDD coding standards. **CRITICAL:** Rules inside this directory are static project policies and must **never** be edited by the agent unless explicitly requested by the user.
+2.  **Read Living Memory:** Review the modular files in [.agents/memory/](./memory/) (such as [context.md](./memory/context.md) and [tasks.md](./memory/tasks.md)) to understand the project architecture, preferences, sprint status, and user feedback.
+3.  **Maintain Helpful Context:** You **should** dynamically update files inside [.agents/memory/](./memory/) (e.g. updating task completion in `tasks.md`, recording resolved issues/preferences in `context.md`) as you learn more during the session.
+
+## 📂 Workspace File Index
+
+*   **Rules ([.agents/rules/](./rules/))**: Static guidelines (collaboration, git-safety, testing-tdd, artifact-rules, docs-rules).
+*   **Memory ([.agents/memory/](./memory/))**: Living context files (context, tasks).
+*   **Docs ([docs/](../docs/))**: Project knowledge base. See [docs/index.md](../docs/index.md) for contents.
+
+## 🛡️ Harness & Context Engineering
+
+You operate inside a local *Harness* (this config, CLI/IDE tools, sandboxing).
+*   **Static Context:** (`AGENTS.mdc`, `rules/*.mdc`) - Keep it lightweight.
+*   **Dynamic Context:** Do not read entire folders or dump large files. Dynamically run tools (grep, dynamic skills) only when needed to optimize tokens.

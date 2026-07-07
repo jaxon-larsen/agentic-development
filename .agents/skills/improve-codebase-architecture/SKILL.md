@@ -11,13 +11,13 @@ Surface architectural friction and propose **deepening opportunities** — refac
 This command is _informed_ by the project's domain model and built on a shared design vocabulary:
 
 - Run the `/codebase-design` skill for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, "the interface is the test surface", "one adapter = hypothetical seam, two = real"). Use these terms exactly in every suggestion — don't drift into "component," "service," "API," or "boundary."
-- The domain language in `CONTEXT.md` gives names to good seams; major design decisions recorded in existing documents (like `CONTEXT.md` or component specs) should not be re-litigated.
+- The domain language in `.agents/memory/context.md` gives names to good seams; major design decisions recorded in existing documents (like `.agents/memory/context.md` or component specs) should not be re-litigated.
 
 ## Process
 
 ### 1. Explore
 
-Read the project's domain glossary (`CONTEXT.md`) and any recorded design decisions in the area you're touching first.
+Read the project's domain glossary (`.agents/memory/context.md`) and any recorded design decisions in the area you're touching first.
 
 Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid heuristics — explore organically and note where you experience friction:
 
@@ -46,7 +46,7 @@ For each candidate, render a card with:
 
 End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
 
-**Use CONTEXT.md vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `CONTEXT.md` defines "Order," talk about "the Order intake module" — not "the FooBarHandler," and not "the Order service."
+**Use `.agents/memory/context.md` vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `.agents/memory/context.md` defines "Order," talk about "the Order intake module" — not "the FooBarHandler," and not "the Order service."
 
 **Decision conflicts**: if a candidate contradicts a previously recorded decision, only surface it when the friction is real enough to warrant revisiting it. Mark it clearly in the card (e.g. a warning callout: _"reopens decision on database selection — but worth reopening because..."_).
 
@@ -60,7 +60,7 @@ Once the user picks a candidate, run the `/grilling` skill to walk the design tr
 
 Side effects happen inline as decisions crystallize — run the `/domain-modeling` skill to keep the domain model current as you go:
 
-- **Naming a deepened module after a concept not in `CONTEXT.md`?** Add the term to `CONTEXT.md`. Create the file lazily if it doesn't exist.
-- **Sharpening a fuzzy term during the conversation?** Update `CONTEXT.md` right there.
-- **User rejects the candidate with a load-bearing reason?** Offer to record the decision directly within `CONTEXT.md` or the relevant component spec, framed as: _"Want me to log this decision in CONTEXT.md so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing — skip ephemeral reasons ("not worth it right now") and self-evident ones.
+- **Naming a deepened module after a concept not in `.agents/memory/context.md`?** Add the term to `.agents/memory/context.md`. Create the file lazily if it doesn't exist.
+- **Sharpening a fuzzy term during the conversation?** Update `.agents/memory/context.md` right there.
+- **User rejects the candidate with a load-bearing reason?** Offer to record the decision directly within `.agents/memory/context.md` or the relevant component spec, framed as: _"Want me to log this decision in `.agents/memory/context.md` so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing — skip ephemeral reasons ("not worth it right now") and self-evident ones.
 - **Want to explore alternative interfaces for the deepened module?** Run the `/codebase-design` skill and use its design-it-twice parallel sub-agent pattern.

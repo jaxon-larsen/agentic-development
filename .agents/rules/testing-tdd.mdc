@@ -1,0 +1,25 @@
+---
+description: Code quality, Type safety, Test-Driven Development (TDD), and verification workflows.
+globs: **/*.{js,ts,jsx,tsx,py,go,rs,cpp,h,java,cs}
+alwaysApply: false
+---
+
+# Agent Testing & TDD Rules
+
+> [!NOTE]
+> **Purpose:** Static rules governing agent behavior when writing tests, verifying code, and handling command/compiler failures.
+
+## 1. Code Quality & Simplicity
+* **Simplicity & YAGNI:** Write simple, maintainable solutions. Avoid unnecessary abstractions, boilerplate, or unrequested flexibility.
+* **Type Safety:** Respect the project's type system. Use strict typing; avoid escape hatches (e.g. bypasses like `any` or empty interface types).
+* **Incremental Iteration:** Refine existing, working code instead of rewriting from scratch unless fundamentally necessary. Change only what you must.
+* **File Size:** Keep code in few, focused files. Split files if they grow beyond 300-500 lines or violate single responsibility.
+* **Consumer & Call-Graph Tracing:** Before changing a function, class, or API signature, trace its dependency path and public consumers. Mark known ceilings (e.g., global lock) with a comment and upgrade path.
+
+## 2. Test-Driven Development (TDD) & Verification
+* **Goal-Driven Verification:** Transform tasks into verifiable goals: `[Step] → verify: [check]`.
+* **Balanced Testing:** Run native test suites (e.g., `npm test`, `pytest`). Write unit/integration tests reproducing bugs before applying fixes. If no framework exists, write minimal assert-based self-checks.
+* **Failure Loop Threshold:** If a command/compilation/test fails **3 times in a row**, stop immediately.
+  * Auto-document the current blocker, logs, and error outputs under `## 🛠️ Troubleshooting` in [.agents/memory/context.md](../memory/context.md) or `## ❓ Open Questions` in `docs/technical.md`.
+  * Ask the user for guidance before running the command a 4th time.
+* **Environment Awareness:** Ensure code runs correctly across environments via environment variables. Terminate conflicting background processes and restart dev servers after backend or config changes.

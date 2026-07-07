@@ -12,7 +12,7 @@ Drive codebase and feature expansion by turning specifications and requirements 
 
 ### 1. Analyze Gaps and Stepping Off Points
 
-Read existing documentation (`CONTEXT.md`, files in `docs/`, etc.) and scan the codebase. Identify:
+Read existing documentation (`.agents/memory/context.md`, files in `docs/`, etc.) and scan the codebase. Identify:
 - **Feature Gaps:** Areas where the code has not yet caught up to the specifications/documentation.
 - **Stepping Off Points:** Promising entry points or foundations in the current code and docs to expand the project into a more robust, complete system.
 - **Architectural Readiness:** What scaffolding or preparation is needed to support the next logical phase of implementation.
@@ -39,6 +39,6 @@ Draft a structured plan to execute the agreed-upon phase. The plan must:
 Once the plan is approved:
 - Write and refine the code to implement the next stage.
 - Run all verification steps (type checks, compilation, tests) and ensure they pass successfully.
-- Update the documentation (e.g. task lists or checklists in `CONTEXT.md`) *only after verification passes* to:
+- Update the documentation (e.g. task lists or checklists in `.agents/memory/tasks.md`) *only after verification passes* to:
   - Mark completed tasks as finished.
   - Add newly discovered ideas, roadmap items, or next steps to the backlog.

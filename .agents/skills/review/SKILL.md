@@ -26,7 +26,7 @@ Before going further, confirm the fixed point resolves (`git rev-parse <fixed-po
 
 Look for the originating spec, in this order:
 
-1. Active checklist/roadmap tasks in `CONTEXT.md` or `TODO.md`.
+1. Active checklist/roadmap tasks in `.agents/memory/tasks.md` or `TODO.md`.
 2. A path the user passed as an argument.
 3. A PRD/spec file under `docs/` or `specs/` matching the branch name or feature.
 4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
@@ -43,19 +43,27 @@ Send a single message with two `Agent` tool calls. Use the `general-purpose` sub
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3.
-- The brief: "Report — per file/hunk where relevant — every place the diff violates a documented standard. Cite the standard (file + the rule). Distinguish hard violations from judgement calls. Skip anything tooling enforces. Under 400 words."
+- The brief: "Report — per file/hunk where relevant — every place the diff violates a documented standard. Cite the standard (file + the rule).
+  * **Prioritize & group findings** strictly by severity: `Critical` (breaking violation), `Warn` (deviation from standard), `Note` (style recommendation).
+  * **Citation format:** Prefix every finding with the exact `filepath:line_number` reference.
+  * **Order:** Present all findings at the top of your response; place any general code summaries at the very bottom.
+  * Limit to under 400 words."
 
 **Spec sub-agent prompt** — include:
 
 - The diff command and commit list.
 - The path or fetched contents of the spec.
-- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+- The brief: "Identify requirements from the spec that are missing, partial, incorrect, or represent scope creep.
+  * **Prioritize & group findings** strictly by severity: `Critical` (missing/failed requirement), `Warn` (partial implementation), `Note` (observation/scope creep).
+  * **Citation format:** Prefix every finding with the exact `filepath:line_number` reference.
+  * **Order:** Present all findings at the top of your response; place any general summaries or trade-off discussions at the very bottom.
+  * Limit to under 400 words."
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
 ### 5. Aggregate
 
-Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings — the two axes are deliberately separate (see _Why two axes_).
+Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned, maintaining the severity grouping and exact line references. Do **not** merge or rerank findings between the two axes.
 
 End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes — that's the reranking the separation exists to prevent.
 
