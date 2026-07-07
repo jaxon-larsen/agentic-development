@@ -24,7 +24,13 @@ Define project-specific terminology and naming rules here to maintain consistenc
 
 ---
 
-## 🛠️ Troubleshooting
+## ⚠️ Pitfalls & Troubleshooting
 
-Record environment-specific gotchas, common error resolutions, and local developer setup tips here to prevent repeating issues:
+Record stack-specific gotchas, common error resolutions, and local developer setup tips here to prevent repeating issues:
 - **[Common Issue / Gotcha]:** [How to resolve / work around it]
+
+---
+
+## ⚖️ Operational Policies
+
+<!-- For complex projects, future agents or developers can define a Source of Truth hierarchy, Task Routing rules, or a Parity Checklist here to prevent sync errors. -->

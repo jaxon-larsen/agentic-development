@@ -32,7 +32,7 @@ your-project/
 └── ...
 ```
 
-*Note: If you are using Cursor instead of Antigravity, simply rename the copied `.agents/` directory to `.cursor/`.*
+*Note: If you are using Cursor instead of Antigravity, you can rename the copied `.agents/` directory to `.cursor/`. Alternatively, to support both editors with zero duplication, keep `.agents/` and create a symbolic link (PowerShell: `New-Item -ItemType SymbolicLink -Path .cursor -Target .agents`) or directory junction (PowerShell: `New-Item -ItemType Junction -Path .cursor -Target .agents`, which does not require Developer Mode).*
 
 ### After copying
 
