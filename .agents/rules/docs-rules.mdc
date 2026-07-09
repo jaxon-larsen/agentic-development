@@ -5,18 +5,14 @@ alwaysApply: false
 ---
 
 # Documentation Rules
+Rules governing the maintenance and editing of files in `docs/`.
 
-> [!NOTE]
-> **Purpose:** Static rules governing how the agent maintains and modifies files in the `docs/` folder.
+## 1. Templates & Living Docs
+- **Customizable:** Docs are living templates to be tailored for the target repo.
+- **No Secrets:** Do not hardcode credentials, private tokens, or database keys.
+- **Placeholders:** Use square-bracketed placeholders (e.g., `[Project Name]`) for customizable segments.
 
-## 1. Keep Documents Generic (For Templates)
-* **Living Documentation:** The files under `docs/` are living documents designed to be copied and customized for the target repository.
-* **No Hardcoding:** Do not insert target-specific credentials, private repository tokens, database secrets, or project-specific developer details.
-* **Placeholder Syntax:** Use clean, square-bracketed placeholders (e.g., `[Project Name]`, `[e.g., React, TypeScript]`) for any customizable segments.
-
-## 2. Structural & Link Integrity
-* **Link Resolution:** Any edits to document structures must verify that all cross-document markdown links (such as link references from `technical.md` to `architecture.md`) remain valid and resolve correctly.
-* **Consistency:** Maintain standard markdown section headers so that automation scripts (such as dynamic learning or setup skills) can parse them cleanly.
-
-## 3. Grounding Before Changing
-* **Dependency Check:** Before modifying a document placeholder or section heading, perform a targeted non-mutating codebase search (e.g., glob/grep search) to see if onboarding scripts, skills, or rules rely on those specific structures.
+## 2. Integrity & Dependencies
+- **Links:** Verify cross-document markdown links resolve correctly after structure edits.
+- **Headers:** Maintain consistent markdown headings for automated parsing.
+- **Grounding:** Search codebase (glob/grep) before changing placeholders to ensure script/skill integrity.

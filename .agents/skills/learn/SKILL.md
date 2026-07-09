@@ -4,27 +4,28 @@ description: Audit the recent session history to extract domain terms, library c
 disable-model-invocation: true
 ---
 
-# Learn (Persist Session Learnings)
+## Overview
+Analyze recent conversation, diffs, and decisions to update living repository memory.
 
-Analyze recent conversation history, code changes, and resolved design decisions to update the workspace's living memory.
+## Instructions
+### 1. Audit Session
+Review conversation, git diffs, and grill notes. Extract:
+- **Domain Vocabulary:** Resolved concepts, entity names, or terms.
+- **Troubleshooting:** Tool version fixes, gotchas, configuration blocks, or compiler flags.
+- **Roadmap:** Completed tasks or new backlog items.
+- **Conventions:** Styles, folder limits, type guidelines, or test setups.
 
-## Process
+### 2. Update Memory Files
+- Update `.agents/memory/context.md` (Vocabulary, Stack, Troubleshooting, Preferences, Corrections sections).
+- Update `.agents/memory/tasks.md` checklist milestones.
+- Do not add specific vocabulary or gotchas directly to `AGENTS.mdc`.
 
-### 1. Audit Session History
-Review the current conversation history, git diffs, and resolved grill session notes to extract:
-* **Domain Vocabulary:** Newly resolved terms, names, API identifiers, or business entities.
-* **Troubleshooting Steps:** Resolving tool version issues, compiler flags, configuration bugs, or environment setup gotchas.
-* **Roadmap Updates:** Checked-off checklist items or newly identified backlog ideas.
-* **Technical Guidelines:** Code styles, directory constraints, interface choices, or typing exceptions.
+### 3. Review Diffs
+- Present updated `.agents/memory/context.md` and `.agents/memory/tasks.md` diffs in chat and explain what was learned.
 
-* **context.md:** Update the `Technology Stack`, `Core Domain Vocabulary`, `Troubleshooting`, `General Preferences`, or `Past Corrections` sections when new terms, preferences, gotchas, or stack parameters are defined.
-* **tasks.md:** Check off completed tasks and update the active sprint roadmap milestones.
+## Output
+- Markdown diff of updates in `context.md` and `tasks.md`.
+- Summary of lessons extracted.
 
-### 4. Keep Agent Configuration Broad (`AGENTS.mdc`)
-* **CRITICAL:** Do not add specific vocabulary words, troubleshooting steps, or minor style choices into `AGENTS.mdc` (or `.agents/AGENTS.mdc`). 
-* Keep `AGENTS.mdc` focused strictly on broad, overall workspace instructions, high-level boundaries, and tool definitions.
-
-### 5. Final User Review
-* Present the updated markdown diffs to the user in chat.
-* Explain what terms, rules, or roadmap changes were learned and why they were placed in their respective files.
-* Prompt the user to stage and commit the updated memory files.
+## References
+- [rule-writing-guide.md](./references/rule-writing-guide.md) - Guidelines for writing effective rules and memory updates.

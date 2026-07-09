@@ -5,21 +5,19 @@ alwaysApply: false
 ---
 
 # Agent Testing & TDD Rules
-
-> [!NOTE]
-> **Purpose:** Static rules governing agent behavior when writing tests, verifying code, and handling command/compiler failures.
+Rules for code quality, strict typing, TDD iteration, and troubleshooting limits.
 
 ## 1. Code Quality & Simplicity
-* **Simplicity & YAGNI:** Write simple, maintainable solutions. Avoid unnecessary abstractions, boilerplate, or unrequested flexibility.
-* **Type Safety:** Respect the project's type system. Use strict typing; avoid escape hatches (e.g. bypasses like `any` or empty interface types).
-* **Incremental Iteration:** Refine existing, working code instead of rewriting from scratch unless fundamentally necessary. Change only what you must.
-* **File Size:** Keep code in few, focused files. Split files if they grow beyond 300-500 lines or violate single responsibility.
-* **Consumer & Call-Graph Tracing:** Before changing a function, class, or API signature, trace its dependency path and public consumers. Mark known ceilings (e.g., global lock) with a comment and upgrade path.
+- **YAGNI:** Keep code simple. Avoid unrequested abstractions or flexibility.
+- **Strict Types:** Respect the type system; avoid escape hatches (like `any`).
+- **Incremental:** Modify only what is necessary instead of rewriting.
+- **File Size:** Keep code in focused files. Split if they exceed 300-500 lines.
+- **Dependency Scan:** Trace dependency paths and consumers before changing signatures.
 
-## 2. Test-Driven Development (TDD) & Verification
-* **Goal-Driven Verification:** Transform tasks into verifiable goals: `[Step] → verify: [check]`.
-* **Balanced Testing:** Run native test suites (e.g., `npm test`, `pytest`). Write unit/integration tests reproducing bugs before applying fixes. If no framework exists, write minimal assert-based self-checks.
-* **Failure Loop Threshold:** If a command/compilation/test fails **3 times in a row**, stop immediately.
-  * Auto-document the current blocker, logs, and error outputs under `## 🛠️ Troubleshooting` in [.agents/memory/context.md](../memory/context.md) or `## ❓ Open Questions` in `docs/technical.md`.
-  * Ask the user for guidance before running the command a 4th time.
-* **Environment Awareness:** Ensure code runs correctly across environments via environment variables. Terminate conflicting background processes and restart dev servers after backend or config changes.
+## 2. Test-Driven Development & Troubleshooting
+- **Goal-Driven:** Reorganize tasks as `[Step] → verify: [check]`.
+- **TDD:** Write unit/integration tests reproducing bugs before applying fixes. Write minimal asserts if no framework is present.
+- **Failure Loop Limit:** If a test/compilation/run fails **3 times in a row**, stop.
+  - Document blocker under `## 🛠️ Troubleshooting` in `.agents/memory/context.md`.
+  - Ask user for help before running the command a 4th time.
+- **Environment:** Run tests/compiles across environments via env variables. Clean port conflicts and restart servers on backend or config changes.

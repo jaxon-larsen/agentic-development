@@ -4,25 +4,19 @@ alwaysApply: true
 ---
 
 # Agent Collaboration Rules
-
-> [!NOTE]
-> **Purpose:** Static rules governing agent communication, collaboration modes, check-ins, and token economics.
+Rules for communication, coordination, planning, and tool usage.
 
 ## 1. Collaboration Guidelines
-* **Standard Check-in:** Before making major modifications, check in:
-  > "Confirming understanding: I've reviewed [document/code context]. The goal is [task goal], adhering to [key constraint]. Proceeding with [planned step]."
-* **Suggest vs. Apply:** Prefix edits in conversation with "Suggestion:" (for draft review) or "Applying fix:" (for direct modifications).
-* **Conductor vs. Orchestrator Modes:** Adjust interaction based on the user's current workflow:
-  * *Conductor Mode (IDE completions/real-time loops):* Make incremental suggestions, focus on keystroke-level changes, and check in at each checkpoint.
-  * *Orchestrator Mode (Asynchronous delegation):* Act autonomously. Write a complete plan first, execute the changes, run tests, and present a final walkthrough.
-* **Token Economics:** Optimize token consumption. For heavy, low-complexity tasks (e.g. codebase research or audits), delegate to a cheaper specialized subagent (like `research`) using `invoke_subagent`.
+- **Standard Check-in:** Before major changes, send: *"Confirming understanding: I've reviewed [context]. Goal is [task], adhering to [key constraints]. Proceeding with [step]."*
+- **Conversation:** Prefix edits with *"Suggestion:"* (drafts) or *"Applying fix:"* (mutations).
+- **Modes:**
+  - *Conductor:* Interactive checkpoints, keystroke-level/incremental changes.
+  - *Orchestrator:* Write plan first, execute, verify, and document walkthrough.
+- **Token Economy:** Delegate research/audits to subagents (`invoke_subagent` using `research`).
 
-## 2. Planning Mode & Decision-Complete Plans
-* **Plan Mode is Non-Mutating:** When compiling or editing an implementation plan:
-  * **Allowed:** Non-mutating actions that gather facts, check schemas, run typechecks, or perform dry-runs (reading files, ripgrep searches, globbing).
-  * **Forbidden:** Mutating actions that change repository-tracked state (writing code, applying migrations, running automatic formatters, or making code edits).
-* **Explore First, Ask Second (Grounding):** Before asking the user about a discoverable codebase detail, you **must** perform at least one targeted search/read operation first. Do not ask questions that can be answered from the codebase (e.g. "where is this function defined?").
-* **Decision-Complete Plans:** The final plan must be **decision complete** (leaving no architectural, design, or schema choices to the implementer).
-* **Format File Citations:** When mentioning codebase files or symbols, use the `filepath:line_number` pattern (e.g. `src/utils/api.ts:42`) so it remains instantly clickable and navigable in terminal panels.
-* **No Time Estimates:** Never provide task durations, time estimates, or predictions (e.g. "this will take 5 minutes") in any plan, check-in, or message.
-
+## 2. Planning Mode & Grounding
+- **Planning Mode is Non-Mutating:** Compiling plans must NOT write/modify repository code. Dry-runs, file reads, and grep searches are allowed.
+- **Ground Before Asking:** Search the codebase before asking user about discoverable details.
+- **Decision-Complete:** Plans must resolve all design, schema, and API decisions.
+- **Citations:** Link files/symbols as `filepath:line_number` (clickable references).
+- **No Time Estimates:** Never predict task duration (e.g. "this will take 5 minutes").

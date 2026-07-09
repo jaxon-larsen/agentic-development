@@ -4,28 +4,24 @@ description: Bootstrap a repository as an agentic workspace by copying static in
 disable-model-invocation: true
 ---
 
-# Onboarding
+## Overview
+Scan codebase and bootstrap project memory/agent configurations for developer collaboration.
 
-Configure and customize a newly bootstrapped repository for agent collaboration by tailoring the living project memory (`.agents/memory/context.md`) and agent configuration to fit the scanned codebase.
-
-## Process
-
+## Instructions
 ### 1. Codebase Scan
-- Scan the repository to detect:
-  - **Technology Stack:** package managers, frameworks, and database setups (e.g., parsing `package.json`, `Cargo.toml`, `requirements.txt`).
-  - **Project Layout:** folder structure, test paths, and entry points.
-  - **Existing Guidelines:** read existing `README` or documentation index files.
+Identify tech stack (manifests like `package.json`, `Cargo.toml`, etc.), project layout (tests, src entry points), and existing docs/READMEs.
 
-### 2. Customize Project Memory (`.agents/memory/context.md`)
-- Tailor **`.agents/memory/context.md`** to align with the codebase scan:
-  - Populate the *Technology Stack* list with detected libraries and frameworks.
-  - Seed the *Core Domain Vocabulary* with key terms extracted from the codebase's readme/structure.
-  - Build the initial *Active Tasks & Roadmap* checklist based on the project's state.
+### 2. Customize Project Memory
+- Seed `.agents/memory/context.md`: technology stack, core domain glossary, and initial roadmap tasks.
+- Customize `.agents/AGENTS.mdc` with discovered custom tools, run/test commands, or folder conventions.
 
-### 3. Customize Agent Rules (`.agents/AGENTS.mdc`)
-- Tailor **`.agents/AGENTS.mdc`** with any project-specific conventions, test scripts, or tool configurations discovered.
+### 3. User Review
+Present updated files in chat. Grill user one question at a time to verify key terms or custom script options before completing.
 
-### 4. User Review
-- Present the customized `.agents/memory/context.md` and `.agents/AGENTS.mdc` to the user in the chat.
-- Ask targeted questions **one at a time** (following the `/grill` protocol) to verify domain glossary terms, coding conventions, or custom tools before wrapping up.
-- Inform the user that they can now manually stage and commit the customized onboarding files.
+## Output
+- Bootstrapped `.agents/memory/context.md` project memory.
+- Customized `.agents/AGENTS.mdc` rules.
+- Initial backlog checklist in `.agents/memory/tasks.md`.
+
+## References
+- [onboarding-checklist.md](./resources/onboarding-checklist.md) - Checklist guiding scan parameters and structure maps.

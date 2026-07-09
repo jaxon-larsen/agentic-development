@@ -58,14 +58,15 @@ Skills live in `.agents/skills/`. Each skill is **user-invoked** (`disable-model
 
 | Skill                                                                                  | Purpose                                                     |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| [debug-systematically](./.agents/skills/debug-systematically/SKILL.md)                 | Systematically debug an issue using hypothesis-driven investigation |
 | [enhance-docs](./.agents/skills/enhance-docs/SKILL.md)                                 | Audit doc-code drift, identify ambiguities, and grill to clarify vision |
 | [expand-from-docs](./.agents/skills/expand-from-docs/SKILL.md)                         | Identify gaps, interview user on next phase, and create execution plans |
 | [goal](./.agents/skills/goal/SKILL.md)                                                 | Decompose a complex objective into checklist tasks and execute with loop protection |
 | [grilling](./.agents/skills/grilling/SKILL.md)                                         | Ask questions; probe docs and code; capture session notes   |
-| [handoff](./.agents/skills/handoff/SKILL.md)                                           | Compact conversation for another session                    |
 | [improve-codebase-architecture](./.agents/skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring opportunities |
 | [learn](./.agents/skills/learn/SKILL.md)                                               | Audit session history to extract domain terms and coding rules, updating memory/context.md |
 | [onboarding](./.agents/skills/onboarding/SKILL.md)                                     | Bootstrap a repository as an agentic workspace              |
+| [performance-audit](./.agents/skills/performance-audit/SKILL.md)                       | Profile and optimize application performance                |
 | [prototype](./.agents/skills/prototype/SKILL.md)                                       | Build throwaway prototype code                              |
 
 ### Model-invoked
@@ -84,11 +85,28 @@ Skills live in `.agents/skills/`. Each skill is **user-invoked** (`disable-model
 
 ## Maintaining this skill library
 
-When adding or editing skills:
+When adding or editing skills, adhere to these development principles:
 
+### 1. SKILL.md Anatomy
+Every skill must follow a consistent 4-section body structure after its YAML frontmatter:
+- `## Overview`: A 1–2 sentence summary of what the skill does.
+- `## Instructions`: Step-by-step instructions outlining the execution logic.
+- `## Output`: Description of output format, files, or reports generated.
+- `## References`: (Optional) Clickable links to helper resources in the skill directory.
+
+### 2. YAML Frontmatter Guidelines
+- `name`: Kebab-case matching the folder name.
+- `description`: Concise, trigger-optimized summary.
+- `disable-model-invocation`: Set to `true` for user-invoked skills; omit for model-invoked skills.
+- Use `tags` (e.g., `[stable]`, `[beta]`, `[experimental]`) to denote maturity.
+
+### 3. Token Economy & Supporting Files
+- **Keep SKILL.md under 500 lines.**
+- For verbose criteria, checklists, or reference materials, create separate markdown files under a `references/` or `resources/` directory inside the skill folder and link them from the `## References` section.
+- Avoid unnecessary scripts or folders unless they add clear automation value.
+
+### 4. Registration
 - Every skill in `.agents/skills/` must appear in this README with a link to its `SKILL.md`.
 - Group under **User-invoked** and **Model-invoked**.
-- **User-invoked:** set `disable-model-invocation: true`; human-facing `description`.
-- **Model-invoked:** omit that flag; model-facing `description` with trigger phrasing.
-- User-invoked skills may invoke model-invoked skills, not other user-invoked skills.
+- User-invoked skills may invoke model-invoked skills, but should not call other user-invoked skills.
 - Reach other skills via `/skill` prose, not cross-folder behavior links.

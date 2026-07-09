@@ -5,23 +5,21 @@ alwaysApply: false
 ---
 
 # UI Design & Styling Rules
-
-> [!NOTE]
-> **Purpose:** Static rules governing layout, typography, neutral spacing, and copywriting standards for HTML/CSS/JS.
+Rules for layout, typography, spacing, and copywriting for HTML/CSS/JS files.
 
 ## 1. Typography & Colors
-* **Line Width Limit:** Keep running text containers near **65 characters wide** to maintain typographic readability. Set a clear type scale.
-* **CSP-Safe Font Inlining:** Browser Content Security Policies (CSP) frequently block external font CDNs (like Google Fonts). Do not link external webfont URLs. Instead, inline custom webfonts as `@font-face` data URIs directly in CSS.
-* **Neutral Tone Bias:** Avoid pure grey backgrounds/components. Bias neutrals slightly toward the page's primary accent hue (e.g. using a warm-toned grey for a warm accent) to make the design look cohesive.
-* **Avoid AI-Generated Presets:** Do not default to generic visual presets (such as cream (#F4F1EA) with serif headings, or solid black with lone neon pop bars) unless explicitly requested by the user.
+- **Line Width:** Limit text containers to ~65 characters for readability. Set clear type scale.
+- **CSP Safety:** Inline custom webfonts as `@font-face` data URIs directly in CSS; do not use external CDNs.
+- **Cohesion:** Bias neutral shades slightly toward the primary accent hue (avoid pure grey backgrounds).
+- **Style:** Avoid generic cream/neon visual presets unless requested.
 
 ## 2. Layout & Spacing
-* **Use Flexbox/Grid Gap:** Manage layout spacing between sibling components using flex/grid `gap` properties. Avoid using element-level margins, which are prone to collapsing or doubling.
-* **Sideways Overflow Prevention:** Wrap wide content (such as tables, code blocks, or wide diagrams) in a container with `overflow-x: auto` to prevent the main page from scrolling horizontally.
-* **Tabular Numbers:** Use `font-variant-numeric: tabular-nums` for numeric lists or data tables so digits align perfectly.
+- **Flow:** Use `gap` (Flex/Grid) for spacing. Avoid margins which double/collapse.
+- **Overflow:** Wrap wide content (tables, code, diagrams) in `overflow-x: auto` to prevent horizontal scrolling.
+- **Data:** Use `font-variant-numeric: tabular-nums` for numeric lists or tables.
 
 ## 3. Copywriting & Interaction
-* **User-First Perspective:** Name labels and controls based on what a person recognizes, not how the system is built (e.g. use "notifications" rather than "webhook config").
-* **Active Voice Controls:** Call-to-action buttons must state exactly what happens next (e.g. "Publish", followed by a toast alert "Published").
-* **Actionable Errors:** Error alerts must clearly explain what went wrong and provide exact instructions on how to resolve the issue (no apologies or vagueness).
-* **Information Hierarchy:** Surface summary states and cards before detailed listings. State should be encoded in shape (e.g. pills, chips, colored stripes) so what needs attention is visible at a glance.
+- **Labels:** Name controls from the user's perspective, not system internals (e.g. "Notifications" not "Webhook Config").
+- **CTA:** Use active-voice buttons (e.g. "Publish") followed by immediate confirmation.
+- **Errors:** Must state exactly what failed and how to resolve it without apologies or vagueness.
+- **Hierarchy:** Surface summary metrics/cards before detail tables. Encode status in shapes/colors.

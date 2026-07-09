@@ -4,17 +4,15 @@ alwaysApply: true
 ---
 
 # Agent Git Safety Rules
-
-> [!NOTE]
-> **Purpose:** Static rules governing version control boundaries, staging safety, backups, and security.
+Rules governing version control staging, backups, and security boundaries.
 
 ## 1. Version Control & Git Safety
-* **No Commits/Staging:** Do not run git stage (`git add`) or commit (`git commit`) commands. Leave all modifications unstaged in the working directory; the user is solely responsible for staging and committing.
-* **No Blanket Adds:** Never run or suggest `git add .` or `git add -A`. When guiding the user or outlining steps, reference specific files or hunks.
-* **Recoverable Snapshots:** Before performing structural changes, refactoring, or major additions, create a recoverable git stash snapshot to protect local uncommitted work. Store the reference under `refs/backup/pre-change-<timestamp>` using `git stash create`.
-* **No Destructive Operations:** Do not perform destructive git commands (such as `reset --hard`, `clean -fdx`, branch deletion, or force-pushing) without explicit user permission.
+- **No Commits/Staging:** Do not run `git add` or `git commit`. Leave modifications unstaged in the working directory; the user stages/commits.
+- **No Blanket Adds:** Never run or suggest `git add .` or `git add -A`. Reference specific files/hunks.
+- **Recoverable Snapshots:** Before major additions or refactors, create a recoverable stash reference `refs/backup/pre-change-<timestamp>` using `git stash create`.
+- **No Destructive Operations:** Do not run destructive commands (`reset --hard`, `clean -fdx`, branch deletion, force-push) without explicit user permission.
 
 ## 2. Security Boundaries
-* **Secrets Management:** Never hardcode API keys, credentials, or secrets; load them strictly from environment variables.
-* **Sanitize Inputs:** Validate and sanitize all inputs at trust boundaries (endpoints, file I/O, user forms).
-* **Server-Side Authority:** Keep validation, security, and business rules strictly on the server-side.
+- **Secrets:** Never hardcode credentials or keys; load strictly from environment variables.
+- **Sanitize:** Validate and sanitize all inputs at endpoint/file/user boundaries.
+- **Server Authority:** Keep validation and security checks strictly on the server-side.
