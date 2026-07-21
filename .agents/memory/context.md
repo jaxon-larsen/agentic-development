@@ -17,7 +17,6 @@ Define project-specific terminology and naming rules here to maintain consistenc
 
 ### General Preferences
 - **Pacing:** Be concise, direct, and factual. Focus on problem-solving without emotional validation.
-- **Copywriting:** Name interactive controls by what a person recognizes rather than database symbols.
 
 ### Past Corrections
 - *Corrections Here*

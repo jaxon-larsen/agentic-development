@@ -20,15 +20,6 @@ List the commands required to run tests, format code, and lint the workspace:
 * **Run Linter:** `[command]`
 * **Typecheck Code:** `[command]`
 
----
-
-## 🤖 Evaluation Rubric (Agent Evals)
-
-For projects implementing LLMs or agentic workflows, define the criteria and evaluation rubrics for testing non-deterministic behavior:
-- **[Task/Flow Name]:**
-  - *Input Scenario:* [Description of test input]
-  - *Evaluation Criteria:* [What constitutes a success or failure, constraints, model guidelines]
-  - *Evaluation Commands:* `[command]`
 
 ---
 

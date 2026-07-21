@@ -38,12 +38,12 @@ your-project/
 
 1. Open your target project in Cursor or Antigravity.
 2. Run the `/onboarding` command — this skill will scan your codebase and customize the copied `.agents/memory/context.md` and `.agents/AGENTS.mdc` templates for your stack.
-3. Try `/grilling` on something fuzzy, then `/enhance-docs` to sync, or `/expand-from-docs` to build out new features.
+3. Try `/grill` on something fuzzy, then `/enhance-docs` to sync, or `/expand-from-docs` to build out new features.
 
 ## Workflow
 
 ```
-/grilling  →  probe context, clarify design in chat
+/grill  →  probe context, clarify design in chat
      ↓
 /enhance-docs  →  audit doc-code drift, resolve ambiguities (Wiki Linter)
      ↓
@@ -56,32 +56,32 @@ Skills live in `.agents/skills/`. Each skill is **user-invoked** (`disable-model
 
 ### User-invoked
 
-| Skill                                                                                  | Purpose                                                     |
-| -------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [debug-systematically](./.agents/skills/debug-systematically/SKILL.md)                 | Systematically debug an issue using hypothesis-driven investigation |
-| [enhance-docs](./.agents/skills/enhance-docs/SKILL.md)                                 | Audit doc-code drift, identify ambiguities, and grill to clarify vision |
-| [expand-from-docs](./.agents/skills/expand-from-docs/SKILL.md)                         | Identify gaps, interview user on next phase, and create execution plans |
-| [goal](./.agents/skills/goal/SKILL.md)                                                 | Decompose a complex objective into checklist tasks and execute with loop protection |
-| [grilling](./.agents/skills/grilling/SKILL.md)                                         | Ask questions; probe docs and code; capture session notes   |
-| [improve-codebase-architecture](./.agents/skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring opportunities |
-| [learn](./.agents/skills/learn/SKILL.md)                                               | Audit session history to extract domain terms and coding rules, updating memory/context.md |
-| [onboarding](./.agents/skills/onboarding/SKILL.md)                                     | Bootstrap a repository as an agentic workspace              |
-| [performance-audit](./.agents/skills/performance-audit/SKILL.md)                       | Profile and optimize application performance                |
-| [prototype](./.agents/skills/prototype/SKILL.md)                                       | Build throwaway prototype code                              |
+| Skill                                                                                    | Purpose                                                                                    |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [debug-systematically](./.agents/skills/debug-systematically/SKILL.md)                   | Systematically debug an issue using hypothesis-driven investigation                        |
+| [enhance-docs](./.agents/skills/enhance-docs/SKILL.md)                                   | Audit doc-code drift, identify ambiguities, and grill to clarify vision                    |
+| [expand-from-docs](./.agents/skills/expand-from-docs/SKILL.md)                           | Identify gaps, interview user on next phase, and create execution plans                    |
+| [goal](./.agents/skills/goal/SKILL.md)                                                   | Decompose a complex objective into checklist tasks and execute with loop protection        |
+| [grill](./.agents/skills/grill/SKILL.md)                                                 | Ask questions; probe docs and code; capture session notes                                  |
+| [improve-codebase-architecture](./.agents/skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring opportunities                                |
+| [learn](./.agents/skills/learn/SKILL.md)                                                 | Audit session history to extract domain terms and coding rules, updating memory/context.md |
+| [onboarding](./.agents/skills/onboarding/SKILL.md)                                       | Bootstrap a repository as an agentic workspace                                             |
+| [performance-audit](./.agents/skills/performance-audit/SKILL.md)                         | Profile and optimize application performance                                               |
+| [prototype](./.agents/skills/prototype/SKILL.md)                                         | Build throwaway prototype code                                                             |
 
 ### Model-invoked
 
-| Skill                                                    | Purpose                                             |
-| -------------------------------------------------------- | --------------------------------------------------- |
-| [review](./.agents/skills/review/SKILL.md)               | Two-axis review (Standards vs Spec) of commit diffs |
+| Skill                                      | Purpose                                             |
+| ------------------------------------------ | --------------------------------------------------- |
+| [review](./.agents/skills/review/SKILL.md) | Two-axis review (Standards vs Spec) of commit diffs |
 
 ## Terms
 
-| Term                | Meaning                                                  |
-| ------------------- | -------------------------------------------------------- |
-| **Skill**           | Folder with `SKILL.md` — agent instructions when invoked |
-| **Grilling**        | Questions only; clarifies goals and design in the chat   |
-| **context.md**      | Living agent memory containing vocabulary, preferences, and gotchas to avoid repeating mistakes |
+| Term           | Meaning                                                                                         |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| **Skill**      | Folder with `SKILL.md` — agent instructions when invoked                                        |
+| **Grilling**   | Questions only; clarifies goals and design in the chat                                          |
+| **context.md** | Living agent memory containing vocabulary, preferences, and gotchas to avoid repeating mistakes |
 
 ## Maintaining this skill library
 

@@ -9,7 +9,6 @@ Rules governing the maintenance and editing of files in `docs/`.
 
 ## 1. Templates & Living Docs
 - **Customizable:** Docs are living templates to be tailored for the target repo.
-- **No Secrets:** Do not hardcode credentials, private tokens, or database keys.
 - **Placeholders:** Use square-bracketed placeholders (e.g., `[Project Name]`) for customizable segments.
 
 ## 2. Integrity & Dependencies

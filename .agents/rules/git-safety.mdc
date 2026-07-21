@@ -8,8 +8,6 @@ Rules governing version control staging, backups, and security boundaries.
 
 ## 1. Version Control & Git Safety
 - **No Commits/Staging:** Do not run `git add` or `git commit`. Leave modifications unstaged in the working directory; the user stages/commits.
-- **No Blanket Adds:** Never run or suggest `git add .` or `git add -A`. Reference specific files/hunks.
-- **Recoverable Snapshots:** Before major additions or refactors, create a recoverable stash reference `refs/backup/pre-change-<timestamp>` using `git stash create`.
 - **No Destructive Operations:** Do not run destructive commands (`reset --hard`, `clean -fdx`, branch deletion, force-push) without explicit user permission.
 
 ## 2. Security Boundaries

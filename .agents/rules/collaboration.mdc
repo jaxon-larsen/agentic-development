@@ -19,4 +19,3 @@ Rules for communication, coordination, planning, and tool usage.
 - **Ground Before Asking:** Search the codebase before asking user about discoverable details.
 - **Decision-Complete:** Plans must resolve all design, schema, and API decisions.
 - **Citations:** Link files/symbols as `filepath:line_number` (clickable references).
-- **No Time Estimates:** Never predict task duration (e.g. "this will take 5 minutes").
