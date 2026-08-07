@@ -20,3 +20,4 @@ Rules for layout, typography, spacing, and copywriting for HTML/CSS/JS files.
 - **Labels:** Name controls from the user's perspective, not system internals (e.g. "Notifications" not "Webhook Config").
 - **CTA:** Use active-voice buttons (e.g. "Publish") followed by immediate confirmation.
 - **Hierarchy:** Surface summary metrics/cards before detail tables. Encode status in shapes/colors.
+- **Explanatory Brevity**: Do not surface comments about the function of elements in the UI unless strictly needed. Most likely, you should just add it as a comment.

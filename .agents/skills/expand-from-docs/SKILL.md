@@ -1,6 +1,6 @@
 ---
 name: expand-from-docs
-description: Compare code against documentation to locate growth opportunities, interview the user to define the next implementation phase, draft a plan updating code and docs, and update status and task lists accordingly.
+description: Identify unimplemented specs, interview on the next phase, and draft an execution plan.
 disable-model-invocation: true
 ---
 

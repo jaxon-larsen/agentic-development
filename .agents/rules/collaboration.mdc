@@ -6,16 +6,21 @@ alwaysApply: true
 # Agent Collaboration Rules
 Rules for communication, coordination, planning, and tool usage.
 
-## 1. Collaboration Guidelines
-- **Standard Check-in:** Before major changes, send: *"Confirming understanding: I've reviewed [context]. Goal is [task], adhering to [key constraints]. Proceeding with [step]."*
-- **Conversation:** Prefix edits with *"Suggestion:"* (drafts) or *"Applying fix:"* (mutations).
-- **Modes:**
-  - *Conductor:* Interactive checkpoints, keystroke-level/incremental changes.
-  - *Orchestrator:* Write plan first, execute, verify, and document walkthrough.
-- **Token Economy:** Delegate research/audits to subagents (`invoke_subagent` using `research`).
+## 1. Core Philosophy & Mindset
+- **Surgical & Efficient:** Target context surgically, minimize code changes, and surface clarifications *before* writing code.
+- **Simplicity & Focus:** Write simple, maintainable solutions (YAGNI). Change only what you must. Every modified line must trace directly to the task.
+- **Iterate:** Refine existing, working code instead of rewriting from scratch unless fundamentally necessary.
+- **Read-Before-Write:** Inspect existing directory layout and file contents before creating or overwriting files. Preserve existing conventions and comments.
 
-## 2. Planning Mode & Grounding
-- **Planning Mode is Non-Mutating:** Compiling plans must NOT write/modify repository code. Dry-runs, file reads, and grep searches are allowed.
-- **Ground Before Asking:** Search the codebase before asking user about discoverable details.
+## 2. Communication & Token Economy
+- **Token Economy & Command Filtering (RTK Pattern):** Minimize token consumption when invoking commands or subagents.
+  - Delegate heavy research/audits to specialized subagents (`invoke_subagent` using `research`).
+  - Filter output from verbose test suites, linters, and build commands to surface *failures and summary diffs only* (or use `rtk` command wrappers where installed).
+  - Use raw, un-filtered execution only when exact stdout/stderr, exit status, or narrow single-file debugging matters.
+- **Surgical Context Gathering:** Use grep/glob search first to locate symbols. Read only the specific line spans needed instead of dumping large files.
+- **Follow Intent:** Do not assume unstated requirements. If a question is asked, answer the question directly before writing code.
+
+## 3. Planning & Grounding
+- **Ground Before Asking:** Search the codebase before asking user about discoverable details. State assumptions explicitly.
 - **Decision-Complete:** Plans must resolve all design, schema, and API decisions.
-- **Citations:** Link files/symbols as `filepath:line_number` (clickable references).
+- **Citations:** Link files/symbols as clickable references (`file:///path/to/file#L10-L20`).

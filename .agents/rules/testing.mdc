@@ -1,0 +1,26 @@
+---
+description: Code quality, Type safety, Test-Driven Development (TDD), and verification workflows.
+globs: **/*.{js,ts,jsx,tsx,py,go,rs,cpp,h,java,cs}
+alwaysApply: false
+---
+
+# Agent Testing & TDD Rules
+Rules for code quality, strict typing, TDD iteration, and troubleshooting limits.
+
+## 1. Code Quality & Simplicity
+- **YAGNI & Strict Types:** Keep code simple. Respect the type system; avoid escape hatches (like `any`).
+- **Incremental Changes:** Modify only what is necessary instead of rewriting.
+- **File Size:** Keep code in focused files. Split if they exceed 300-500 lines or violate single responsibility.
+- **Dependency Tracing:** Before changing a function, class, or API signature, trace its dependency path and public consumers.
+- **Document Heuristics:** Mark simplifications and known logic ceilings (e.g. global lock, naive scan) with inline comments and upgrade paths.
+- **No Rot:** Do not commit temporary scripts. Remove imports and variables rendered obsolete by your changes.
+
+## 2. Test-Driven Development & Verification
+- **Goal-Driven:** Reorganize tasks as `[Step] → verify: [check]`.
+- **TDD:** Write unit/integration tests reproducing bugs before applying fixes. Write minimal assertions if no framework exists.
+- **Debugging Protocols:** Fix root causes, not symptoms. Trace errors using log analysis; remove temporary debug logging before completing.
+- **Scratchpad Prototyping:** Execute temporary logic checks in local scratch files (`.agents/scratch/` or OS temp dir), deleting them prior to finalization.
+- **Failure Loop Threshold:** If a test/compilation/run fails **3 times in a row**, stop immediately.
+  - Summarize the failure and document the blocker under `## ⚠️ Pitfalls & Troubleshooting` in `.agents/memory/context.md`.
+  - Ask the user for guidance before attempting a 4th run.
+

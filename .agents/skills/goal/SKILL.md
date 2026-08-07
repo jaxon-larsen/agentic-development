@@ -1,6 +1,6 @@
 ---
 name: goal
-description: Decompose a complex, long-running goal into a task checklist and execute it in an iterative verification loop with loop protection.
+description: Decompose a complex goal into tasks and execute with iterative verification and loop protection.
 disable-model-invocation: true
 ---
 

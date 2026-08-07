@@ -14,9 +14,17 @@ alwaysApply: true
 
 ## 📂 Workspace File Index
 
-*   **Rules ([.agents/rules/](./rules/))**: Static guidelines (collaboration, git-safety, testing-tdd, artifact-rules, docs-rules).
+*   **Rules ([.agents/rules/](./rules/))**: Static guidelines (collaboration, git, testing, docs, styling).
 *   **Memory ([.agents/memory/](./memory/))**: Living context files (context, tasks).
 *   **Docs ([docs/](../docs/))**: Project knowledge base. See [docs/index.md](../docs/index.md) for contents.
+
+## 🗺️ Documentation Routing
+
+Do not read entire folders or dump large files in `docs/`. Read only the documents relevant to the current task:
+* Read [**`docs/architecture.md`**](../docs/architecture.md) for system boundaries, component diagrams, and data flows.
+* Read [**`docs/technical.md`**](../docs/technical.md) for stack paradigms, coding conventions, and library choices.
+* Read [**`docs/testing.md`**](../docs/testing.md) for test execution commands, linting rules, and evaluation rubrics.
+* Read [**`docs/index.md`**](../docs/index.md) for full documentation table of contents.
 
 ## 🛡️ Harness & Context Engineering
 

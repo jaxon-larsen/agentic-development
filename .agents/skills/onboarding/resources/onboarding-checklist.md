@@ -11,14 +11,18 @@ Follow this checklist when bootstrapping a repository for agent collaboration.
 - Identify main code entry points:
   - Frontend: `src/main.tsx`, `pages/index.tsx`, `app/page.tsx`
   - Backend: `server.js`, `app.py`, `main.go`, `src/index.ts`
-- Locate existing tests:
-  - `tests/`, `__tests__/`, `src/**/*.test.ts`, `vitest.config.ts`, `jest.config.js`
+- Locate existing test runner & linters:
+  - `tests/`, `__tests__/`, `src/**/*.test.ts`, `vitest.config.ts`, `jest.config.js`, `pytest.ini`
 
-## 2. Rule & Context Setup
+## 2. Rule & Context Setup (Placeholder Substitution)
+- Replace `{{...}}` tokens across `docs/*.md`:
+  - `docs/index.md` & `docs/architecture.md`: `{{PROJECT_NAME}}`, `{{DOMAIN_BOUNDARY_1}}`, `{{DOMAIN_BOUNDARY_2}}`
+  - `docs/technical.md`: `{{PRIMARY_LANGUAGE}}`, `{{FRONTEND_FRAMEWORK}}`, `{{BACKEND_FRAMEWORK}}`, `{{TESTING_FRAMEWORK}}`
+  - `docs/testing.md`: `{{TEST_COMMAND}}`, `{{LINT_COMMAND}}`, `{{TYPECHECK_COMMAND}}`
 - Initialize `.agents/memory/context.md`:
-  - List detected technologies and frameworks under `## 🛠️ Technology Stack`.
-  - Populate initial concepts under `## 🗣️ Core Domain Vocabulary`.
-  - Set default style/conventions in `## ⚙️ General Preferences`.
+  - Replace `{{PROJECT_NAME}}`, `{{DOMAIN_TERM_1}}`, `{{COMMON_GOTCHA}}`.
+  - Populate domain glossary and tech stack pitfalls.
+  - Confirm Memory Hygiene Policy (< 100 lines target).
 - Verify `.agents/AGENTS.mdc`:
   - Point to active project files and templates.
   - Set relevant glob mappings or paths.

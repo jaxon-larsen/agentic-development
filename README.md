@@ -20,11 +20,12 @@ your-project/
 ├── .agents/               <-- Copy this folder (rename to .cursor if using Cursor)
 │   ├── skills/            <-- Workspace dynamic skills
 │   ├── rules/             <-- Modular, glob-matched rule files
-│   │   ├── artifact-rules.mdc
 │   │   ├── collaboration.mdc
-│   │   ├── docs-rules.mdc
-│   │   ├── git-safety.mdc
-│   │   └── testing-tdd.mdc
+│   │   ├── docs.mdc
+│   │   ├── git.mdc
+│   │   ├── rules.mdc
+│   │   ├── styling.mdc
+│   │   └── testing.mdc
 │   ├── memory/            <-- Persistent modular memory files
 │   │   ├── context.md     <-- Living agent memory to avoid coding/doc mistakes
 │   │   └── tasks.md       <-- Active tasks checklist/roadmap

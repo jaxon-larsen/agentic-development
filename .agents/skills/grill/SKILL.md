@@ -10,12 +10,16 @@ Interview the user to clarify goals, design decisions, and requirements. **Quest
 
 ## Instructions
 
-1. **Focus & Map:** Define grilling scope. Map out logical choices as a hierarchical design tree (high-level decisions first, details later).
-2. **Read Code & Docs First:** Read context.md, docs/, and code before grilling.
-3. **One Question at a Time:** Ask questions one by one. Do not overwhelm the user.
-   - Use `ask_question` tool if available, otherwise ask directly in chat.
-4. **Recommend Answers:** Place your recommended option **first** in the list, prefix with `(Recommended)`, and explain the rationale.
-5. **Scenario Test:** Design specific scenarios/edge cases to stress-test requirements.
+1. **Map the Design Tree:** Map out choices as a hierarchical design tree (high-level architectural decisions first, details later).
+2. **Read Code & Docs First:** Read `context.md`, `docs/`, and code before grilling.
+3. **Execute in Rounds:** Work the design tree in **rounds**. The **frontier** consists of decisions whose prerequisites are settled—ask the frontier questions in one organized round:
+   - Format each question cleanly:
+     ```text
+     ? **Q1** - **<Question Title>**: <Question body with context & options>
+     ?? <Your recommended default answer & rationale>
+     ```
+   - Use `ask_question` tool if available, or list the questions in chat with `(Recommended)` options listed first.
+4. **Scenario Test:** Design specific scenarios/edge cases to stress-test requirements.
 
 ## Output
 

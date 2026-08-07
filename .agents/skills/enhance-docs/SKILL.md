@@ -1,6 +1,6 @@
 ---
 name: enhance-docs
-description: Search the docs and reference the codebase to identify drift, flag ambiguities, outline concrete steps to simplify/restructure documentation, and interview the user to clarify the project's vision.
+description: Audit docs against code for drift, gaps, and ambiguities, then interview to align.
 disable-model-invocation: true
 ---
 

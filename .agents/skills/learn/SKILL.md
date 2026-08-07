@@ -1,6 +1,6 @@
 ---
 name: learn
-description: Audit the recent session history to extract domain terms, library conventions, or troubleshooting tips and persist them to context.md and technical.md.
+description: Extract domain terms and gotchas from the session and persist to context.md.
 disable-model-invocation: true
 ---
 
