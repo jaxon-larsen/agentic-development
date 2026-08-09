@@ -1,113 +1,81 @@
-# Agent Skills for Engineering Workspaces
+# Agentic Development Workflow Library
 
-A compact library of AI agent skills focused on keeping **code and documentation in sync**.
+A centralized repository of AI agent skills, rules, and documentation templates designed to keep **code and documentation in sync** across **Antigravity** and **Cursor**.
 
-Works across Cursor and Antigravity (`SKILL.md` + slash commands).
+---
 
-## Drag and drop into a project
+## 🏗️ Architecture & Delivery Model
 
-This library is structured to be copied directly into any target repository. 
-
-To install, copy the `.agents/` and `docs/` folders from this repository directly to the root of your project:
+This repository is the **single source of truth** for universal agentic workflow rules and skills.
 
 ```
-your-project/
-├── docs/                  <-- Project documentation
-│   ├── index.md           <-- Central documentation index
-│   ├── architecture.md    <-- System architecture & data flows
-│   ├── technical.md       <-- Coding conventions & paradigms
-│   └── testing.md         <-- Verification & evaluation standards
-├── .agents/               <-- Copy this folder (rename to .cursor if using Cursor)
-│   ├── skills/            <-- Workspace dynamic skills
-│   ├── rules/             <-- Modular, glob-matched rule files
-│   │   ├── collaboration.mdc
-│   │   ├── docs.mdc
-│   │   ├── git.mdc
-│   │   ├── rules.mdc
-│   │   ├── styling.mdc
-│   │   └── testing.mdc
-│   ├── memory/            <-- Persistent modular memory files
-│   │   ├── context.md     <-- Living agent memory to avoid coding/doc mistakes
-│   │   └── tasks.md       <-- Active tasks checklist/roadmap
-│   └── AGENTS.mdc         <-- Agent entry point configuration
-└── ...
+agentic-development/                      ← Source of truth template repository
+├── .agents/
+│   ├── skills/  ─────────────────────────> Symlinked FROM ~/.gemini/config/skills/
+│   └── rules/   ─────────────────────────> Symlinked FROM ~/.gemini/config/rules/
+├── docs/                                 ← Documentation templates (index, architecture, technical, testing)
+└── scripts/
+    └── deploy.ps1                        ← PowerShell deploy script for Cursor projects
 ```
 
-*Note: If you are using Cursor instead of Antigravity, you can rename the copied `.agents/` directory to `.cursor/`. Alternatively, to support both editors with zero duplication, keep `.agents/` and create a symbolic link (PowerShell: `New-Item -ItemType SymbolicLink -Path .cursor -Target .agents`) or directory junction (PowerShell: `New-Item -ItemType Junction -Path .cursor -Target .agents`, which does not require Developer Mode).*
+### 1. Antigravity Delivery (Zero Drift via Global Symlinks)
+For Antigravity sessions, global directory junctions in `~/.gemini/config/` point directly to this repository:
+- `~/.gemini/config/skills` → `agentic-development/.agents/skills`
+- `~/.gemini/config/rules` → `agentic-development/.agents/rules`
 
-### After copying
+**Benefit:** Edit a skill or rule once in `agentic-development`, and every Antigravity session across all projects gets the update instantly with **zero drift** and zero duplication.
 
-1. Open your target project in Cursor or Antigravity.
-2. Run the `/onboarding` command — this skill will scan your codebase and customize the copied `.agents/memory/context.md` and `.agents/AGENTS.mdc` templates for your stack.
-3. Try `/grill` on something fuzzy, then `/enhance-docs` to sync, or `/expand-from-docs` to build out new features.
+**Lean Workspace `.agents/`**: In Antigravity-primary projects (e.g. `autograder_v1`), `.agents/` only needs project-specific domain rules (e.g. `backend-rules.mdc`), `AGENTS.mdc`, and `memory/context.md`. Framework skills and rules are served globally.
 
-## Workflow
+### 2. Cursor Delivery (Deploy Script for `.cursor/`)
+Because Cursor reads project-level `.cursor/` directories and does not read `~/.gemini/config/`, use the PowerShell deploy script to update Cursor-primary projects (e.g. `wizard-game`):
 
+```powershell
+# Preview changes before applying
+./scripts/deploy.ps1 -Target "C:\Users\Jaxon\coding\godot\wizard-game" -DryRun
+
+# Deploy framework to target project (creates .cursor/ and seeds domain files if needed)
+./scripts/deploy.ps1 -Target "C:\Users\Jaxon\coding\godot\wizard-game" -Init
 ```
-/grill  →  probe context, clarify design in chat
-     ↓
-/enhance-docs  →  audit doc-code drift, resolve ambiguities (Wiki Linter)
-     ↓
-/expand-from-docs  →  interview, plan, and execute feature expansion
-```
 
-## Skills
+**Deploy Script Behavior:**
+- **Syncs (Overwrites)**: 11 framework skills + 5 framework rules (`collaboration.mdc`, `docs.mdc`, `git.mdc`, `styling.mdc`, `testing.mdc`).
+- **Preserves (Never touches)**: Project-specific domain rules (e.g. `godot-rules.mdc`), custom skills (e.g. `handoff`), and `memory/context.md`.
 
-Skills live in `.agents/skills/`. Each skill is **user-invoked** (`disable-model-invocation: true`) or **model-invoked** (agent can reach when the task fits).
+---
 
-### User-invoked
+## ⚙️ Global Antigravity Configurations (`~/.gemini/config/`)
 
-| Skill                                                                                    | Purpose                                                                                    |
-| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [debug-systematically](./.agents/skills/debug-systematically/SKILL.md)                   | Systematically debug an issue using hypothesis-driven investigation                        |
-| [enhance-docs](./.agents/skills/enhance-docs/SKILL.md)                                   | Audit doc-code drift, identify ambiguities, and grill to clarify vision                    |
-| [expand-from-docs](./.agents/skills/expand-from-docs/SKILL.md)                           | Identify gaps, interview user on next phase, and create execution plans                    |
-| [goal](./.agents/skills/goal/SKILL.md)                                                   | Decompose a complex objective into checklist tasks and execute with loop protection        |
-| [grill](./.agents/skills/grill/SKILL.md)                                                 | Ask questions; probe docs and code; capture session notes                                  |
-| [improve-codebase-architecture](./.agents/skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring opportunities                                |
-| [learn](./.agents/skills/learn/SKILL.md)                                                 | Audit session history to extract domain terms and coding rules, updating memory/context.md |
-| [onboarding](./.agents/skills/onboarding/SKILL.md)                                       | Bootstrap a repository as an agentic workspace                                             |
-| [performance-audit](./.agents/skills/performance-audit/SKILL.md)                         | Profile and optimize application performance                                               |
-| [prototype](./.agents/skills/prototype/SKILL.md)                                         | Build throwaway prototype code                                                             |
+- **`GEMINI.md`**: Global behavioral preferences (concise pacing, no time estimates, clickable `file:///` citations).
+- **`hooks.json`**: Global lifecycle automation:
+  - **Stop Guard** (`stop_guard.ps1`): Prevents the agent from stopping when task list has unfinished `[/]` items.
+  - **Post-Edit Lint** (`post_edit_lint.ps1`): Ephemeral reminder after file edits.
 
-### Model-invoked
+---
 
-| Skill                                      | Purpose                                             |
-| ------------------------------------------ | --------------------------------------------------- |
-| [review](./.agents/skills/review/SKILL.md) | Two-axis review (Standards vs Spec) of commit diffs |
+## 🛠️ Universal Skills Reference
 
-## Terms
+Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` with supporting `references/`, `resources/`, or `scripts/`:
 
-| Term           | Meaning                                                                                         |
-| -------------- | ----------------------------------------------------------------------------------------------- |
-| **Skill**      | Folder with `SKILL.md` — agent instructions when invoked                                        |
-| **Grilling**   | Questions only; clarifies goals and design in the chat                                          |
-| **context.md** | Living agent memory containing vocabulary, preferences, and gotchas to avoid repeating mistakes |
+| Skill | Description | Invocation |
+| :--- | :--- | :--- |
+| [`debug-systematically`](./.agents/skills/debug-systematically/SKILL.md) | Hypothesis-driven systematic debugging | User / Slash |
+| [`enhance-docs`](./.agents/skills/enhance-docs/SKILL.md) | Audit doc-code drift and clarify ambiguities | User / Slash |
+| [`expand-from-docs`](./.agents/skills/expand-from-docs/SKILL.md) | Identify gap items and create phase plans | User / Slash |
+| [`goal`](./.agents/skills/goal/SKILL.md) | Decompose complex objectives into task checklists | User / Slash |
+| [`grill-me`](./.agents/skills/grill-me/SKILL.md) | Probe docs/code and clarify design decisions | User / Slash |
+| [`improve-codebase-architecture`](./.agents/skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring items | User / Slash |
+| [`learn`](./.agents/skills/learn/SKILL.md) | Extract domain terms & rules into `memory/context.md` | User / Slash |
+| [`onboarding`](./.agents/skills/onboarding/SKILL.md) | Bootstrap a repository as an agentic workspace | User / Slash |
+| [`performance-audit`](./.agents/skills/performance-audit/SKILL.md) | Profile and optimize application performance | User / Slash |
+| [`prototype`](./.agents/skills/prototype/SKILL.md) | Build throwaway prototype code | User / Slash |
+| [`review`](./.agents/skills/review/SKILL.md) | Three-axis code review (Standards + Spec + Simplicity) + PR readiness | Model / User |
 
-## Maintaining this skill library
+---
 
-When adding or editing skills, adhere to these development principles:
+## 📏 Maintaining & Modifying the Configuration
 
-### 1. SKILL.md Anatomy
-Every skill must follow a consistent 4-section body structure after its YAML frontmatter:
-- `## Overview`: A 1–2 sentence summary of what the skill does.
-- `## Instructions`: Step-by-step instructions outlining the execution logic.
-- `## Output`: Description of output format, files, or reports generated.
-- `## References`: (Optional) Clickable links to helper resources in the skill directory.
-
-### 2. YAML Frontmatter Guidelines
-- `name`: Kebab-case matching the folder name.
-- `description`: Concise, trigger-optimized summary.
-- `disable-model-invocation`: Set to `true` for user-invoked skills; omit for model-invoked skills.
-- Use `tags` (e.g., `[stable]`, `[beta]`, `[experimental]`) to denote maturity.
-
-### 3. Token Economy & Supporting Files
-- **Keep SKILL.md under 500 lines.**
-- For verbose criteria, checklists, or reference materials, create separate markdown files under a `references/` or `resources/` directory inside the skill folder and link them from the `## References` section.
-- Avoid unnecessary scripts or folders unless they add clear automation value.
-
-### 4. Registration
-- Every skill in `.agents/skills/` must appear in this README with a link to its `SKILL.md`.
-- Group under **User-invoked** and **Model-invoked**.
-- User-invoked skills may invoke model-invoked skills, but should not call other user-invoked skills.
-- Reach other skills via `/skill` prose, not cross-folder behavior links.
+When updating rules or skills:
+1. **To modify a framework skill or rule globally**: Edit the file directly under `agentic-development/.agents/skills/` or `agentic-development/.agents/rules/`. All Antigravity projects receive the update immediately via global junctions.
+2. **To push updates to Cursor projects**: Run `./scripts/deploy.ps1 -Target <project_path>`.
+3. **To add a project-specific rule**: Add a domain-named file (e.g. `my-domain-rules.mdc`) inside that project's `.agents/rules/` or `.cursor/rules/`. The deploy script will preserve it.

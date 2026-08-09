@@ -1,5 +1,5 @@
 ---
-name: grill
+name: grill-me
 description: Probe and clarify — ask questions about docs, code, or both until understanding is sharp. Does not edit project files.
 disable-model-invocation: true
 ---

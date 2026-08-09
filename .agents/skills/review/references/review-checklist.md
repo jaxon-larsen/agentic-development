@@ -1,35 +1,41 @@
 # Code Review & Security Checklist
 
-This document details guidelines for conducting PR Readiness, Standards, and Spec code reviews.
+Guidelines for PR Readiness, Standards, Spec, and Simplicity code reviews.
 
 ## 🚦 PR Readiness Criteria
-- **Verification Commands:** Have all automated tests, linters, and typechecks passed cleanly without ignored errors?
-- **Git Hygiene:** Are there untracked secret files (`auth.json`, `.env`), untracked build artifacts, or temporary scratch files?
-- **Diff Focus:** Does the diff contain accidental edits, drive-by formatting changes, or orphan unused code?
+- **Verification:** All automated tests, linters, and typechecks pass cleanly without ignored errors.
+- **Git Hygiene:** No untracked secrets (`auth.json`, `.env`), build artifacts, or temporary scratch files.
+- **Diff Focus:** No accidental edits, drive-by formatting changes, or orphaned code.
 
-## 🛡️ Security Review Criteria
-- **Input Validation:** Are all external inputs properly validated and sanitized?
-- **Sensitive Data Handling:** Are credentials, API keys, or private user data printed in logs or hardcoded in configurations?
-- **Authentication & Authorization:** Are security checks enforced on all access points?
-- **Memory & Resource Safety:** Are resources (file handles, database connections, locks) properly released?
+## 🛡️ Security Criteria
+- **Input Sanitization:** External inputs validated and sanitized at trust boundaries.
+- **Sensitive Data:** Credentials, API keys, or PII never printed in logs or hardcoded.
+- **Access Control:** Security and role checks enforced on all server endpoints.
+- **Resource Safety:** File handles, database connections, and locks properly released.
 
-## 📋 Standards & Correctness Criteria
-- **Error Handling:** Are exceptions and errors caught and handled gracefully, or do they silently fail?
-- **Code Style & Duplication:** Does the change follow the repository's styling guidelines? Are there opportunities to simplify or eliminate duplicated code?
-- **Conventions:** Are the naming patterns, types, and module layouts matching existing paradigms?
+## 📏 Standards & Correctness Criteria
+- **Error Handling:** Exceptions caught and handled gracefully; no silent swallowed errors.
+- **Styling & Layout:** Compliance with `.agents/rules/` and glossary conventions in `context.md`.
+- **Conventions:** Naming patterns, types, and module layouts match existing repository paradigms.
 
 ## 🎯 Spec Adherence Criteria
-- **Requirement Completeness:** Are all requirements from the task/PRD fully implemented?
-- **Scope Control:** Does the code contain unnecessary additions or scope creep?
-- **Edge Cases:** Are boundaries and failure paths accounted for in the implementation?
+- **Requirement Completeness:** All tasks and PRD criteria fully implemented.
+- **Scope Control:** No unrequested features, speculative extensions, or scope creep.
+- **Edge Cases:** Boundary conditions and failure paths correctly handled.
+
+## ✂️ Simplicity & Minimalism Criteria
+- **YAGNI (You Aren't Gonna Need It):** No speculative features, unused parameters, dead code, or unrequested flexibility.
+- **DRY (Don't Repeat Yourself):** No copy-pasted logic or redundant utility functions.
+- **Shallow Abstractions:** No pass-through wrappers, single-use classes, or over-engineered interfaces.
+- **Deletion Test:** Can any newly added class, helper, or layer be removed or merged into a deeper interface without losing functionality?
 
 ## 🏷️ Severity Level Definitions
-- **Critical:** Security vulnerabilities, failing automated tests, severe performance degradations, data loss risks, or major logic bugs that block release.
-- **Warn:** Deviations from standard practices, minor logical bugs, partial implementations, or potential maintenance issues.
-- **Note:** Nits, minor readability suggestions, stylistic differences, or general observations.
+- **Critical:** Security vulnerabilities, failing tests, severe performance regressions, data loss risks, or major logic bugs that block release.
+- **Warn:** Deviations from standard practices, minor logic bugs, partial implementations, or maintenance debt.
+- **Note:** Nits, minor readability suggestions, stylistic differences, or observations.
 
 ## 🔍 80% Verification Audit
-Beyond automated tests, audit implementations for conceptual bugs, edge cases, and security vulnerabilities that standard test suites might miss. Check for:
+Audit implementations beyond standard unit tests:
 - Off-by-one errors, null/undefined edge cases, and boundary conditions.
-- Race conditions or ordering assumptions in async code.
+- Race conditions or ordering assumptions in async/concurrent code.
 - Implicit trust of external inputs that bypass validation.
