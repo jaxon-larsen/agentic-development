@@ -9,7 +9,7 @@ Rules governing the maintenance and editing of files in `docs/`.
 
 ## 1. Templates & Living Docs
 - **Customizable:** Docs are living templates to be tailored for the target repo.
-- **Placeholders:** Use square-bracketed placeholders (e.g., `[Project Name]`) for customizable segments.
+- **Placeholders:** Use mustache placeholders (e.g., `{{PROJECT_NAME}}`) for customizable segments.
 
 ## 2. Integrity & Dependencies
 - **Links:** Verify cross-document markdown links resolve correctly after structure edits.

@@ -15,12 +15,12 @@ alwaysApply: true
 ## 📂 Workspace File Index
 
 *   **Rules ([.agents/rules/](./rules/))**: Static guidelines (collaboration, git, testing, docs, styling).
-*   **Memory ([.agents/memory/](./memory/))**: Living context files (context, tasks).
-*   **Docs ([docs/](../docs/))**: Project knowledge base. See [docs/index.md](../docs/index.md) for contents.
+*   **Memory ([.agents/memory/](./memory/))**: Living context templates ([context.md](./memory/context.md), [tasks.md](./memory/tasks.md)) to be populated during project onboarding.
+*   **Docs ([docs/](../docs/))**: Downstream project knowledge base templates. See [docs/index.md](../docs/index.md) for contents.
 
 ## 🗺️ Documentation Routing
 
-Do not read entire folders or dump large files in `docs/`. Read only the documents relevant to the current task:
+Note: Files in `docs/` are reusable templates containing `{{...}}` placeholders, populated for target repositories during the [`onboarding`](./skills/onboarding/SKILL.md) workflow. Read only documents relevant to the current task:
 * Read [**`docs/architecture.md`**](../docs/architecture.md) for system boundaries, component diagrams, and data flows.
 * Read [**`docs/technical.md`**](../docs/technical.md) for stack paradigms, coding conventions, and library choices.
 * Read [**`docs/testing.md`**](../docs/testing.md) for test execution commands, linting rules, and evaluation rubrics.

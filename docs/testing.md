@@ -24,7 +24,7 @@ List the commands required to run tests, format code, and lint the workspace:
 
 ## ❓ Open Questions
 
-- [ ] Question 1: [Short description of testing issue]
+- [ ] Question 1: {{TESTING_QUESTION_1}}
 
 ---
 

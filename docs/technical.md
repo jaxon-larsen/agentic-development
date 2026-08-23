@@ -33,10 +33,10 @@
 
 ## ❓ Open Questions
 
-- [ ] Question 1: [Short description of design trade-off and options]
+- [ ] Question 1: {{TECHNICAL_QUESTION_1}}
 
 ---
 
 ## 🚀 Next Steps
 
-- [ ] Task 1: [Short description of code refinement or refactoring task]
+- [ ] Task 1: {{TECHNICAL_TASK_1}}

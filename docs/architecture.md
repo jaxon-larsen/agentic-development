@@ -21,8 +21,8 @@ Provide a high-level summary of how these layers interact, deployment boundaries
 ## 📦 Core Domain Boundaries
 
 Identify the core domains, services, or modules that make up {{PROJECT_NAME}}:
-- **{{DOMAIN_BOUNDARY_1}}:** [Role and responsibility of this boundary]
-- **{{DOMAIN_BOUNDARY_2}}:** [Role and responsibility of this boundary]
+- **{{DOMAIN_BOUNDARY_1}}:** {{DOMAIN_BOUNDARY_1_DESCRIPTION}}
+- **{{DOMAIN_BOUNDARY_2}}:** {{DOMAIN_BOUNDARY_2_DESCRIPTION}}
 
 ---
 
@@ -37,10 +37,10 @@ Describe how data moves through the system during a key transaction or action:
 
 ## ❓ Open Questions
 
-- [ ] Question 1: [Short description of architectural question]
+- [ ] Question 1: {{ARCHITECTURAL_QUESTION_1}}
 
 ---
 
 ## 🚀 Next Steps
 
-- [ ] Task 1: [Short description of architectural improvement]
+- [ ] Task 1: {{ARCHITECTURAL_TASK_1}}
