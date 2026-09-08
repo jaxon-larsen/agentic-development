@@ -1,42 +1,70 @@
 ---
 name: review
-description: Three-axis code review (Standards + Spec + Simplicity) with PR readiness checks. Use when reviewing changes or preparing a PR.
+description: Fast, three-axis code review (Correctness + Alignment + Economy) with pre-review readiness short-circuiting.
 ---
 
-## Overview
-Comprehensive PR-readiness audit and three-axis code review:
-- **PR Readiness Check:** Run tests/linters, audit git status for untracked secrets/artifacts.
-- **Standards Review:** Verify compliance with `.agents/rules/`, security guardrails, and conventions.
-- **Spec Review:** Verify requirement completeness against specs, PRD, or `tasks.md` checklists.
-- **Simplicity Review:** Evaluate YAGNI, DRY, shallow wrappers, over-engineering, and apply Deletion Test.
-Spawns 3 parallel sub-agents to review independently, then aggregates findings side-by-side.
+# Code Review Skill
 
-## Instructions
+Conducts a deterministic pre-flight readiness check followed by three independent, single-responsibility sub-agent reviews:
+- **Readiness:** Run tests, typechecks, and check git hygiene before reviewing.
+- **Axis 1: Correctness:** Runtime behavior, edge cases, security, and repository conventions.
+- **Axis 2: Alignment:** Requirements satisfaction, scope management, and documentation/content parity.
+- **Axis 3: Economy:** Code minimalism, YAGNI, dead code, shallow wrappers, and the Deletion Test.
 
-### 1. Pre-Commit PR Readiness & Ref Pinning
-- Check git status (`git status`) for untracked secrets, uncommitted changes, or temporary files.
-- Resolve target ref (`git rev-parse <ref>`) and ensure diff is non-empty (`git diff <ref>...HEAD` or uncommitted diff).
-- Execute verification commands from `docs/testing.md` (e.g. test runner, linter) with output filtering.
+---
 
-### 2. Identify Context
-- Locate spec: `.agents/memory/tasks.md` checklist, user argument path, or `docs/` specs.
-- Locate standards: static rules under `.agents/rules/` and glossary conventions in `context.md`.
+## Workflow Instructions
 
-### 3. Spawn Parallel Sub-Agents
-Use `research` or `self` sub-agents to run reviews concurrently:
-- **Standards & Security Sub-agent Brief:** Report violations of conventions, failing tests, or security risks.
-  - Prompt: "Group findings strictly by severity: `Critical` (vulnerabilities/breaking), `Warn` (deviations/bugs), `Note` (nits). Prefix each finding with `filepath:line_number` and place general summaries at the bottom. Limit to 400 words."
-- **Spec Sub-agent Brief:** Identify requirements missing, incorrect, partial, or scope creep.
-  - Prompt: "Group findings strictly by severity: `Critical` (failed requirements), `Warn` (partial), `Note` (scope creep). Prefix each finding with `filepath:line_number` and place general summaries at the bottom. Limit to 400 words."
-- **Simplicity Sub-agent Brief:** Evaluate (1) YAGNI & scope creep, (2) DRY & duplicate logic, (3) Deletion test & shallow wrappers (*can new code be removed/merged without functional loss?*).
-  - Prompt: "Group findings strictly by severity: `Critical` (heavy technical debt/over-engineering), `Warn` (unnecessary abstraction/wrapper), `Note` (simplification nit). Prefix each finding with `filepath:line_number` and place general summaries at the bottom. Limit to 400 words."
+### 1. Pre-Flight Readiness (Deterministic Gate)
+Execute this gate directly before spawning review agents.
+- **Git Hygiene:** Run `git status --porcelain`. Fail immediately if untracked secrets (`.env`, credentials), build artifacts, or temporary scratch files exist.
+- **Diff Resolution:** Resolve the diff boundary. If a base branch/ref is provided, use `git diff <base>...HEAD`. Otherwise, evaluate staged and unstaged working-tree changes (`git diff HEAD`). Fail if the diff is empty.
+- **Automated Verification:** Discover and run project verification scripts if present (e.g., checks in `package.json`, `Makefile`, `Justfile`, `docs/testing.md`, or standard test/lint runners).
+- **Short-Circuit Rule:** If tests fail, linters error, or git hygiene is violated, stop. Do not dispatch review agents. Emit `## 🚦 Pre-Flight Readiness: FAILED` with the tool logs.
 
-### 4. Aggregate Findings
-Compile report under `## 🚦 PR Readiness`, `## 📏 Standards`, `## 🎯 Spec`, and `## ✂️ Simplicity` headers. Do not merge or rerank. End with pass/fail verdict and worst-issue summary per axis.
+### 2. Context Discovery (Heuristic Fallbacks)
+Locate and supply existing context to review agents without hard dependencies on proprietary layouts:
+- **Spec / Task Context:** Find task descriptions or user prompt specs. Check available issue trackers, PR descriptions, and files with similar roles.
+- **Project Rules:** Check for style guides, linter configs, `.agents/rules/`, or `README.md`. If none exist, fall back to idiomatic language conventions.
+- **Documentation:** Identify modified features/routes/APIs and search for corresponding markdown guides, docs folders, or inline API specs.
 
-## Output
-- Structured markdown review with independent PR Readiness, Standards, Spec, and Simplicity sections.
-- Findings grouped by severity with `filepath:line_number` citations and merge recommendation.
+### 3. Dispatch Review Sub-Agents
+Spawn 3 parallel agents. Remember, 
+- **No Active Polling:** When awaiting sub-agent results, do NOT set sequential sleep timers or repeatedly query intermediate statuses. 
+Pass each agent the **resolved diff**, **discovered context paths**, and its specific brief:
 
-## References
-- [review-checklist.md](./references/review-checklist.md) - PR readiness, security, correctness, spec, and simplicity criteria.
+- **Correctness Agent Brief:**
+  - *Focus:* Code safety, logic defects, security, and rule compliance.
+  - *Audit:* Edge cases (null/undefined, off-by-one, boundary values), race conditions, error handling (no swallowed exceptions), security vulnerabilities (injection, auth, unvalidated inputs), and consistency with existing codebase patterns.
+  - *Prompt:* "Audit the diff strictly for bugs, security vulnerabilities, edge cases, and repo conventions. Do not evaluate feature scope or design simplicity. Use the severity rubric: `Critical` (blocker, bug, crash, security risk), `Warn` (unhandled edge case, convention violation), `Note` (style nit). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
+
+- **Alignment Agent Brief:**
+  - *Focus:* Spec adherence, scope boundaries, and documentation parity.
+  - *Audit:* Are all requested features/acceptance criteria satisfied? Is there unrequested work (scope creep)? Have accompanying guides, user docs, schemas, or docs pages been updated to match the changes made?
+  - *Prompt:* "Audit the diff strictly against requested specifications and documentation sync. Do not review code syntax or logic bugs. Check requirement completeness, scope creep, and stale/missing docs or page updates. Use the severity rubric: `Critical` (missing core requirement, undocumented breaking change), `Warn` (partial implementation, omitted documentation/content update for modified behavior), `Note` (scope creep, doc typo). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
+
+- **Economy Agent Brief:**
+  - *Focus:* Minimalism, YAGNI, DRY, and abstraction depth.
+  - *Audit:* Identify unnecessary abstractions, single-use utility wrappers, speculative configuration, and redundant code. Apply the **Deletion Test**: Can this new class, function, or layer be removed or folded into the call site without functional regression?
+  - *Prompt:* "Audit the diff strictly for bloat, unnecessary abstractions, YAGNI, and DRY violations. Do not evaluate requirement completion or runtime security. Use the severity rubric: `Critical` (architectural anti-pattern creating severe maintenance debt), `Warn` (shallow wrapper, dead code, copy-pasted logic, failed Deletion Test), `Note` (minor simplification nit). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
+
+### 4. Aggregate Report
+Synthesize findings side-by-side using the following template:
+
+```markdown
+## 🚦 Pre-Flight Readiness: PASSED
+
+## 🛡️ Correctness
+<!-- Correctness agent findings -->
+
+## 🎯 Alignment
+<!-- Alignment agent findings -->
+
+## ✂️ Economy
+<!-- Economy agent findings -->
+
+---
+### Verdict: [READY / CHANGES REQUESTED]
+- **Correctness Blocker:** <Top "None" critical issue or>
+- **Alignment Blocker:** <Top "None" critical issue or>
+- **Economy Blocker:** <Top "None" critical issue or>
