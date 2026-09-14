@@ -11,14 +11,14 @@ Interview the user to clarify goals, design decisions, and requirements. **Quest
 ## Instructions
 
 1. **Map the Design Tree:** Map out choices as a hierarchical design tree (high-level architectural decisions first, details later).
-2. **Read Code & Docs First:** Read `context.md`, `docs/`, and code before grilling.
+2. **Read Code & Docs First:** Read `.agents/memory/context.md`, `docs/`, and code before grilling.
 3. **Execute in Rounds:** Work the design tree in **rounds**. The **frontier** consists of decisions whose prerequisites are settled—ask the frontier questions in one organized round:
    - Format each question cleanly:
      ```text
      ? **Q1** - **<Question Title>**: <Question body with context & options>
      ?? <Your recommended default answer & rationale>
      ```
-   - Use `ask_question` tool if available, or list the questions in chat with `(Recommended)` options listed first.
+   - Present questions directly in chat with `(Recommended)` options listed first (or use interactive question tools if supported by your harness).
 4. **Scenario Test:** Design specific scenarios/edge cases to stress-test requirements.
 
 ## Output

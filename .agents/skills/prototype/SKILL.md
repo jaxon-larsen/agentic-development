@@ -10,8 +10,8 @@ A prototype is **throwaway code that answers a design question**. The question d
 ## Instructions
 ### 1. Determine Branch
 Identify what question to answer:
-- **Logic/State Model:** Build a tiny, runnable terminal script (following [LOGIC.md](LOGIC.md)) that demonstrates state changes.
-- **User Interface:** Generate 2–3 UI variants on a single route (following [UI.md](UI.md)) toggleable via URL query params.
+- **Logic/State Model:** Build a tiny, runnable terminal script (following [LOGIC.md](./references/LOGIC.md)) that demonstrates state changes.
+- **User Interface:** Generate 2–3 UI variants on a single route (following [UI.md](./references/UI.md)) toggleable via URL query params.
 
 ### 2. Implementation Rules
 1. **Throwaway:** Name/locate files clearly to mark them as throwaway. Do not create new routing conventions.
@@ -19,7 +19,7 @@ Identify what question to answer:
 3. **No Persistence:** Keep state in memory. Use mock database or temp file only if required.
 4. **Skip Polish:** No tests, abstractions, or complex error handling.
 5. **Expose State:** Log or render state differences after every action/toggle.
-6. **Absorb/Delete:** Delete the code or merge validated logic immediately after answering the question.
+6. **Do Not Promote Directly:** Prototype code is unpolished by design. Once the design question is answered, delete the prototype code or cleanly re-implement validated logic under standard production rules (tests, types, error handling). Never merge raw prototype code directly into production.
 
 ## Output
 - Runnable terminal script or multi-variation page.
@@ -27,5 +27,5 @@ Identify what question to answer:
 - Cleanup plan to remove prototype code.
 
 ## References
-- [LOGIC.md](./LOGIC.md) - Detailed guide for backend/logic prototyping.
-- [UI.md](./UI.md) - Detailed guide for frontend/UI prototyping.
+- [LOGIC.md](./references/LOGIC.md) - Detailed guide for backend/logic prototyping.
+- [UI.md](./references/UI.md) - Detailed guide for frontend/UI prototyping.

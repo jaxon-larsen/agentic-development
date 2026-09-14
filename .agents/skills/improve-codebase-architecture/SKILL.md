@@ -38,20 +38,20 @@ Present each refactoring candidate in chat with markdown formatting:
 
 Ask user: *"Which candidate would you like to explore?"*
 
-### 3. Design It Twice (Parallel Subagents) & Grilling
+### 3. Design It Twice & Grilling
 Once the user picks a candidate, run a **Design It Twice** pass:
-- Spawn 2–3 parallel subagents using `invoke_subagent` (`research` or `self`) with different design constraints:
-  - *Agent 1:* Minimalist interface (1–3 entry points max, maximum leverage).
-  - *Agent 2:* High flexibility (adaptable configuration & extension points).
-  - *Agent 3:* Optimized for common callers (default paths made trivial).
+- If your environment supports subagents, spawn 2–3 parallel agents with different design constraints (or evaluate the competing variations sequentially in chat):
+  - *Option 1:* Minimalist interface (1–3 entry points max, maximum leverage).
+  - *Option 2:* High flexibility (adaptable configuration & extension points).
+  - *Option 3:* Optimized for common callers (default paths made trivial).
 - Present competing designs side by side, compare their depth, locality, and seam placement, and give an opinionated recommendation.
-- Run `/grill` to finalize design choices, and update `.agents/memory/context.md` vocabulary inline.
+- Follow the grill-me protocol to finalize design choices, update `.agents/memory/context.md` vocabulary, and record approved refactoring milestones in `.agents/memory/tasks.md`.
 
 ## Output
 
-- Report presented to user.
-- Glossary updates in `.agents/memory/context.md`.
-- Codebase design improvements.
+- Candidate architectural report and design comparison presented in chat.
+- Refactoring roadmap added to `.agents/memory/tasks.md`.
+- Glossary and architecture decisions recorded in `.agents/memory/context.md`.
 
 ## References
 

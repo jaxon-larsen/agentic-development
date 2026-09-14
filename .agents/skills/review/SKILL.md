@@ -29,9 +29,11 @@ Locate and supply existing context to review agents without hard dependencies on
 - **Documentation:** Identify modified features/routes/APIs and search for corresponding markdown guides, docs folders, or inline API specs.
 
 ### 3. Dispatch Review Sub-Agents
-Spawn 3 parallel agents. Remember, 
-- **No Active Polling:** When awaiting sub-agent results, do NOT set sequential sleep timers or repeatedly query intermediate statuses. 
-Pass each agent the **resolved diff**, **discovered context paths**, and its specific brief:
+If your environment supports subagents, spawn 3 parallel agents. If running in a single-agent or chat interface without subagent capabilities, evaluate the three audit axes sequentially in the current context.
+
+When dispatching parallel subagents:
+- **No Active Polling:** When awaiting sub-agent results, do NOT set sequential sleep timers or repeatedly query intermediate statuses.
+Pass each agent (or evaluate in your sequential pass) the **resolved diff**, **discovered context paths**, and its specific brief:
 
 - **Correctness Agent Brief:**
   - *Focus:* Code safety, logic defects, security, and rule compliance.
@@ -46,7 +48,8 @@ Pass each agent the **resolved diff**, **discovered context paths**, and its spe
 - **Economy Agent Brief:**
   - *Focus:* Minimalism, YAGNI, DRY, and abstraction depth.
   - *Audit:* Identify unnecessary abstractions, single-use utility wrappers, speculative configuration, and redundant code. Apply the **Deletion Test**: Can this new class, function, or layer be removed or folded into the call site without functional regression?
-  - *Prompt:* "Audit the diff strictly for bloat, unnecessary abstractions, YAGNI, and DRY violations. Do not evaluate requirement completion or runtime security. Use the severity rubric: `Critical` (architectural anti-pattern creating severe maintenance debt), `Warn` (shallow wrapper, dead code, copy-pasted logic, failed Deletion Test), `Note` (minor simplification nit). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
+  - *Prototype Carve-Out:* If the change is explicitly marked as throwaway prototype code or an exploratory spike, skip or soften Economy critique.
+  - *Prompt:* "Audit the diff strictly for bloat, unnecessary abstractions, YAGNI, and DRY violations. Do not evaluate requirement completion or runtime security. (If the code is marked as an exploratory prototype, note that minimalism polish is deferred). Use the severity rubric: `Critical` (architectural anti-pattern creating severe maintenance debt), `Warn` (shallow wrapper, dead code, copy-pasted logic, failed Deletion Test), `Note` (minor simplification nit). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
 
 ### 4. Aggregate Report
 Synthesize findings side-by-side using the following template:
@@ -65,6 +68,7 @@ Synthesize findings side-by-side using the following template:
 
 ---
 ### Verdict: [READY / CHANGES REQUESTED]
-- **Correctness Blocker:** <Top "None" critical issue or>
-- **Alignment Blocker:** <Top "None" critical issue or>
-- **Economy Blocker:** <Top "None" critical issue or>
+- **Correctness Blocker:** <Top critical issue or "None">
+- **Alignment Blocker:** <Top critical issue or "None">
+- **Economy Blocker:** <Top critical issue or "None">
+```

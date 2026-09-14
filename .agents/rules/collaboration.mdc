@@ -14,8 +14,8 @@ Rules for communication, coordination, planning, and tool usage.
 
 ## 2. Communication & Token Economy
 - **Token Economy & Command Filtering (RTK Pattern):** Minimize token consumption when invoking commands or subagents.
-  - Delegate heavy research/audits to specialized subagents (`invoke_subagent` using `research`).
-  - Filter output from verbose test suites, linters, and build commands to surface *failures and summary diffs only* (or use `rtk` command wrappers where installed).
+  - If the environment supports subagents, delegate heavy research or audits to background workers; otherwise, run a targeted, narrow search pass.
+  - Filter output from verbose test suites, linters, and build commands to surface *failures and summary diffs only* (or use command wrappers where installed).
   - Use raw, un-filtered execution only when exact stdout/stderr, exit status, or narrow single-file debugging matters.
 - **Surgical Context Gathering:** Use grep/glob search first to locate symbols. Read only the specific line spans needed instead of dumping large files.
 - **Follow Intent:** Do not assume unstated requirements. If a question is asked, answer the question directly before writing code.
@@ -24,3 +24,4 @@ Rules for communication, coordination, planning, and tool usage.
 - **Ground Before Asking:** Search the codebase before asking user about discoverable details. State assumptions explicitly.
 - **Decision-Complete:** Plans must resolve all design, schema, and API decisions.
 - **Citations:** Link files/symbols as clickable references (`file:///path/to/file#L10-L20`).
+- **Interactive Inquiries:** When clarifying ambiguities, format questions directly in chat with recommended defaults (or use interactive question tools if available in the harness).

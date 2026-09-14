@@ -19,12 +19,12 @@ Write a report (no edits yet) covering:
 - **Wiki Linter / Structural Health:**
   - Orphan markdown files under `docs/` (not linked in index.md).
   - Dead relative markdown links.
-  - Glossary Gaps: Domain/jargon terms used in code but missing definitions in `context.md`.
-  - Stale Tasks: Discrepancies in task completion status between `tasks.md` and codebase.
+  - Glossary Gaps: Domain/jargon terms used in code but missing definitions in `.agents/memory/context.md`.
+  - Stale Tasks: Discrepancies in task completion status between `.agents/memory/tasks.md` and codebase.
 - **Simplification Plan:** Concrete restructuring/cleanup steps.
 
 ### 3. Interview
-Present report to user. Clarify open questions one at a time using `/grill` protocol (suggest recommendations and explain trade-offs).
+Present report to user. Clarify open questions one at a time using the grill-me protocol (suggest recommendations and explain trade-offs).
 
 ### 4. Sync
 Update `.agents/memory/context.md` (domain vocabulary), `.agents/memory/tasks.md` (roadmap), and docs under `docs/` after user confirmation.

@@ -1,6 +1,6 @@
 # Agentic Development Workflow Library
 
-A centralized repository of AI agent skills, rules, and documentation templates designed to keep **code and documentation in sync** across **Antigravity** and **Cursor**.
+A centralized, platform-agnostic repository of AI agent skills, rules, and documentation templates designed to keep **code and documentation in sync** across any AI tool, editor, or chat interface (Cursor, Antigravity, ChatGPT, Grok, etc.).
 
 ---
 
@@ -11,36 +11,24 @@ This repository is the **single source of truth** for universal agentic workflow
 ```
 agentic-development/                      ← Source of truth template repository
 ├── .agents/
-│   ├── skills/  ─────────────────────────> Symlinked FROM ~/.gemini/config/skills/
-│   └── rules/   ─────────────────────────> Symlinked FROM ~/.gemini/config/rules/
-├── docs/                                 ← Documentation templates (index, architecture, technical, testing)
-└── scripts/
-    └── deploy.ps1                        ← PowerShell deploy script for Cursor projects
+│   ├── memory/                           ← Living project memory (context.md, tasks.md)
+│   ├── rules/                            ← Universal policies (collaboration, git, testing, docs, styling)
+│   ├── scratch/                          ← Ephemeral workspace scratchpad
+│   └── skills/                           ← Universal procedural skills
+└── docs/                                 ← Documentation templates (index, architecture, technical, testing)
 ```
 
-### 1. Antigravity Delivery (Zero Drift via Global Symlinks)
-For Antigravity sessions, global directory junctions in `~/.gemini/config/` point directly to this repository:
+### 1. Zero-Drift Global Sync (Antigravity)
+Global directory junctions in `~/.gemini/config/` point directly to this repository:
 - `~/.gemini/config/skills` → `agentic-development/.agents/skills`
 - `~/.gemini/config/rules` → `agentic-development/.agents/rules`
 
-**Benefit:** Edit a skill or rule once in `agentic-development`, and every Antigravity session across all projects gets the update instantly with **zero drift** and zero duplication.
+Edit a skill or rule once in `agentic-development`, and any connected session gets the update instantly with **zero drift**.
 
-**Lean Workspace `.agents/`**: In Antigravity-primary projects (e.g. `autograder_v1`), `.agents/` only needs project-specific domain rules (e.g. `backend-rules.mdc`), `AGENTS.mdc`, and `memory/context.md`. Framework skills and rules are served globally.
-
-### 2. Cursor Delivery (Deploy Script for `.cursor/`)
-Because Cursor reads project-level `.cursor/` directories and does not read `~/.gemini/config/`, use the PowerShell deploy script to update Cursor-primary projects (e.g. `wizard-game`):
-
-```powershell
-# Preview changes before applying
-./scripts/deploy.ps1 -Target "C:\Users\Jaxon\coding\godot\wizard-game" -DryRun
-
-# Deploy framework to target project (creates .cursor/ and seeds domain files if needed)
-./scripts/deploy.ps1 -Target "C:\Users\Jaxon\coding\godot\wizard-game" -Init
-```
-
-**Deploy Script Behavior:**
-- **Syncs (Overwrites)**: 11 framework skills + 5 framework rules (`collaboration.mdc`, `docs.mdc`, `git.mdc`, `styling.mdc`, `testing.mdc`).
-- **Preserves (Never touches)**: Project-specific domain rules (e.g. `godot-rules.mdc`), custom skills (e.g. `handoff`), and `memory/context.md`.
+### 2. Project Bootstrapping (Universal / Cursor / Any AI)
+To equip any new repository with the workflow framework:
+1. **Copy** `.agents/` (and optionally `docs/`) directly into your project root.
+2. **Bootstrap with Onboarding**: In your tool (Cursor, Antigravity, ChatGPT, Grok), run the [`onboarding`](./.agents/skills/onboarding/SKILL.md) skill. The agent will scan your tech stack, substitute template placeholders (`{{...}}`), and seed initial tasks in `.agents/memory/tasks.md`.
 
 ---
 
@@ -67,6 +55,7 @@ Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` wi
 | [`improve-codebase-architecture`](./.agents/skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring items | User / Slash |
 | [`learn`](./.agents/skills/learn/SKILL.md) | Extract domain terms & rules into `memory/context.md` | User / Slash |
 | [`onboarding`](./.agents/skills/onboarding/SKILL.md) | Bootstrap a repository as an agentic workspace | User / Slash |
+| [`orchestrator-split`](./.agents/skills/orchestrator-split/SKILL.md) | Decompose tasks into parallel agent prompts with contracts | User / Slash |
 | [`performance-audit`](./.agents/skills/performance-audit/SKILL.md) | Profile and optimize application performance | User / Slash |
 | [`prototype`](./.agents/skills/prototype/SKILL.md) | Build throwaway prototype code | User / Slash |
 | [`review`](./.agents/skills/review/SKILL.md) | Three-axis code review (Standards + Spec + Simplicity) + PR readiness | Model / User |
@@ -76,6 +65,5 @@ Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` wi
 ## 📏 Maintaining & Modifying the Configuration
 
 When updating rules or skills:
-1. **To modify a framework skill or rule globally**: Edit the file directly under `agentic-development/.agents/skills/` or `agentic-development/.agents/rules/`. All Antigravity projects receive the update immediately via global junctions.
-2. **To push updates to Cursor projects**: Run `./scripts/deploy.ps1 -Target <project_path>`.
-3. **To add a project-specific rule**: Add a domain-named file (e.g. `my-domain-rules.mdc`) inside that project's `.agents/rules/` or `.cursor/rules/`. The deploy script will preserve it.
+1. **To modify a framework skill or rule**: Edit the file directly under `agentic-development/.agents/skills/` or `agentic-development/.agents/rules/`.
+2. **To customize a specific project**: Add project-specific rules directly in that project's `.agents/rules/` (e.g. `backend-rules.mdc` or `game-rules.mdc`).

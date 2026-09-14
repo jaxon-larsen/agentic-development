@@ -17,7 +17,7 @@ Try these in order until one works:
 3. **CLI invocation** with a fixture input, diffing stdout against a known-good snapshot.
 4. **Replay a captured trace** — save a real request/payload/event log to disk; replay through the code path in isolation.
 5. **Throwaway harness** — spin up a minimal subset of the system that exercises the bug code path.
-6. **HITL bash script** — last resort. If a human must click, use [hitl-loop.template.sh](./scripts/hitl-loop.template.sh) so the loop is still structured.
+6. **HITL script** — last resort. If a human must click, use [hitl-loop.template.ps1](./scripts/hitl-loop.template.ps1) (PowerShell) or [hitl-loop.template.sh](./scripts/hitl-loop.template.sh) (Bash) so the loop is still structured.
 
 **Tighten the loop:** Make it faster (skip unrelated init), sharper (assert on the specific symptom), and more deterministic (pin time, seed RNG, isolate I/O).
 
@@ -43,7 +43,8 @@ Before declaring done:
 - [ ] Regression test passes
 - [ ] All `[DEBUG-...]` instrumentation removed (grep the prefix)
 - [ ] Throwaway prototypes deleted
-- [ ] Root cause stated in the commit message
+- [ ] Root cause identified and documented in findings
+- [ ] If a recurring or obscure pitfall was uncovered, record it under Troubleshooting in `.agents/memory/context.md`
 
 ## Output
 A report detailing:
@@ -53,4 +54,5 @@ A report detailing:
 - **Verification**: Run log showing tests passed.
 
 ## References
-- [hitl-loop.template.sh](./scripts/hitl-loop.template.sh) - Human-in-the-loop bash template for bugs requiring manual interaction.
+- [hitl-loop.template.ps1](./scripts/hitl-loop.template.ps1) - Human-in-the-loop PowerShell template for bugs requiring manual interaction on Windows.
+- [hitl-loop.template.sh](./scripts/hitl-loop.template.sh) - Human-in-the-loop Bash template for bugs requiring manual interaction on POSIX systems.

@@ -13,13 +13,13 @@ Identify tech stack (manifests like `package.json`, `Cargo.toml`, `go.mod`, `pyp
 
 ### 2. Tailor Template Placeholders (`{{...}}`)
 Systematically inspect and replace template tokens across workspace files:
-- **`docs/*.md`**: Replace `{{PROJECT_NAME}}`, `{{PRIMARY_LANGUAGE}}`, `{{FRONTEND_FRAMEWORK}}`, `{{BACKEND_FRAMEWORK}}`, `{{TEST_COMMAND}}`, `{{LINT_COMMAND}}`, `{{TYPECHECK_COMMAND}}`.
+- **`docs/*.md`**: Replace `{{PROJECT_NAME}}`, `{{PRIMARY_LANGUAGE}}`, `{{FRONTEND_FRAMEWORK}}`, `{{BACKEND_FRAMEWORK}}`, `{{TESTING_FRAMEWORK}}`, `{{TEST_COMMAND}}`, `{{LINT_COMMAND}}`, `{{TYPECHECK_COMMAND}}`, `{{DOMAIN_BOUNDARY_*}}` (see [onboarding-checklist.md](./resources/onboarding-checklist.md)).
 - **`.agents/memory/context.md`**: Populate domain vocabulary and tech stack gotchas while enforcing the ~100-line Memory Hygiene Policy.
 - **`.agents/AGENTS.mdc`**: Tailor rules, custom scripts, and folder index mappings.
 - **`.agents/memory/tasks.md`**: Seed initial discovery and setup checklist tasks.
 
 ### 3. User Review & Grilling
-Present updated files in chat. Grill user one question at a time to verify key terms, custom script options, or architectural boundaries before completing.
+Present updated files in chat. Follow the grill-me protocol to clarify key terms, custom script options, or architectural boundaries before completing.
 
 ## Output
 - Fully tailored `docs/` knowledge base (`index.md`, `architecture.md`, `technical.md`, `testing.md`).
