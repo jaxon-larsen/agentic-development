@@ -59,6 +59,7 @@ Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` wi
 | [`performance-audit`](./.agents/skills/performance-audit/SKILL.md) | Profile and optimize application performance | User / Slash |
 | [`prototype`](./.agents/skills/prototype/SKILL.md) | Build throwaway prototype code | User / Slash |
 | [`review`](./.agents/skills/review/SKILL.md) | Three-axis code review (Standards + Spec + Simplicity) + PR readiness | Model / User |
+| [`spec-architect`](./.agents/skills/spec-architect/SKILL.md) | Probe decisions to tighten contracts and update living docs | User / Slash |
 
 ---
 

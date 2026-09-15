@@ -9,12 +9,10 @@ Rules for layout, typography, spacing, and copywriting for HTML/CSS/JS files.
 
 ## 1. Typography & Colors
 - **Line Width:** Limit text containers to ~65 characters for readability. Set clear type scale.
-- **CSP Safety:** Inline custom webfonts as `@font-face` data URIs directly in CSS; do not use external CDNs.
 
 ## 2. Layout & Spacing
 - **Flow:** Use `gap` (Flex/Grid) for spacing. Avoid margins which double/collapse.
 - **Overflow:** Wrap wide content (tables, code, diagrams) in `overflow-x: auto` to prevent horizontal scrolling.
-- **Data:** Use `font-variant-numeric: tabular-nums` for numeric lists or tables.
 
 ## 3. Copywriting & Interaction
 - **Labels:** Name controls from the user's perspective, not system internals (e.g. "Notifications" not "Webhook Config").
