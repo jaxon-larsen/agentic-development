@@ -1,21 +1,21 @@
 # Agentic Development Workflow Library
 
-A centralized, platform-agnostic repository of AI agent skills, rules, and documentation templates designed to keep **code and documentation in sync** across any AI tool, editor, or chat interface (Cursor, Antigravity, ChatGPT, Grok, etc.).
+A centralized, platform-agnostic repository of skills, rules, and documentation templates designed to facilitate robust spec- and test-driven development with agentic LLM assistants
 
 ---
 
 ## 🏗️ Architecture & Delivery Model
 
-This repository is the **single source of truth** for universal agentic workflow rules and skills.
+This repository is the **single source of truth** for my agentic workflow tools.
 
 ```
-agentic-development/                      ← Source of truth template repository
+agentic-development/
 ├── .agents/
-│   ├── memory/                           ← Living project memory (context.md, tasks.md)
-│   ├── rules/                            ← Universal policies (collaboration, git, testing, docs, styling)
-│   ├── scratch/                          ← Ephemeral workspace scratchpad
-│   └── skills/                           ← Universal procedural skills
-└── docs/                                 ← Documentation templates (index, architecture, technical, testing)
+│   ├── memory/                           ← Living project memory
+│   ├── rules/                            ← Universal policies
+│   ├── scratch/                          ← For temporary files
+│   └── skills/                           ← User-invoked skills
+└── docs/                                 ← Documentation templates
 ```
 
 ### 1. Zero-Drift Global Sync (Antigravity)
@@ -25,7 +25,7 @@ Global directory junctions in `~/.gemini/config/` point directly to this reposit
 
 Edit a skill or rule once in `agentic-development`, and any connected session gets the update instantly with **zero drift**.
 
-### 2. Project Bootstrapping (Universal / Cursor / Any AI)
+### 2. Project Bootstrapping (Universal)
 To equip any new repository with the workflow framework:
 1. **Copy** `.agents/` (and optionally `docs/`) directly into your project root.
 2. **Bootstrap with Onboarding**: In your tool (Cursor, Antigravity, ChatGPT, Grok), run the [`onboarding`](./.agents/skills/onboarding/SKILL.md) skill. The agent will scan your tech stack, substitute template placeholders (`{{...}}`), and seed initial tasks in `.agents/memory/tasks.md`.
@@ -41,7 +41,7 @@ To equip any new repository with the workflow framework:
 
 ---
 
-## 🛠️ Universal Skills Reference
+## 🛠️ Skills Reference
 
 Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` with supporting `references/`, `resources/`, or `scripts/`:
 
