@@ -55,7 +55,7 @@ Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` wi
 | [`improve-codebase-architecture`](./.agents/skills/improve-codebase-architecture/SKILL.md) | Scan codebase for shallowness and refactoring items | User / Slash |
 | [`learn`](./.agents/skills/learn/SKILL.md) | Extract domain terms & rules into `memory/context.md` | User / Slash |
 | [`onboarding`](./.agents/skills/onboarding/SKILL.md) | Bootstrap a repository as an agentic workspace | User / Slash |
-| [`orchestrator-split`](./.agents/skills/orchestrator-split/SKILL.md) | Decompose tasks into parallel agent prompts with contracts | User / Slash |
+| [`orchestrate`](./.agents/skills/orchestrate/SKILL.md) | Decompose tasks into parallel agent prompts with contracts | User / Slash |
 | [`performance-audit`](./.agents/skills/performance-audit/SKILL.md) | Profile and optimize application performance | User / Slash |
 | [`prototype`](./.agents/skills/prototype/SKILL.md) | Build throwaway prototype code | User / Slash |
 | [`review`](./.agents/skills/review/SKILL.md) | Three-axis code review (Standards + Spec + Simplicity) + PR readiness | Model / User |

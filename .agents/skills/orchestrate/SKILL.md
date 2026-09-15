@@ -1,5 +1,5 @@
 ---
-name: orchestrator-split
+name: orchestrate
 description: >-
   Decompose a task into maximally-parallel work streams across N agents.
   Assigns responsibilities by capability, defines seams/contracts, optionally
