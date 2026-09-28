@@ -3,20 +3,13 @@
 > [!NOTE]
 > **Purpose:** Reference diagrams and maps detailing system layout, component relationships, and data flows.
 
-After onboarding, keep diagrams source-backed: cite the files or configuration that establish important components and relationships. Label planned or uncertain links explicitly; do not present the example below as implemented architecture.
+Add a Mermaid diagram only when it clarifies a real architectural boundary or data flow. Cite the files or configuration that establish existing relationships, and label planned or uncertain links explicitly.
 
 ---
 
 ## 🗺️ High-Level System Overview
 
-```mermaid
-graph TD
-    User([User Client]) --> WebApp[Web Application / Frontend]
-    WebApp --> API[Backend API Layer]
-    API --> DB[(Database / Storage)]
-```
-
-Provide a high-level summary of how these layers interact, deployment boundaries, and network topologies for {{PROJECT_NAME}}.
+Summarize meaningful components and relationships for {{PROJECT_NAME}}. Add a diagram here when it makes those relationships easier to understand.
 
 **Evidence and limits:** Link the source for non-obvious nodes and connections. Record any relationship that still depends on deployment configuration or another unverified fact.
 
@@ -42,9 +35,3 @@ Describe how data moves through the system during a key transaction or action:
 ## ❓ Open Questions
 
 - [ ] Question 1: {{ARCHITECTURAL_QUESTION_1}}
-
----
-
-## 🚀 Next Steps
-
-- [ ] Task 1: {{ARCHITECTURAL_TASK_1}}

@@ -1,7 +1,7 @@
 ---
+trigger: glob
 description: Layout, typography, spacing, and copywriting standards for HTML and UI styling files.
-globs: **/*.{html,css,js,jsx,ts,tsx}
-alwaysApply: false
+globs: "**/*.html, **/*.css, **/*.js, **/*.jsx, **/*.ts, **/*.tsx"
 ---
 
 # UI Design & Styling Rules

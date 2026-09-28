@@ -13,7 +13,7 @@ Identify tech stack (manifests like `package.json`, `Cargo.toml`, `go.mod`, `pyp
 
 ### 2. Tailor Template Placeholders (`{{...}}`)
 Systematically inspect and replace template tokens across workspace files:
-- **`docs/*.md` when copied or requested**: Replace `{{PROJECT_NAME}}`, `{{PRIMARY_LANGUAGE}}`, `{{FRONTEND_FRAMEWORK}}`, `{{BACKEND_FRAMEWORK}}`, `{{TESTING_FRAMEWORK}}`, `{{TEST_COMMAND}}`, `{{LINT_COMMAND}}`, `{{TYPECHECK_COMMAND}}`, `{{DOMAIN_BOUNDARY_*}}` (see [onboarding-checklist.md](./resources/onboarding-checklist.md)). Replace or remove the example Mermaid graph in `docs/architecture.md` using actual source evidence. Do not create the full docs set solely to complete onboarding.
+- **`docs/*.md` when copied or requested**: Replace `{{PROJECT_NAME}}`, `{{PRIMARY_LANGUAGE}}`, `{{FRONTEND_FRAMEWORK}}`, `{{BACKEND_FRAMEWORK}}`, `{{TESTING_FRAMEWORK}}`, `{{TEST_COMMAND}}`, `{{LINT_COMMAND}}`, `{{TYPECHECK_COMMAND}}`, `{{DOMAIN_BOUNDARY_*}}` (see [onboarding-checklist.md](./resources/onboarding-checklist.md)). Add a Mermaid diagram to `docs/architecture.md` only when it clarifies source-backed architecture or data flow. Do not create the full docs set solely to complete onboarding.
 - **`.agents/memory/context.md`**: Populate domain vocabulary and tech stack gotchas while enforcing the ~100-line Memory Hygiene Policy.
 - **`AGENTS.md`**: Merge with any existing root `AGENTS.md` instead of overwriting it. Keep a short project-specific entry point to relevant rules, skills, docs, and verification commands. Remove references to templates the project did not copy.
 - **`.agents/memory/tasks.md`**: Seed only actionable discovery or setup work that remains after onboarding.

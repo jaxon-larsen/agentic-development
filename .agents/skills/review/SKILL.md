@@ -29,6 +29,7 @@ Review every file in the selected change (defaulting to the repository's unstage
 ### Review axes
 
 - **Correctness:** Trace changed behavior through callers and consumers. Check edge cases, failure handling, races, security boundaries, and regressions. A style preference is not a defect.
+- **Downstream assumptions:** For changed APIs, schemas, or shared behavior with other consumers, identify the one or two assumptions most likely to break beyond direct callers. Probe them with focused source or runtime evidence, and say when the decisive check is unavailable.
 - **Alignment:** Compare behavior with the user's request, acceptance criteria, and affected docs. Look for missing requirements, behavior drift, and unrequested work.
 - **Economy:** Apply the deletion test to new layers, dependencies, wrappers, configuration, and duplicate logic. Suggest removal only when the same required behavior remains, including validation, error handling, security, accessibility, and verification.
 

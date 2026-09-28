@@ -38,19 +38,15 @@ Present each refactoring candidate in chat with markdown formatting:
 
 Ask user: *"Which candidate would you like to explore?"*
 
-### 3. Design It Twice & Grilling
-Once the user picks a candidate, run a **Design It Twice** pass:
-- If your environment supports subagents, spawn 2–3 parallel agents with different design constraints (or evaluate the competing variations sequentially in chat):
-  - *Option 1:* Minimalist interface (1–3 entry points max, maximum leverage).
-  - *Option 2:* High flexibility (adaptable configuration & extension points).
-  - *Option 3:* Optimized for common callers (default paths made trivial).
-- Present competing designs side by side, compare their depth, locality, and seam placement, and give an opinionated recommendation.
+### 3. Compare Viable Designs & Grill
+Once the user picks a candidate, compare designs only when there are materially different viable seams or interface shapes. Otherwise, explain the single clear design and its trade-offs. When comparison helps, consider a minimalist interface, flexible extension points, or a shape optimized for common callers; do not force all three variants. If the user explicitly requests parallel design work and the environment supports it, assign independent variants to agents.
+- Compare viable designs by depth, locality, seam placement, and caller impact; give an opinionated recommendation.
 - Follow the grill-me protocol to finalize design choices, update `.agents/memory/context.md` vocabulary, and record approved refactoring milestones in `.agents/memory/tasks.md`.
 
 ## Output
 
-- Candidate architectural report and design comparison presented in chat.
-- Refactoring roadmap added to `.agents/memory/tasks.md`.
+- Candidate architectural report and a design comparison when meaningful, presented in chat.
+- Approved refactoring milestones added to `.agents/memory/tasks.md` when the interview reaches an actionable roadmap.
 - Glossary and architecture decisions recorded in `.agents/memory/context.md`.
 
 ## References

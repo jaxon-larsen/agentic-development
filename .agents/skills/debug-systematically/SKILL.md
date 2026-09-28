@@ -37,6 +37,8 @@ Each probe must map to a specific hypothesis. **Change one variable at a time.**
 ### 5. Fix & Regression Check
 Before fixing a reproducible behavior bug, capture the smallest reliable failing check when practical. Add a lasting regression test when it protects an important behavior or failure mode; otherwise use the existing feedback loop. Apply the fix, confirm the check passes, and re-run the original loop.
 
+If the root cause is a repeated pattern, search for closely related instances in the affected subsystem. Fix those that share the same cause and verification path; report broader occurrences separately so the bug fix does not expand into an unbounded refactor.
+
 ### 6. Cleanup
 Before declaring done:
 - [ ] Original repro no longer reproduces (re-run feedback loop)

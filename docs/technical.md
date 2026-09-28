@@ -34,9 +34,3 @@
 ## ❓ Open Questions
 
 - [ ] Question 1: {{TECHNICAL_QUESTION_1}}
-
----
-
-## 🚀 Next Steps
-
-- [ ] Task 1: {{TECHNICAL_TASK_1}}

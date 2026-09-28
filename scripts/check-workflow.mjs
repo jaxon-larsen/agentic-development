@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const skillRoot = path.join(root, '.agents', 'skills');
+const ruleRoot = path.join(root, '.agents', 'rules');
 const errors = [];
 const checkedFiles = [];
 const readme = existsSync(path.join(root, 'README.md'))
@@ -24,6 +25,23 @@ function walk(dir) {
 
 if (!existsSync(path.join(root, 'AGENTS.md'))) errors.push('Missing root AGENTS.md');
 if (!existsSync(skillRoot)) errors.push('Missing .agents/skills');
+
+if (existsSync(ruleRoot)) {
+  for (const entry of readdirSync(ruleRoot, { withFileTypes: true })) {
+    if (!entry.isFile()) continue;
+    if (entry.name.endsWith('.mdc')) errors.push(`${entry.name}: Antigravity rule must use .md`);
+    if (!entry.name.endsWith('.md')) continue;
+    const body = readFileSync(path.join(ruleRoot, entry.name), 'utf8');
+    const frontmatter = body.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)?.[1];
+    const trigger = frontmatter?.match(/^trigger:\s*(\S+)/m)?.[1];
+    if (!['always_on', 'model_decision', 'glob', 'manual'].includes(trigger)) {
+      errors.push(`${entry.name}: missing or invalid Antigravity trigger`);
+    }
+    if (trigger === 'glob' && !/^globs?:\s*.+$/m.test(frontmatter)) {
+      errors.push(`${entry.name}: glob trigger needs globs`);
+    }
+  }
+}
 
 if (existsSync(skillRoot)) {
   for (const entry of readdirSync(skillRoot, { withFileTypes: true })) {

@@ -1,6 +1,6 @@
 ---
-description: Defensive Git version control policies, git safety limits, and security constraints.
-alwaysApply: true
+trigger: always_on
+description: Git safety and security boundaries.
 ---
 
 # Agent Git Safety Rules

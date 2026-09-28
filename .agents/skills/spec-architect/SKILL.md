@@ -6,7 +6,9 @@ disable-model-invocation: true
 
 # Spec Architect
 
-Conducts a recursive, contract-tightening interview loop with the user. Progressively probes architectural, technical, and operational decisions—starting broad and narrowing to edge-case contracts—while writing living, evergreen updates to project documentation after each round.
+Use this skill when the user asks for a spec interview or names it explicitly.
+
+Conducts a recursive, contract-tightening interview loop with the user. Progressively probes architectural, technical, and operational decisions—starting broad and narrowing to edge-case contracts—while writing living, evergreen updates to project documentation after each round. The evolving docs hold the project design; `expand-from-docs` turns those docs into a phased implementation plan later.
 
 ---
 
@@ -18,8 +20,8 @@ Before initiating questions:
 - Locate project documentation and memory roots dynamically using relative paths:
   - Documentation directory (typically `docs/` or repository docs root).
   - Agent memory directory (typically `.agents/memory/`, such as `context.md` or `tasks.md`).
-- Scan existing markdown files and source code to map current decisions, interfaces, and open gaps.
-- Identify the frontier of unresolved foundational choices.
+- Scan existing markdown files and source code to map current decisions, interfaces, and open gaps. Use the project's glossary and respect existing architecture decisions.
+- Separate established decisions, assumptions, contradictions, and unresolved choices. Identify the frontier of unresolved foundational choices; do not ask for facts the repository already establishes.
 
 ### 2. Progressive Interview Loop (2–3 Questions per Round)
 
@@ -44,12 +46,16 @@ Format each question with context, trade-offs, and a recommended default:
 ```
 
 Present questions directly in chat with `(Recommended)` options listed first (prioritize interactive question tools if available in your environment).
+Prioritize questions that determine downstream choices. If a new answer conflicts with a documented decision, surface the conflict in the next round instead of silently choosing one. The tiers guide depth; do not force every question-bank topic onto a project where it does not apply.
 
 ### 3. Immediate Evergreen Doc Updates
 
 Apply documentation updates to disk immediately upon receiving the user's answers:
 
 - **Living Documents, Not Logs:** Write evergreen statements of current truth. Never append interview transcripts, changelogs, or conversational minutes to architectural docs.
+- **Decision Status:** Record settled decisions as current design, and mark unresolved assumptions or alternatives explicitly. Preserve brief rationale when it explains a consequential choice; do not turn an assumption into a fact.
+- **Behavior Contracts:** For decisions that change observable behavior, record a representative success case and the existing interface or test seam that could verify it. If no suitable seam exists, identify that design gap without inventing an implementation task.
+- **Diagrams on Demand:** Add or revise Mermaid only when it clarifies a decided architectural boundary or data flow. Link source for existing structure; label planned or uncertain relationships distinctly.
 - **Deduplication & DRY:** Update or replace existing sections rather than appending duplicate blocks. Maintain a strict single source of truth across all doc files.
 - **Existing Files First:** Direct updates into established documentation (e.g. `docs/architecture.md`, `docs/technical.md`, `docs/testing.md`).
 - **File Creation Gate:** If an answer warrants creating a distinct new document, propose the new file path to the user and obtain confirmation before creating it.
@@ -61,7 +67,7 @@ Apply documentation updates to disk immediately upon receiving the user's answer
 Execute each round in a single conversational turn:
 
 1. **Apply Edits:** Write modified files directly to disk using standard editing tools.
-2. **Summarize Updates:** Provide a brief, bulleted summary of files updated and decisions codified.
+2. **Check Consistency:** Reconcile the new decisions with affected interfaces, diagrams, and prior statements, then briefly summarize files updated and decisions codified.
 3. **Queue Next Round:** Present the next batch of 2–3 targeted questions, drilling into the next level of the design hierarchy.
 
 Continue this cycle iteratively until the user explicitly signals to stop (e.g. "stop", "done", "looks good", "ready to build").
@@ -72,7 +78,7 @@ When the user signals to stop:
 
 - Present a concise index table of all updated documentation files with relative links.
 - List any remaining deferred questions or future phase considerations.
-- Outline recommended next steps (e.g. task decomposition via `goal`, prototyping via `prototype`, or implementation).
+- If the user wants a phased implementation roadmap, point to `expand-from-docs` as the next workflow.
 
 ---
 

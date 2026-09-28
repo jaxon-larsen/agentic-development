@@ -1,6 +1,6 @@
 ---
-description: Guidelines for agent communication, collaboration modes, check-ins, and token economics.
-alwaysApply: true
+trigger: always_on
+description: Shared agent communication, planning, and context discipline.
 ---
 
 # Agent Collaboration Rules

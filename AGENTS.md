@@ -4,8 +4,8 @@ This file routes agents to the shared workflow. Tailor it and the living memory 
 
 ## Working in this workspace
 
-- Read [collaboration](.agents/rules/collaboration.mdc) and [git safety](.agents/rules/git.mdc) before changing the repository. Load [testing](.agents/rules/testing.mdc), [documentation](.agents/rules/docs.mdc), and [styling](.agents/rules/styling.mdc) rules only when the task touches their scope.
-- Treat `.agents/rules/*.mdc` as shared framework policies. Change them only when the user asks to change the workflow. Keep project facts and preferences in `.agents/memory/` in bootstrapped projects.
+- Follow [collaboration](.agents/rules/collaboration.md) and [git safety](.agents/rules/git.md) before changing the repository. Load [testing](.agents/rules/testing.md), [documentation](.agents/rules/docs.md), and [styling](.agents/rules/styling.md) rules only when the task touches their scope.
+- Treat `.agents/rules/*.md` as shared framework policies. Change them only when the user asks to change the workflow. Keep project facts and preferences in `.agents/memory/` in bootstrapped projects.
 - Use the relevant skill under `.agents/skills/` for a named workflow. Keep skills focused; do not load unrelated skill files.
 - In the workflow library, files in `docs/` and `.agents/memory/` are templates; preserve their `{{...}}` placeholders. In a bootstrapped project, populate them from project source and decisions.
 

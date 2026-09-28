@@ -1,7 +1,7 @@
 ---
-description: Code quality, proportional testing, and evidence-based verification workflows.
-globs: **/*.{js,ts,jsx,tsx,py,go,rs,cpp,h,java,cs}
-alwaysApply: false
+trigger: glob
+description: Code quality, proportional testing, and evidence-based verification.
+globs: "**/*.js, **/*.ts, **/*.jsx, **/*.tsx, **/*.py, **/*.go, **/*.rs, **/*.cpp, **/*.h, **/*.java, **/*.cs"
 ---
 
 # Agent Testing & Verification Rules
@@ -17,6 +17,7 @@ Rules for code quality, proportional testing, and troubleshooting loops.
 ## 2. Test-Driven Development & Verification
 - **Goal-Driven:** Reorganize tasks as `[Step] → verify: [check]`.
 - **Regression Checks:** For a reproducible behavior bug, add or run the smallest check that fails on the bug before fixing it when practical. For trivial, documentation, low-risk configuration, or exploratory changes, use a proportionate check instead of creating a test that merely repeats the implementation.
+- **Direct Evidence:** When practical, exercise the changed behavior at the nearest meaningful interface and record what actually happened. Match the check's cost and depth to risk; state any important path that was not exercised instead of treating a build or test proxy as proof of that path.
 - **Debugging Protocols:** Fix root causes, not symptoms. Trace errors using log analysis; remove temporary debug logging before completing.
 - **Scratchpad Prototyping:** Execute temporary logic checks in workspace scratchpad files (`.agents/scratch/`), deleting them prior to finalization.
 - **Failure Loop Protection:** After three runs with the same failure and no new evidence, stop repeating that command. Inspect the cause, change the hypothesis or check, and continue only when the next step can resolve a concrete uncertainty. If no meaningful diagnostic step remains, record the blocker under `## ⚠️ Pitfalls & Troubleshooting` in `.agents/memory/context.md` and ask the user for the missing input.

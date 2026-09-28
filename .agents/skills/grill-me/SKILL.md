@@ -11,7 +11,7 @@ Interview the user to clarify goals, design decisions, and requirements. **Quest
 ## Instructions
 
 1. **Map the Design Tree:** Map out choices as a hierarchical design tree (high-level architectural decisions first, details later).
-2. **Read Code & Docs First:** Read `.agents/memory/context.md`, `docs/`, and code before grilling.
+2. **Read Code & Docs First:** Read relevant project memory, docs, and code when present. Use established domain terms and decisions; do not ask for facts the repository already answers.
 3. **Execute in Rounds:** Work the design tree in **rounds**. The **frontier** consists of decisions whose prerequisites are settled—ask the frontier questions in one organized round:
    - Format each question cleanly:
      ```text

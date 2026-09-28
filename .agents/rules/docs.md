@@ -1,7 +1,7 @@
 ---
-description: Rules and guidelines for updating or modifying project documentation in docs/.
-globs: docs/**/*.md
-alwaysApply: false
+trigger: glob
+description: Project documentation guidance.
+globs: "docs/**/*.md"
 ---
 
 # Documentation Rules
