@@ -1,122 +1,27 @@
-# Example: Two-Agent Split (Gemini + Grok)
+# Example: Two Independent Agents
 
-This example shows the original pattern that motivated the skill:
-splitting a task between an integration-focused agent and a core-logic agent.
+Task: Add `POST /score` around a scoring engine. Codex owns `src/scoring/`; Cursor owns `src/api/`. This example project already has `ScoreRequest` and `ScoreResult` in `src/contracts/scoring.ts` and focused test commands. Codex will update root exports after both agents finish.
 
----
+## Decomposition
 
-## Input
+| Responsibility | Owner | Phase | Editable files |
+| --- | --- | --- | --- |
+| Score and explain a request | Codex | 1 | `src/scoring/**` |
+| Validate HTTP input and map the result | Cursor | 1 | `src/api/**` |
+| Wire root exports and run integration checks | Codex | 2 | `src/index.ts`, `tests/integration/scoring-api.test.ts` |
 
-```
-<AGENTS>
-- Name: Gemini
-  Capabilities: Tool access, large context window, strong at integration/glue code, API wiring, file I/O
-  Constraints: None
+The seam is `score(request: ScoreRequest): ScoreResult`. The API validates JSON before calling it: malformed input returns 400; a valid result returns 200; an unexpected scoring error returns 500. Neither phase-one agent edits the shared types or root configuration. No new scaffolding is needed because the existing focused suites isolate the packages. Before phase two, the integration owner brings Cursor's completed API files into Codex's integration checkout, confirms both focused suites pass there, and then lets Codex wire exports. In a repository where agents cannot commit or merge, the handoff assigns that transfer to the user or another authorized owner before phase two begins.
 
-- Name: Grok
-  Capabilities: Strong reasoning, algorithms, data structures, isolated domain logic
-  Constraints: None
-</AGENTS>
-
-<TASK>
-Build a URL shortener service. Requirements:
-- HTTP API layer (POST /shorten, GET /:code) with input validation
-- Core shortening engine: generates unique short codes, stores mappings, resolves codes
-- Success command: pytest
-- Constraints: Python, FastAPI, no external databases (in-memory store)
-</TASK>
-
-<CONFIG>
-Contract Path: docs/contracts/
-Scaffolding Path: tests/support/
-Success Command: pytest
-</CONFIG>
-```
-
----
-
-## Expected Output
-
-### 1. Decomposition & Decision
-
-- **Topology**: `CONCURRENT`
-- **Responsibilities**:
-
-  | Responsibility | Owner | Parallel Group | Dependencies |
-  |---|---|---|---|
-  | HTTP API layer (routing, validation, response formatting) | Gemini | 1 | None |
-  | Shortening engine (code generation, storage, resolution) | Grok | 1 | None |
-
-- **Seams**:
-  - `ShorteningService` interface between API layer and engine.
-    Contract file: `docs/contracts/shortening_service_contract.py`
-
-- **Idle Agents**: None
-- **Files Created on Disk**:
-  - `docs/contracts/shortening_service_contract.py`
-  - `tests/support/fake_shortening_service.py`
-  - `tests/test_grok_engine.py`
-  - `tests/test_gemini_api.py`
-  - `tests/test_integration.py`
-  - `tests/run_isolated.sh`
-
-### 2. Grok Prompt
+## Prompt: Codex
 
 ```markdown
-Provide the complete implementation of `src/engine.py`.
-
-You own ONLY: `src/engine.py`
-
-Implement the `ShorteningService` interface defined in
-`docs/contracts/shortening_service_contract.py`. Read that file
-for all method signatures, invariants, and error behaviors.
-Import shared types (`CodeNotFoundError`, etc.) from the contract file.
-
-Your engine must:
-- Generate unique short codes (≥6 chars, alphanumeric)
-- Store URL-to-code mappings in-memory
-- Resolve codes back to original URLs
-- Raise `CodeNotFoundError` (from the contract) for unknown codes
-
-Run until green: `pytest tests/test_grok_engine.py`
-
-Constraints:
-- Do not modify any file outside `src/engine.py`
-- Do not modify tests, contracts, or test doubles
-- Do not import anything from `tests/support/`
-- Do not touch `src/api.py` (Gemini's file)
-- Do not modify `pyproject.toml` or any root config
+Implement `score(request: ScoreRequest): ScoreResult` in `src/scoring/**` using types from `src/contracts/scoring.ts`. The API validates JSON before calling you; produce a `ScoreResult` for valid requests and let unexpected failures propagate for the API to map to 500. During phase one, edit only `src/scoring/**`; do not change shared types, `src/index.ts`, API files, or another agent's tests. Work on an isolated branch or disjoint checkout. Run `npm run test:scoring` and report the result. After Cursor's work is ready, phase two lets you edit `src/index.ts` and `tests/integration/scoring-api.test.ts`; wire exports, then run `npm run test:integration` and `npm run check`.
 ```
 
-### 3. Gemini Prompt
+## Prompt: Cursor
 
 ```markdown
-Implement the FastAPI HTTP layer in `src/api.py`.
-
-You own ONLY: `src/api.py`
-
-Wire routes to the `ShorteningService` interface defined in
-`docs/contracts/shortening_service_contract.py`. Accept `ShorteningService`
-as a constructor/factory parameter (dependency injection) — do NOT import
-from `tests/support/`. The test suite injects the fake through this
-parameter.
-
-Routes:
-- POST /shorten: accepts `{"url": "..."}`, returns `{"short_code": "..."}`
-- GET /:code: redirects to original URL, 404 if not found
-
-Run until green: `pytest tests/test_gemini_api.py`
-
-Constraints:
-- Do not modify any file outside `src/api.py`
-- Do not modify tests, contracts, or test doubles
-- Do not import `fake_shortening_service` in production code
-- Do not touch `src/engine.py` (Grok's file)
-- Do not modify `pyproject.toml` or any root config
+Implement `POST /score` in `src/api/**`. Validate JSON and return 400 for malformed input. Call `score(request: ScoreRequest): ScoreResult` using types from `src/contracts/scoring.ts`; map a valid result to 200 and an unexpected scoring error to 500. Edit only `src/api/**`; do not change shared types, `src/index.ts`, scoring files, or another agent's tests. Work on an isolated branch or disjoint checkout. Run `npm run test:api` and report the result.
 ```
 
-### Final. Verification Command
-
-```bash
-pytest tests/test_integration.py && pytest
-```
+If the project has no integration check, the handoff names a concrete manual API request and expected result instead.

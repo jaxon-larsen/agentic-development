@@ -9,13 +9,13 @@ Rules for code quality, proportional testing, and troubleshooting loops.
 
 ## 1. Code Quality & Modularity
 - **Strict Types:** Respect the type system; avoid escape hatches (like `any`).
-- **File Size:** Keep code in focused files. Split if they exceed 300-500 lines or violate single responsibility.
+- **Cohesion:** Split code when a file combines responsibilities that are easier to understand or change separately; length alone is not a reason to split it.
 - **Dependency Tracing:** Before changing a function, class, or API signature, trace its dependency path and public consumers.
-- **Document Heuristics:** Mark simplifications and known logic ceilings (e.g. global lock, naive scan) with inline comments and upgrade paths.
-- **No Rot:** Do not commit temporary scripts. Remove imports and variables rendered obsolete by your changes.
+- **Document Consequential Limits:** Explain a known limitation where a maintainer needs to see it, when it affects correctness, scale, or a likely future change.
+- **No Rot:** Remove imports and variables rendered obsolete by your changes.
 
 ## 2. Test-Driven Development & Verification
-- **Goal-Driven:** Reorganize tasks as `[Step] → verify: [check]`.
+- **Goal-Driven:** Identify how to verify each meaningful change; use a persistent task breakdown only when it helps track the work.
 - **Regression Checks:** For a reproducible behavior bug, add or run the smallest check that fails on the bug before fixing it when practical. For trivial, documentation, low-risk configuration, or exploratory changes, use a proportionate check instead of creating a test that merely repeats the implementation.
 - **Direct Evidence:** When practical, exercise the changed behavior at the nearest meaningful interface and record what actually happened. Match the check's cost and depth to risk; state any important path that was not exercised instead of treating a build or test proxy as proof of that path.
 - **Debugging Protocols:** Fix root causes, not symptoms. Trace errors using log analysis; remove temporary debug logging before completing.

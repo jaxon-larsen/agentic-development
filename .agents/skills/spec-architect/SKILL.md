@@ -55,10 +55,10 @@ Apply documentation updates to disk immediately upon receiving the user's answer
 - **Living Documents, Not Logs:** Write evergreen statements of current truth. Never append interview transcripts, changelogs, or conversational minutes to architectural docs.
 - **Decision Status:** Record settled decisions as current design, and mark unresolved assumptions or alternatives explicitly. Preserve brief rationale when it explains a consequential choice; do not turn an assumption into a fact.
 - **Behavior Contracts:** For decisions that change observable behavior, record a representative success case and the existing interface or test seam that could verify it. If no suitable seam exists, identify that design gap without inventing an implementation task.
-- **Diagrams on Demand:** Add or revise Mermaid only when it clarifies a decided architectural boundary or data flow. Link source for existing structure; label planned or uncertain relationships distinctly.
+- **Source-Backed Structure:** Describe boundaries and data flow clearly. Add or revise a Mermaid diagram when it makes a real architectural decision or data flow easier to understand. Link source for existing structure; label planned or uncertain relationships distinctly in prose or diagrams.
 - **Deduplication & DRY:** Update or replace existing sections rather than appending duplicate blocks. Maintain a strict single source of truth across all doc files.
 - **Existing Files First:** Direct updates into established documentation (e.g. `docs/architecture.md`, `docs/technical.md`, `docs/testing.md`).
-- **File Creation Gate:** If an answer warrants creating a distinct new document, propose the new file path to the user and obtain confirmation before creating it.
+- **New Documents:** Create a distinct document when the established docs have no suitable home for the decision. Ask about location or ownership only when genuinely ambiguous.
 - **Glossary Sync:** Extract and record newly introduced domain terminology and definitions into `.agents/memory/context.md` when present.
 - **Avoid Bloat:** If a user changes the existing plan, remove all references to the outdated information. Do not leave notes about the old plan. Similarly, if a user says something is not part of the plan, you do not need to record that decision unless strictly necessary. The docs should be a living source of truth, not an idea graveyard.
 

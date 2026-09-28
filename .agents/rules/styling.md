@@ -1,21 +1,20 @@
 ---
 trigger: glob
-description: Layout, typography, spacing, and copywriting standards for HTML and UI styling files.
-globs: "**/*.html, **/*.css, **/*.js, **/*.jsx, **/*.ts, **/*.tsx"
+description: Layout, typography, spacing, and copywriting guidance for UI files.
+globs: "**/*.html, **/*.css, **/*.jsx, **/*.tsx"
 ---
 
 # UI Design & Styling Rules
-Rules for layout, typography, spacing, and copywriting for HTML/CSS/JS files.
+Guidance for user-facing interfaces.
 
 ## 1. Typography & Colors
-- **Line Width:** Limit text containers to ~65 characters for readability. Set clear type scale.
+- **Readability:** Keep long-form text at a comfortable width and use a clear type scale.
 
 ## 2. Layout & Spacing
-- **Flow:** Use `gap` (Flex/Grid) for spacing. Avoid margins which double/collapse.
-- **Overflow:** Wrap wide content (tables, code, diagrams) in `overflow-x: auto` to prevent horizontal scrolling.
+- **Flow:** Use layout primitives that fit the page; avoid accidental spacing collapse or doubling.
+- **Overflow:** Make genuinely wide content usable on narrow screens without hiding controls or data.
 
 ## 3. Copywriting & Interaction
 - **Labels:** Name controls from the user's perspective, not system internals (e.g. "Notifications" not "Webhook Config").
-- **CTA:** Use active-voice buttons (e.g. "Publish") followed by immediate confirmation.
-- **Hierarchy:** Surface summary metrics/cards before detail tables. Encode status in shapes/colors.
-- **Explanatory Brevity**: Do not surface comments about the function of elements in the UI unless strictly needed. Most likely, you should just add it as a comment.
+- **Actions:** Use specific action labels and confirm consequential actions clearly.
+- **Status:** Convey important status with text or shape as well as color.

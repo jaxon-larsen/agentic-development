@@ -26,14 +26,14 @@ Use these exact principles during analysis and discussions:
 ### 1. Explore & Scope
 Read `.agents/memory/context.md` glossary and existing architecture docs. Scan hot spots in `git log --oneline` or user-specified paths:
 - Where are modules **shallow** (interface nearly as complex as implementation)?
-- Where does understanding one concept require jumping across 5+ small files (no **locality**)?
+- Where does understanding one concept require jumping across files without a useful boundary (poor **locality**)?
 - Apply the **deletion test** to verify candidate value.
 
 ### 2. Present Candidate Report
 Present each refactoring candidate in chat with markdown formatting:
 - **Files Involved** | **Problem Statement** | **Proposed Deepening Solution**
 - **Benefits** (explained in terms of leverage, locality, and testability)
-- **Before / After Structure** (ASCII or Mermaid diagram)
+- **Before / After Structure:** Name the proposed seam and affected callers; add a small Mermaid diagram when it clarifies a complex relationship.
 - **Recommendation Strength Badge** (`Strong`, `Worth Exploring`, `Speculative`)
 
 Ask user: *"Which candidate would you like to explore?"*
@@ -41,14 +41,9 @@ Ask user: *"Which candidate would you like to explore?"*
 ### 3. Compare Viable Designs & Grill
 Once the user picks a candidate, compare designs only when there are materially different viable seams or interface shapes. Otherwise, explain the single clear design and its trade-offs. When comparison helps, consider a minimalist interface, flexible extension points, or a shape optimized for common callers; do not force all three variants. If the user explicitly requests parallel design work and the environment supports it, assign independent variants to agents.
 - Compare viable designs by depth, locality, seam placement, and caller impact; give an opinionated recommendation.
-- Follow the grill-me protocol to finalize design choices, update `.agents/memory/context.md` vocabulary, and record approved refactoring milestones in `.agents/memory/tasks.md`.
+- Use targeted questions to settle design choices. Record durable vocabulary or architecture decisions in the appropriate project docs. Add milestones to `.agents/memory/tasks.md` only when the user asks for an execution plan.
 
 ## Output
 
 - Candidate architectural report and a design comparison when meaningful, presented in chat.
-- Approved refactoring milestones added to `.agents/memory/tasks.md` when the interview reaches an actionable roadmap.
-- Glossary and architecture decisions recorded in `.agents/memory/context.md`.
-
-## References
-
-- [architecture-patterns.md](./references/architecture-patterns.md) - Reference list of modular software design principles and common anti-patterns.
+- Durable design decisions recorded in the appropriate docs; milestones only when an execution plan is requested.

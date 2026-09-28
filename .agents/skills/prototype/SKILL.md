@@ -8,23 +8,22 @@ disable-model-invocation: true
 A prototype is **throwaway code that answers a design question**. The question dictates the shape.
 
 ## Instructions
-### 1. Determine Branch
-Identify what question to answer:
-- **Logic/State Model:** Build a tiny, runnable terminal script (following [LOGIC.md](./references/LOGIC.md)) that demonstrates state changes.
-- **User Interface:** Generate 2–3 UI variants on a single route (following [UI.md](./references/UI.md)) toggleable via URL query params.
+### 1. Choose the Smallest Experiment
+State the design question and what observation would answer it. Build only enough to obtain that observation:
+- **Logic/State Model:** Use a script or focused interactive harness; read [LOGIC.md](./references/LOGIC.md) when the user needs to drive state transitions.
+- **User Interface:** Build a focused mockup or structurally different variants; read [UI.md](./references/UI.md) when comparison in the app will help the decision.
 
 ### 2. Implementation Rules
-1. **Throwaway:** Name/locate files clearly to mark them as throwaway. Do not create new routing conventions.
-2. **One-Command:** Must be runnable via one simple project script (e.g. `npm run prototype`).
-3. **No Persistence:** Keep state in memory. Use mock database or temp file only if required.
-4. **Skip Polish:** No tests, abstractions, or complex error handling.
-5. **Expose State:** Log or render state differences after every action/toggle.
-6. **Do Not Promote Directly:** Prototype code is unpolished by design. Once the design question is answered, delete the prototype code or cleanly re-implement validated logic under standard production rules (tests, types, error handling). Never merge raw prototype code directly into production.
+1. **Isolate:** Mark prototype files clearly and avoid new routing or dependency conventions.
+2. **Easy to Run:** Give one simple command or URL when the user needs to try it.
+3. **Keep It Small:** Use in-memory state or stubs unless persistence is the question. Skip production polish and tests that do not help answer the question.
+4. **Expose the Answer:** Show the state, behavior, or UI difference the experiment is testing.
+5. **Production Use:** Carry forward the validated design. Reuse code only after it meets the normal production requirements for types, errors, and verification; remove the throwaway harness.
 
 ## Output
-- Runnable terminal script or multi-variation page.
-- Log of the design answer recorded in spec docs or a local `NOTES.md`.
-- Cleanup plan to remove prototype code.
+- A runnable experiment and its command or URL when applicable.
+- The observed design answer, recorded in the relevant existing docs when it changes the project design.
+- Cleanup or production follow-up for any throwaway files.
 
 ## References
 - [LOGIC.md](./references/LOGIC.md) - Detailed guide for backend/logic prototyping.

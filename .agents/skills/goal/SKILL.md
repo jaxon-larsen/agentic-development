@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 ## Overview
 
-Systematically execute a complex development goal using a task checklist, iterative tests, and execution loop protection boundaries.
+Execute a complex development goal with visible progress and proportional verification.
 
 ## Instructions
 
@@ -14,18 +14,14 @@ Systematically execute a complex development goal using a task checklist, iterat
 
 - Inspect the repository and existing decisions first. If the goal still has choices that materially change implementation, use the relevant questions from grill-me to resolve them.
 
-### 2. Scaffold Checklist (`.agents/memory/tasks.md`)
+### 2. Track the Work
 
-- Record the goal's broken-down checklist directly in `.agents/memory/tasks.md` under a `## 🎯 Active Goal` section with checkboxes (`[ ]` todo, `[/]` in-progress, `[x]` done).
+- Break the goal into verifiable steps. Use `.agents/memory/tasks.md` when work spans sessions or the checklist will help future agents; otherwise track progress in the conversation.
 - **Existing work:** Check `git status` before editing and preserve any pre-existing changes. If the goal risks overwriting them, isolate the work or make a targeted, non-destructive backup first. Do not use `git stash create -u` as an untracked-file backup; `stash create` does not accept the untracked option.
 
 ### 3. Iterative Implementation & Verification
 
-For each task in `.agents/memory/tasks.md`:
-
-1. Mark as in-progress (`[/]`).
-2. Implement change surgically and run verification commands (compilers, linters, tests) immediately.
-3. Once the relevant check passes, mark as completed (`[x]`).
+For each step, make the change and run a focused check. Update a persistent checklist when one is in use.
 
 ### 4. Loop Protection & Failure Escalation
 
@@ -34,14 +30,13 @@ For each task in `.agents/memory/tasks.md`:
 
 ### 5. Final Verification & Walkthrough
 
-- Confirm all goal tasks are marked completed (`[x]`). Run the relevant checks; broaden to the full suite when the change crosses components or the project's release gate requires it.
-- Create or present a walkthrough summarizing technical changes.
-- **Runtime Probe:** For a runnable user-facing change, exercise the changed path and one meaningful edge case. Record why a runtime probe was not relevant or available for other work.
+- Confirm all goal steps are complete. Run the relevant checks; broaden to the full suite when the change crosses components or the project's release gate requires it.
+- For a runnable user-facing change, exercise the changed path directly when practical and add an edge probe when risk warrants it.
 - For a claimed bug fix or measurable improvement, compare the same check before and after the change when a valid baseline is available. State `INCONCLUSIVE` rather than claiming verification when the baseline or environment makes that comparison unreliable.
-- Print a Verification Report in chat covering: **Verdict** (PASS/FAIL/BLOCKED), **Claim**, **Method**, **Steps** (with 🔍 for probes), and **Findings**.
+- Summarize the changes, checks actually run, observed results, and material limits in the final response.
 
 ## Output
 
-- Updated `.agents/memory/tasks.md` checklist.
+- Updated `.agents/memory/tasks.md` checklist when persistent tracking was useful.
 - Verified codebase changes.
-- Technical walkthrough and Verification Report in chat.
+- Concise walkthrough and verification evidence in chat.

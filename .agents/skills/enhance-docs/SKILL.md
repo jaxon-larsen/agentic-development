@@ -9,26 +9,17 @@ Audit project documentation against the codebase to identify drift, structural g
 
 ## Instructions
 ### 1. Explore
-Read `.agents/memory/context.md` glossary, `docs/`, and scan codebase to locate features, modules, and API layers.
+Read the docs, memory, and source relevant to the requested area. Widen the scan only when evidence points to a broader documentation problem.
 
 ### 2. Generate Alignment Report
-Write a report (no edits yet) covering:
-- **Doc-Code Drift:** Discrepancies between specs/READMEs and actual codebase.
-- **Redundancy & Bloat:** Obsolete instructions or duplicate docs.
-- **Ambiguities & Gaps:** Underspecified logic or missing edge cases in specs.
-- **Wiki Linter / Structural Health:**
-  - Orphan markdown files under `docs/` (not linked in index.md).
-  - Dead relative markdown links.
-  - Glossary Gaps: Domain/jargon terms used in code but missing definitions in `.agents/memory/context.md`.
-  - Stale Tasks: Discrepancies in task completion status between `.agents/memory/tasks.md` and codebase.
-- **Simplification Plan:** Concrete restructuring/cleanup steps.
+Report material drift, duplication, ambiguities, or broken links found in the affected docs. Check glossary terms and task status when the work touches them. Recommend specific corrections with source evidence.
 
 ### 3. Interview
-Present report to user. Clarify open questions one at a time using the grill-me protocol (suggest recommendations and explain trade-offs).
+Clarify genuine product or design ambiguities with targeted questions and recommended defaults. Continue with corrections that do not depend on those answers.
 
 ### 4. Sync
-Update `.agents/memory/context.md` (domain vocabulary), `.agents/memory/tasks.md` (roadmap), and docs under `docs/` after user confirmation.
+Update only the affected docs and memory files. An explicit request to enhance docs authorizes routine corrections; ask before choosing between materially different meanings.
 
 ## Output
-- Alignment report table summarizing Drift, Bloat, Gaps, Linter, Glossary, and Tasks.
-- Updated documentation, glossary, and active task lists.
+- Concise findings with source evidence and any unresolved decisions.
+- Corrected documentation and memory where needed.

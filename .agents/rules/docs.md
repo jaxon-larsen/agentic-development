@@ -8,10 +8,8 @@ globs: "docs/**/*.md"
 Rules governing the maintenance and editing of files in `docs/`.
 
 ## 1. Templates & Living Docs
-- **Customizable:** Docs are living templates to be tailored for the target repo.
-- **Placeholders:** Use mustache placeholders (e.g., `{{PROJECT_NAME}}`) for customizable segments.
+- In this workflow library, preserve `{{...}}` placeholders in templates. In a bootstrapped project, replace them with verified project facts and decisions; do not add new placeholders to living docs.
 
 ## 2. Integrity & Dependencies
 - **Links:** Verify cross-document markdown links resolve correctly after structure edits.
-- **Headers:** Maintain consistent markdown headings for automated parsing.
-- **Grounding:** Search codebase (glob/grep) before changing placeholders to ensure script/skill integrity.
+- **Grounding:** Check the relevant code and configuration before stating project facts or changing template placeholders.

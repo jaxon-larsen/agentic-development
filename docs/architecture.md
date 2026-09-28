@@ -1,17 +1,18 @@
 # System Architecture: {{PROJECT_NAME}}
 
 > [!NOTE]
-> **Purpose:** Reference diagrams and maps detailing system layout, component relationships, and data flows.
+> **Purpose:** Describe system boundaries, component relationships, and data flows with source evidence.
 
-Add a Mermaid diagram only when it clarifies a real architectural boundary or data flow. Cite the files or configuration that establish existing relationships, and label planned or uncertain links explicitly.
+Cite the files or configuration that establish existing relationships, and label planned or uncertain relationships explicitly.
+Add a Mermaid diagram when it makes a boundary, relationship, or data flow easier to understand. Keep it consistent with the text and source evidence.
 
 ---
 
 ## 🗺️ High-Level System Overview
 
-Summarize meaningful components and relationships for {{PROJECT_NAME}}. Add a diagram here when it makes those relationships easier to understand.
+Summarize meaningful components and relationships for {{PROJECT_NAME}}. Use prose by default and a diagram when it adds clarity.
 
-**Evidence and limits:** Link the source for non-obvious nodes and connections. Record any relationship that still depends on deployment configuration or another unverified fact.
+**Evidence and limits:** Link the source for non-obvious components and relationships. Record any relationship that still depends on deployment configuration or another unverified fact.
 
 ---
 

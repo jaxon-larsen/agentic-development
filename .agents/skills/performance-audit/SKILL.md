@@ -14,8 +14,8 @@ Identify core performance metrics (latency, CPU, memory, payload size). Run benc
 ### 2. Identify
 Locate bottlenecks using profiling tools (flame graphs, network tab). Trace hot paths and rank them by impact vs effort.
 
-### 3. Prioritize & Plan
-Formulate target optimizations and get user approval.
+### 3. Prioritize
+Choose optimizations by measured impact and implementation cost. Ask the user only when a proposed change alters external behavior, cost, or the agreed scope.
 
 ### 4. Optimize & Verify
 Implement optimizations incrementally. Re-run benchmarks under matching baseline conditions. Compare before/after results and verify zero correctness regressions.

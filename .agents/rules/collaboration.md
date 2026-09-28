@@ -22,6 +22,6 @@ Rules for communication, coordination, planning, and tool usage.
 
 ## 3. Planning & Grounding
 - **Ground Before Asking:** Search the codebase before asking user about discoverable details. State assumptions explicitly.
-- **Decision-Complete:** Plans must resolve all design, schema, and API decisions.
+- **Decision-Ready:** Resolve design, schema, and API decisions needed for the next implementation step; label consequential deferred choices.
 - **Citations:** Link files and symbols with a path and line in the current harness's supported format. Do not assume one file URI format works in every agent.
 - **Interactive Inquiries:** When clarifying ambiguities, format questions directly in chat with recommended defaults (or use interactive question tools if available in the harness).

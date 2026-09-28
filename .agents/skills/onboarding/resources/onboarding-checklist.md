@@ -22,7 +22,7 @@ Follow this checklist when bootstrapping a repository for agent collaboration.
 - Initialize `.agents/memory/context.md`:
   - Replace `{{PROJECT_NAME}}`, `{{DOMAIN_TERM_1}}`, `{{COMMON_GOTCHA}}`.
   - Populate domain glossary and tech stack pitfalls.
-  - Confirm Memory Hygiene Policy (< 100 lines target).
+  - Keep only verified facts that will help future work and are hard to recover from source.
 - Verify root `AGENTS.md`:
   - Merge with existing instructions if present; do not replace project-specific guidance.
   - Point only to files copied into the project and commands verified against its manifests.
