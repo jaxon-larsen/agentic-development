@@ -1,74 +1,56 @@
 ---
 name: review
-description: Fast, three-axis code review (Correctness + Alignment + Economy) with pre-review readiness short-circuiting.
+description: Review a code change for defects, requirement alignment, and unnecessary complexity with depth matched to risk.
 ---
 
-# Code Review Skill
+# Code Review
 
-Conducts a deterministic pre-flight readiness check followed by three independent, single-responsibility sub-agent reviews:
-- **Readiness:** Run tests, typechecks, and check git hygiene before reviewing.
-- **Axis 1: Correctness:** Runtime behavior, edge cases, security, and repository conventions.
-- **Axis 2: Alignment:** Requirements satisfaction, scope management, and documentation/content parity.
-- **Axis 3: Economy:** Code minimalism, YAGNI, dead code, shallow wrappers, and the Deletion Test.
+Review every file in the selected change (defaulting to the repository's unstaged changes), then report only actionable, source-verified findings. Keep a routine review light; use independent passes when the change warrants them.
 
----
+## 1. Establish the review boundary
 
-## Workflow Instructions
+- Resolve the user's requested branch, commit, PR, path, or working tree. State the exact boundary in the report.
+- For a working-tree review, use `git status --porcelain=v1 -uall` to inventory tracked **and untracked** files. Use `git diff HEAD` for tracked changes; read each relevant untracked file as a new file. Account for deletions and renames. Never silently omit a changed file.
+- For a branch review, use the requested base and `git diff <base>...HEAD`. Do not silently include working-tree changes in that boundary. For a commit, compare it with its parent. If the boundary is ambiguous and materially changes what is reviewed, ask once.
+- Exclude secrets, ignored files, generated output, and unrelated artifacts from model context. Name any excluded path or category in the coverage note. If no reviewable change exists, say so rather than inventing findings.
 
-### 1. Pre-Flight Readiness (Deterministic Gate)
-Execute this gate directly before spawning review agents.
-- **Git Hygiene:** Run `git status --porcelain`. Fail immediately if untracked secrets (`.env`, credentials), build artifacts, or temporary scratch files exist.
-- **Diff Resolution:** Resolve the diff boundary. If a base branch/ref is provided, use `git diff <base>...HEAD`. Otherwise, evaluate staged and unstaged working-tree changes (`git diff HEAD`). Fail if the diff is empty.
-- **Automated Verification:** Discover and run project verification scripts if present (e.g., checks in `package.json`, `Makefile`, `Justfile`, `docs/testing.md`, or standard test/lint runners).
-- **Short-Circuit Rule:** If tests fail, linters error, or git hygiene is violated, stop. Do not dispatch review agents. Emit `## 🚦 Pre-Flight Readiness: FAILED` with the tool logs.
+## 2. Gather only relevant context and checks
 
-### 2. Context Discovery (Heuristic Fallbacks)
-Locate and supply existing context to review agents without hard dependencies on proprietary layouts:
-- **Spec / Task Context:** Find task descriptions or user prompt specs. Check available issue trackers, PR descriptions, and files with similar roles.
-- **Project Rules:** Check for style guides, linter configs, `.agents/rules/`, or `README.md`. If none exist, fall back to idiomatic language conventions.
-- **Documentation:** Identify modified features/routes/APIs and search for corresponding markdown guides, docs folders, or inline API specs.
+- Read the task or PR intent, project rules, affected interfaces and callers, and documentation that describes changed behavior.
+- Run focused tests, typechecks, or lint checks when practical. Record commands and outcomes. A failing check is evidence to investigate, **not** a reason to stop reviewing. If a check cannot run, continue source review and state the limit.
+- On a large diff, group related files by behavior or subsystem so every changed file has an owner. Read enough surrounding source to understand each changed path.
 
-### 3. Dispatch Review Sub-Agents
-If your environment supports subagents, spawn 3 parallel agents. If running in a single-agent or chat interface without subagent capabilities, evaluate the three audit axes sequentially in the current context.
+## 3. Match review depth to risk
 
-When dispatching parallel subagents:
-- **No Active Polling:** When awaiting sub-agent results, do NOT set sequential sleep timers or repeatedly query intermediate statuses.
-Pass each agent (or evaluate in your sequential pass) the **resolved diff**, **discovered context paths**, and its specific brief:
+- **Routine:** Make one pass across correctness, alignment, and economy. This is the default for small, local changes.
+- **Deep:** Use separate independent passes for the three axes when the user requests a thorough review or the change affects trust boundaries, authentication, money, data loss, concurrency, persistence, public APIs, schema migrations, deployment, or several interacting subsystems. Use subagents only when the active environment and user instructions allow them; otherwise run the passes sequentially.
+- Do not add agents, repeated test runs, or broad repository scans merely to fill a process. Expand a pass only to resolve a concrete uncertainty.
 
-- **Correctness Agent Brief:**
-  - *Focus:* Code safety, logic defects, security, and rule compliance.
-  - *Audit:* Edge cases (null/undefined, off-by-one, boundary values), race conditions, error handling (no swallowed exceptions), security vulnerabilities (injection, auth, unvalidated inputs), and consistency with existing codebase patterns.
-  - *Prompt:* "Audit the diff strictly for bugs, security vulnerabilities, edge cases, and repo conventions. Do not evaluate feature scope or design simplicity. Use the severity rubric: `Critical` (blocker, bug, crash, security risk), `Warn` (unhandled edge case, convention violation), `Note` (style nit). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
+### Review axes
 
-- **Alignment Agent Brief:**
-  - *Focus:* Spec adherence, scope boundaries, and documentation parity.
-  - *Audit:* Are all requested features/acceptance criteria satisfied? Is there unrequested work (scope creep)? Have accompanying guides, user docs, schemas, or docs pages been updated to match the changes made?
-  - *Prompt:* "Audit the diff strictly against requested specifications and documentation sync. Do not review code syntax or logic bugs. Check requirement completeness, scope creep, and stale/missing docs or page updates. Use the severity rubric: `Critical` (missing core requirement, undocumented breaking change), `Warn` (partial implementation, omitted documentation/content update for modified behavior), `Note` (scope creep, doc typo). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
+- **Correctness:** Trace changed behavior through callers and consumers. Check edge cases, failure handling, races, security boundaries, and regressions. A style preference is not a defect.
+- **Alignment:** Compare behavior with the user's request, acceptance criteria, and affected docs. Look for missing requirements, behavior drift, and unrequested work.
+- **Economy:** Apply the deletion test to new layers, dependencies, wrappers, configuration, and duplicate logic. Suggest removal only when the same required behavior remains, including validation, error handling, security, accessibility, and verification.
 
-- **Economy Agent Brief:**
-  - *Focus:* Minimalism, YAGNI, DRY, and abstraction depth.
-  - *Audit:* Identify unnecessary abstractions, single-use utility wrappers, speculative configuration, and redundant code. Apply the **Deletion Test**: Can this new class, function, or layer be removed or folded into the call site without functional regression?
-  - *Prototype Carve-Out:* If the change is explicitly marked as throwaway prototype code or an exploratory spike, skip or soften Economy critique.
-  - *Prompt:* "Audit the diff strictly for bloat, unnecessary abstractions, YAGNI, and DRY violations. Do not evaluate requirement completion or runtime security. (If the code is marked as an exploratory prototype, note that minimalism polish is deferred). Use the severity rubric: `Critical` (architectural anti-pattern creating severe maintenance debt), `Warn` (shallow wrapper, dead code, copy-pasted logic, failed Deletion Test), `Note` (minor simplification nit). Format each finding as `- [SEVERITY] filepath:line_number: Description`. Max 350 words."
+## 4. Verify candidate findings
 
-### 4. Aggregate Report
-Synthesize findings side-by-side using the following template:
+Before reporting an issue, reopen the current source and verify its file and line. State the triggering condition, the actual or well-supported failure, and why the proposed change causes it. Try to disprove the finding using nearby guards, callers, tests, and runtime conditions. If a decisive fact is unavailable, label it an open question, not a confirmed defect. Consolidate duplicates by root cause.
+
+Use `Critical` for a demonstrated severe failure or security exposure, `Warn` for a material defect or unmet requirement, and `Note` only for a concrete, worthwhile simplification. Omit speculative nits.
+
+## Report
 
 ```markdown
-## 🚦 Pre-Flight Readiness: PASSED
+## Review: READY | CHANGES REQUESTED | INCOMPLETE
 
-## 🛡️ Correctness
-<!-- Correctness agent findings -->
+Scope: <exact diff boundary; tracked and untracked coverage>
+Checks: <commands and results, or why not run>
 
-## 🎯 Alignment
-<!-- Alignment agent findings -->
+### Findings
+- [SEVERITY] path:line — <trigger, impact, and smallest effective correction>
 
-## ✂️ Economy
-<!-- Economy agent findings -->
-
----
-### Verdict: [READY / CHANGES REQUESTED]
-- **Correctness Blocker:** <Top critical issue or "None">
-- **Alignment Blocker:** <Top critical issue or "None">
-- **Economy Blocker:** <Top critical issue or "None">
+### Open questions and limits
+- <only facts that could change the verdict or files not reviewed>
 ```
+
+If there are no actionable findings, say so and still report scope and check limits. `READY` means no material issue was found within the stated scope; it does not claim an exhaustive audit.

@@ -3,6 +3,8 @@
 > [!NOTE]
 > **Purpose:** Reference diagrams and maps detailing system layout, component relationships, and data flows.
 
+After onboarding, keep diagrams source-backed: cite the files or configuration that establish important components and relationships. Label planned or uncertain links explicitly; do not present the example below as implemented architecture.
+
 ---
 
 ## 🗺️ High-Level System Overview
@@ -15,6 +17,8 @@ graph TD
 ```
 
 Provide a high-level summary of how these layers interact, deployment boundaries, and network topologies for {{PROJECT_NAME}}.
+
+**Evidence and limits:** Link the source for non-obvious nodes and connections. Record any relationship that still depends on deployment configuration or another unverified fact.
 
 ---
 

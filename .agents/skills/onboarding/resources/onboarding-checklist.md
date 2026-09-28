@@ -15,7 +15,7 @@ Follow this checklist when bootstrapping a repository for agent collaboration.
   - `tests/`, `__tests__/`, `src/**/*.test.ts`, `vitest.config.ts`, `jest.config.js`, `pytest.ini`
 
 ## 2. Rule & Context Setup (Placeholder Substitution)
-- Replace `{{...}}` tokens across `docs/*.md`:
+- If `docs/` templates were copied or requested, replace their `{{...}}` tokens:
   - `docs/index.md` & `docs/architecture.md`: `{{PROJECT_NAME}}`, `{{DOMAIN_BOUNDARY_1}}`, `{{DOMAIN_BOUNDARY_2}}`
   - `docs/technical.md`: `{{PRIMARY_LANGUAGE}}`, `{{FRONTEND_FRAMEWORK}}`, `{{BACKEND_FRAMEWORK}}`, `{{TESTING_FRAMEWORK}}`
   - `docs/testing.md`: `{{TEST_COMMAND}}`, `{{LINT_COMMAND}}`, `{{TYPECHECK_COMMAND}}`
@@ -23,9 +23,8 @@ Follow this checklist when bootstrapping a repository for agent collaboration.
   - Replace `{{PROJECT_NAME}}`, `{{DOMAIN_TERM_1}}`, `{{COMMON_GOTCHA}}`.
   - Populate domain glossary and tech stack pitfalls.
   - Confirm Memory Hygiene Policy (< 100 lines target).
-- Verify `.agents/AGENTS.mdc`:
-  - Point to active project files and templates.
-  - Set relevant glob mappings or paths.
-- Seed `.agents/memory/tasks.md` with:
-  - Initial codebase discovery tasks.
-  - High-level backlog items found in root issue lists or readmes.
+- Verify root `AGENTS.md`:
+  - Merge with existing instructions if present; do not replace project-specific guidance.
+  - Point only to files copied into the project and commands verified against its manifests.
+  - Keep it short; place scoped rules in `.agents/rules/`.
+- Seed `.agents/memory/tasks.md` with unfinished, actionable setup or discovery tasks only. Do not turn every README idea into a task.

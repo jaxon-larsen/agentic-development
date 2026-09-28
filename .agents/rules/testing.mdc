@@ -1,11 +1,11 @@
 ---
-description: Code quality, Type safety, Test-Driven Development (TDD), and verification workflows.
+description: Code quality, proportional testing, and evidence-based verification workflows.
 globs: **/*.{js,ts,jsx,tsx,py,go,rs,cpp,h,java,cs}
 alwaysApply: false
 ---
 
-# Agent Testing & TDD Rules
-Rules for code quality, strict typing, TDD iteration, and troubleshooting limits.
+# Agent Testing & Verification Rules
+Rules for code quality, proportional testing, and troubleshooting loops.
 
 ## 1. Code Quality & Modularity
 - **Strict Types:** Respect the type system; avoid escape hatches (like `any`).
@@ -16,10 +16,8 @@ Rules for code quality, strict typing, TDD iteration, and troubleshooting limits
 
 ## 2. Test-Driven Development & Verification
 - **Goal-Driven:** Reorganize tasks as `[Step] → verify: [check]`.
-- **TDD:** Write unit/integration tests reproducing bugs before applying fixes. Write minimal assertions if no framework exists.
+- **Regression Checks:** For a reproducible behavior bug, add or run the smallest check that fails on the bug before fixing it when practical. For trivial, documentation, low-risk configuration, or exploratory changes, use a proportionate check instead of creating a test that merely repeats the implementation.
 - **Debugging Protocols:** Fix root causes, not symptoms. Trace errors using log analysis; remove temporary debug logging before completing.
 - **Scratchpad Prototyping:** Execute temporary logic checks in workspace scratchpad files (`.agents/scratch/`), deleting them prior to finalization.
-- **Failure Loop Threshold:** If a test/compilation/run fails **3 times in a row**, stop immediately.
-  - Summarize the failure and document the blocker under `## ⚠️ Pitfalls & Troubleshooting` in `.agents/memory/context.md`.
-  - Ask the user for guidance before attempting a 4th run.
+- **Failure Loop Protection:** After three runs with the same failure and no new evidence, stop repeating that command. Inspect the cause, change the hypothesis or check, and continue only when the next step can resolve a concrete uncertainty. If no meaningful diagnostic step remains, record the blocker under `## ⚠️ Pitfalls & Troubleshooting` in `.agents/memory/context.md` and ask the user for the missing input.
 

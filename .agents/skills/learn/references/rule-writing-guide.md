@@ -4,7 +4,8 @@ Best practices for extracting learnings and codifying them as workspace memory o
 
 ## 🧠 Memory vs. Rules
 - **Memory (`context.md`)**: Lives as dynamic context. Ideal for project description, tech stacks, developer preferences, glossary terms, resolved issues, and troubleshooting gotchas.
-- **Rules (`rules/*.mdc` or `AGENTS.mdc`)**: Lives as static policies. Enforces strict guidelines that must be applied across sessions (e.g., git conventions, artifact requirements, styling constraints, testing workflows).
+- **Rules (`rules/*.mdc`)**: Shared, scoped policies for git conventions, styling, testing, and other recurring behavior.
+- **Root `AGENTS.md`**: A short project entry point that routes agents to relevant rules, skills, docs, and commands. Keep project facts in memory instead.
 
 ## 📝 Writing Effective Rules & Memory
 - **Be Specific & Actionable:** Provide clear code snippets, folder targets, or command patterns. Avoid vague instructions (e.g., "be careful with database calls").

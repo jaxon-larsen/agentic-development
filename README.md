@@ -10,11 +10,12 @@ This repository is the **single source of truth** for my agentic workflow tools.
 
 ```
 agentic-development/
+├── AGENTS.md                            ← Short cross-agent entry point
 ├── .agents/
 │   ├── memory/                           ← Living project memory
 │   ├── rules/                            ← Universal policies
 │   ├── scratch/                          ← For temporary files
-│   └── skills/                           ← User-invoked skills
+│   └── skills/                           ← Reusable workflows
 └── docs/                                 ← Documentation templates
 ```
 
@@ -27,8 +28,10 @@ Edit a skill or rule once in `agentic-development`, and any connected session ge
 
 ### 2. Project Bootstrapping (Universal)
 To equip any new repository with the workflow framework:
-1. **Copy** `.agents/` (and optionally `docs/`) directly into your project root.
-2. **Bootstrap with Onboarding**: In your tool (Cursor, Antigravity, ChatGPT, Grok), run the [`onboarding`](./.agents/skills/onboarding/SKILL.md) skill. The agent will scan your tech stack, substitute template placeholders (`{{...}}`), and seed initial tasks in `.agents/memory/tasks.md`.
+1. **Copy** the short root [`AGENTS.md`](./AGENTS.md) and `.agents/` (and optionally `docs/`) into the project root. Merge with an existing `AGENTS.md` instead of overwriting it.
+2. **Bootstrap with Onboarding**: In Antigravity, Codex, or Cursor, run the [`onboarding`](./.agents/skills/onboarding/SKILL.md) skill. The agent will scan the tech stack, tailor the entry point and copied templates, and seed initial tasks in `.agents/memory/tasks.md`.
+
+`AGENTS.md` gives Codex and Cursor a small discoverable entry point; `.agents/rules/` remains the detailed policy source, and `.agents/skills/` remains the shared skill source. Antigravity's global junctions above still point at the same skills and rules. Confirm skill discovery in each agent after bootstrapping rather than assuming an installation path worked.
 
 ---
 
@@ -58,7 +61,8 @@ Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` wi
 | [`orchestrate`](./.agents/skills/orchestrate/SKILL.md) | Decompose tasks into parallel agent prompts with contracts | User / Slash |
 | [`performance-audit`](./.agents/skills/performance-audit/SKILL.md) | Profile and optimize application performance | User / Slash |
 | [`prototype`](./.agents/skills/prototype/SKILL.md) | Build throwaway prototype code | User / Slash |
-| [`review`](./.agents/skills/review/SKILL.md) | Three-axis code review (Standards + Spec + Simplicity) + PR readiness | Model / User |
+| [`review`](./.agents/skills/review/SKILL.md) | Risk-based review of correctness, alignment, and economy | Model / User |
+| [`security-audit`](./.agents/skills/security-audit/SKILL.md) | Explicit, source-backed audit of trust boundaries | User / Slash |
 | [`spec-architect`](./.agents/skills/spec-architect/SKILL.md) | Probe decisions to tighten contracts and update living docs | User / Slash |
 
 ---
@@ -68,3 +72,4 @@ Skills live in `.agents/skills/`. Each skill includes a structured `SKILL.md` wi
 When updating rules or skills:
 1. **To modify a framework skill or rule**: Edit the file directly under `agentic-development/.agents/skills/` or `agentic-development/.agents/rules/`.
 2. **To customize a specific project**: Add project-specific rules directly in that project's `.agents/rules/` (e.g. `backend-rules.mdc` or `game-rules.mdc`).
+3. **To check the library**: Run `node scripts/check-workflow.mjs`, then try the relevant positive and negative prompts in [`evals/skill-smoke.md`](./evals/skill-smoke.md) in the agents you use. The script checks structure and links; the prompt cases check actual skill selection and behavior.

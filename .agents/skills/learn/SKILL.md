@@ -18,7 +18,7 @@ Review conversation, git diffs, and grill notes. Extract:
 ### 2. Update Memory Files
 - Update `.agents/memory/context.md` (Vocabulary, Stack, Troubleshooting, Preferences, Corrections sections).
 - Update `.agents/memory/tasks.md` checklist milestones.
-- Do not add specific vocabulary or gotchas directly to `AGENTS.mdc`.
+- Do not add specific vocabulary or gotchas directly to root `AGENTS.md`.
 
 ### 3. Review Diffs
 - Present updated `.agents/memory/context.md` and `.agents/memory/tasks.md` diffs in chat and explain what was learned.
