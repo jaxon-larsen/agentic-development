@@ -12,7 +12,7 @@ Review every file in the selected change (defaulting to the repository's unstage
 - Resolve the user's requested branch, commit, PR, path, or working tree. State the exact boundary in the report.
 - For a working-tree review, use `git status --porcelain=v1 -uall` to inventory tracked **and untracked** files. Use `git diff HEAD` for tracked changes; read each relevant untracked file as a new file. Account for deletions and renames. Never silently omit a changed file.
 - For a branch review, use the requested base and `git diff <base>...HEAD`. Do not silently include working-tree changes in that boundary. For a commit, compare it with its parent. If the boundary is ambiguous and materially changes what is reviewed, ask once.
-- Exclude secrets, ignored files, generated output, and unrelated artifacts from model context. Name any excluded path or category in the coverage note. If no reviewable change exists, say so rather than inventing findings.
+- Exclude secrets, ignored files, generated output, and unrelated artifacts from model context, but flag untracked secrets (`.env`, credential files) or accidental build artifacts in the working tree as actionable hygiene findings. Name any excluded path or category in the coverage note. If no reviewable change exists, say so rather than inventing findings.
 
 ## 2. Gather only relevant context and checks
 
@@ -28,7 +28,7 @@ Review every file in the selected change (defaulting to the repository's unstage
 
 ### Review axes
 
-- **Correctness:** Trace changed behavior through callers and consumers. Check edge cases, failure handling, races, security boundaries, and regressions. A style preference is not a defect.
+- **Correctness:** Trace changed behavior through callers and consumers. Check edge cases (boundary values, off-by-one), failure handling, async races, resource cleanup (unreleased locks, open handles/connections), security boundaries, and regressions. A style preference is not a defect.
 - **Downstream assumptions:** For changed APIs, schemas, or shared behavior with other consumers, identify the one or two assumptions most likely to break beyond direct callers. Probe them with focused source or runtime evidence, and say when the decisive check is unavailable.
 - **Alignment:** Compare behavior with the user's request, acceptance criteria, and affected docs. Look for missing requirements, behavior drift, and unrequested work.
 - **Economy:** Apply the deletion test to new layers, dependencies, wrappers, configuration, and duplicate logic. Suggest removal only when the same required behavior remains, including validation, error handling, security, accessibility, and verification.
