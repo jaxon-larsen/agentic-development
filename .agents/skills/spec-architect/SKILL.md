@@ -25,14 +25,7 @@ Before initiating questions:
 
 ### 2. Progressive Interview Loop (2–3 Questions per Round)
 
-Structure questions hierarchically across rounds, tightening the contract as decisions solidify:
-
-1. **Foundational Tier (Initial Rounds):**
-   - System boundaries, core philosophy, architectural patterns, tech stack constraints, primary actors/personas, and end-to-end data topology.
-2. **Subsystem Tier (Middle Rounds):**
-   - Module decomposition, interface seams, data models/schemas, state lifecycle, persistence mechanisms, and external integrations.
-3. **Contract & Hardening Tier (Later Rounds):**
-   - Error handling strategies, boundary edge cases, concurrency/race conditions, security/auth boundaries, performance budgets, and testing invariants.
+Structure questions hierarchically across rounds, tightening the contract as decisions solidify. Start with the most important decisions that will affect many future plans. As those are resolved, you may probe deeper into more specific areas as the docs are improved.
 
 #### Question Format
 
@@ -40,13 +33,13 @@ Format each question with context, trade-offs, and a recommended default:
 
 ```text
 ? **Q1** - **<Question Title>**: <Context and specific trade-off to decide>
-💡 (Recommended) <Default choice with concise rationale>
+  (Recommended) <Default choice with concise rationale>
    - Option A: <Description>
    - Option B: <Description>
 ```
 
 Present questions directly in chat with `(Recommended)` options listed first (prioritize interactive question tools if available in your environment).
-Prioritize questions that determine downstream choices. If a new answer conflicts with a documented decision, surface the conflict in the next round instead of silently choosing one. The tiers guide depth; do not force every question-bank topic onto a project where it does not apply.
+Prioritize questions that determine downstream choices. If a new answer conflicts with a documented decision, surface the conflict in the next round instead of silently choosing one.
 
 ### 3. Immediate Evergreen Doc Updates
 
@@ -71,38 +64,3 @@ Execute each round in a single conversational turn:
 3. **Queue Next Round:** Present the next batch of 2–3 targeted questions, drilling into the next level of the design hierarchy.
 
 Continue this cycle iteratively until the user explicitly signals to stop (e.g. "stop", "done", "looks good", "ready to build").
-
-### 5. Finalization & Wrap-Up
-
-When the user signals to stop:
-
-- Present a concise index table of all updated documentation files with relative links.
-- List any remaining deferred questions or future phase considerations.
-- If the user wants a phased implementation roadmap, point to `expand-from-docs` as the next workflow.
-
----
-
-## Grilling Question Bank
-
-Use these patterns to guide question formulation across tiers.
-
-### 🏗️ Tier 1: Foundations & Architecture
-
-- **Scope & Boundaries:** "What is strictly outside the scope of this project or phase?"
-- **Topology:** "Is this structured as a modular monolith, standalone CLI, client-server service, or distributed pipeline?"
-- **Runtime & Stack:** "What runtime environments and core toolchains are mandated, and what constraints do they impose?"
-- **State Ownership:** "Where does the authoritative state live, and how is mutation managed across boundaries?"
-
-### ⚙️ Tier 2: Subsystems & Data Flow
-
-- **Module Contracts:** "What are the exact inputs, outputs, and interfaces between the primary components?"
-- **Persistence & Schema:** "What is the shape of the data model? Does it require migration guarantees, relational integrity, or schema validation?"
-- **Communication Protocols:** "How do components coordinate (synchronous method calls, REST, gRPC, event emitter, message bus)?"
-- **Lifecycle & Lifecycle Hooks:** "How is initialization, configuration loading, health monitoring, and graceful shutdown handled?"
-
-### 🛡️ Tier 3: Contracts, Edge Cases & Verification
-
-- **Failure Modes & Retries:** "How should network failures, unexpected payload formats, or resource exhaustion be handled?"
-- **Concurrency & Idempotency:** "Can operations be invoked concurrently? Are mutations idempotent?"
-- **Security & Authorization:** "How are secrets managed, inputs sanitized, and permissions enforced at system seams?"
-- **Verification Contracts:** "What defines a passing test suite? Are there specific integration fixtures, contract tests, or performance benchmarks required?"
